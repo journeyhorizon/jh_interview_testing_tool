@@ -2,14 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
-// import App from "./components/App";
-import Header from "./components/common/Header/Header"
-import Footer from "./components/common/Footer/Footer"
+import App from "./components/App";
 
 ReactDOM.render(
   <Router>
-    <Header />
-    <Footer />
+    <App />
   </Router>,
   document.getElementById("root")
 );
