@@ -1,0 +1,348 @@
+[
+  {
+    "id": 0,
+    "intervieweeId": 0,
+    "resultOfEnglishTest": {
+      "id": 2,
+      "durationTime": 270,
+      "answerList": [
+        {
+          "id": 0,
+          "type": "WH",
+          "questionContent": "Introduce about yourself?",
+          "answerContent": "My name is Nam. I'm 22 years old. Nice to meet you!"
+        },
+        {
+          "id": 1,
+          "type": "WH",
+          "questionContent": "What do you often do in your freetime?",
+          "answerContent": "In my freetime, I often play game online or watching TV show/youtube."
+        },
+        {
+          "id": 2,
+          "type": "WH",
+          "questionContent": "What differs you from other interviewee?",
+          "answerContent": "I will be one of the company's employee but they're not."
+        }
+      ],
+      "review": "",
+      "totalScore": 0
+    },
+    "resultOfLogicTest": {
+      "id": 2,
+      "durationTime": 200,
+      "answerList": [
+        {
+          "id": 0,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "What is the main color of our company's logo?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Blue",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "White",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Black",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [0],
+          "point": true
+        },
+        {
+          "id": 1,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which studio is better on producing Hero films?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "DC",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Marvel",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Universal",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [1],
+          "answerContent": [2],
+          "point": false
+        },
+        {
+          "id": 2,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "What is the result of (5*2+5)?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "5+2*5",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "15",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "35",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0, 1],
+          "answerContent": [1, 2],
+          "point": false
+        },
+        {
+          "id": 3,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Inside which HTML element do we put the JavaScript?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "&lt;script&gt;",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "&lt;js&gt;",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "&lt;scripting&gt;",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "&lt;javascript&gt;",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [3],
+          "point": false
+        },
+        {
+          "id": 4,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "Where do the dolphin live?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Lake",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Ocean",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Swimming pool",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Sea",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [1, 3],
+          "answerContent": [1, 3],
+          "point": true
+        }
+      ],
+      "review": "",
+      "totalScore": 4
+    }
+  },
+  {
+    "id": 1,
+    "intervieweeId": 1,
+    "resultOfEnglishTest": {
+      "id": 2,
+      "durationTime": 200,
+      "answerList": [
+        {
+          "id": 0,
+          "type": "WH",
+          "questionContent": "Introduce about yourself?",
+          "answerContent": "My name is Tuan but everybody call me Chu, hmmm! I'm 24 years old and I'm from Can Tho.. dìa dia!"
+        },
+        {
+          "id": 1,
+          "type": "WH",
+          "questionContent": "What do you often do in your freetime?",
+          "answerContent": "I go dating or hang out with my friends."
+        },
+        {
+          "id": 2,
+          "type": "WH",
+          "questionContent": "What differs you from other interviewee?",
+          "answerContent": "I am the BOSS!"
+        }
+      ],
+      "review": "This one is pretty good! We're impressed of him.",
+      "totalScore": 8.5
+    },
+    "resultOfLogicTest": {
+      "id": 2,
+      "durationTime": 180,
+      "answerList": [
+        {
+          "id": 0,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "What is the main color of our company's logo?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Blue",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "White",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Black",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [0],
+          "point": true
+        },
+        {
+          "id": 1,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which studio is better on producing Hero films?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "DC",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Marvel",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Universal",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [1],
+          "answerContent": [1],
+          "point": true
+        },
+        {
+          "id": 2,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "What is the result of (5*2+5)?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "5+2*5",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "15",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "35",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0, 1],
+          "answerContent": [1, 2],
+          "point": false
+        },
+        {
+          "id": 3,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Inside which HTML element do we put the JavaScript?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "&lt;script&gt;",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "&lt;js&gt;",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "&lt;scripting&gt;",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "&lt;javascript&gt;",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [0],
+          "point": true
+        },
+        {
+          "id": 4,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "Where do the dolphin live?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Lake",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Ocean",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Swimming pool",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Sea",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [1, 3],
+          "answerContent": [1, 3],
+          "point": true
+        }
+      ],
+      "review": "He is intelligent and very clever!",
+      "totalScore": 8
+    }
+  }
+]

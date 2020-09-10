@@ -1,0 +1,71 @@
+[
+  {
+    "id": 0,
+    "durationTime": 600,
+    "questionList": [
+      {
+        "id": 0,
+        "type": "WH",
+        "questionContent": "Describe your personality in just 10 words!"
+      },
+      {
+        "id": 1,
+        "type": "WH",
+        "questionContent": "What type of work environment do you prefer?"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "durationTime": 900,
+    "questionList": [
+      {
+        "id": 0,
+        "type": "WH",
+        "questionContent": "Write a letter to your leader for being absent for a week!"
+      },
+      {
+        "id": 1,
+        "type": "WH",
+        "questionContent": "If you have 1 billion dollars, what will be your future plan?"
+      },
+      {
+        "id": 2,
+        "type": "WH",
+        "questionContent": "What do you expect from our company?"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "durationTime": 300,
+    "questionList": [
+      {
+        "id": 0,
+        "type": "WH",
+        "questionContent": "Introduce about yourself?"
+      },
+      {
+        "id": 1,
+        "type": "WH",
+        "questionContent": "What do you often do in your freetime?"
+      },
+      {
+        "id": 2,
+        "type": "WH",
+        "questionContent": "What differs you from other interviewee?"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "durationTime": 480,
+    "questionList": [
+      {
+        "id": 0,
+        "type": "WH",
+        "questionContent": "What is your favourite anime? Tell us why you love it, otherwise why you don't?"
+      }
+    ]
+  }
+]
