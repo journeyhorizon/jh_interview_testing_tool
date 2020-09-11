@@ -2,6 +2,7 @@
   {
     "id": 0,
     "intervieweeId": 0,
+    "submitTime": "Mon Sep 07 2020 16:34:50 GMT+0700 (Indochina Time)",
     "resultOfEnglishTest": {
       "id": 2,
       "durationTime": 270,
@@ -175,6 +176,7 @@
   {
     "id": 1,
     "intervieweeId": 1,
+    "submitTime": "Thu Sep 10 2020 10:30:50 GMT+0700 (Indochina Time)",
     "resultOfEnglishTest": {
       "id": 2,
       "durationTime": 200,
