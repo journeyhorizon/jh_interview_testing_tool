@@ -18,7 +18,7 @@ class NotFoundPage extends React.Component {
           <p>We can't seem to find the page that you're looking for</p>
           <p>
             Return to&nbsp;
-            <Link to="/"><span>Home Page</span></Link>
+            {this.props.location.pathname === "/adminnotfound" ? <Link to="/admin"><span>Admin Page</span></Link> : <Link to="/"><span>Home Page</span></Link>}
           </p>
         </div>
         <Footer />
