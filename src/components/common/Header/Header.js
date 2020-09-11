@@ -5,11 +5,19 @@ class Header extends React.Component {
   render() {
     if (this.props.isNotFound)
       return (
-        <div className={css.header}> <span>Not Found</span> </div>
+        <div className={css.header}>
+          <div className={css.headerTitle}>
+            <span>Not Found</span>
+          </div>
+        </div>
       );
     else
       return (
-        <div className={css.header}> Welcome&nbsp;<span>{this.props.name}</span> </div>
+        <div className={css.header}>
+          <div className={css.headerTitle}>
+            Welcome&nbsp;<span>{this.props.name}!</span>
+          </div>
+        </div>
       );
   }
 }

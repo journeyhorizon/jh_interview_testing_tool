@@ -5,7 +5,9 @@ class Footer extends React.Component {
   render() {
     return (
       <div className={css.footer}>
-        Journey Horizon
+        <div className={css.footerTitle}>
+          Journey Horizon
+        </div>
       </div>
     )
   }

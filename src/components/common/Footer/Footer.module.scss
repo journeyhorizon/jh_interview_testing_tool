@@ -6,29 +6,55 @@ $extraLarge: 1600px;
 .footer {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   height: 70px;
-  font-size: 14px;
-  font-weight: 300;
   text-transform: uppercase;
+  background-image: url("../../../assets/footerBackground-big.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
 
   @media only screen and (min-width: $small) {
     height: 100px;
-    font-size: 18px;
   }
 
   @media only screen and (min-width: $medium) {
     height: 150px;
-    font-size: 26px;
   }
 
   @media only screen and (min-width: $large) {
     height: 90px;
-    font-size: 20px;
+    padding-bottom: 20px;
   }
 
   @media only screen and (min-width: $extraLarge) {
     height: 130px;
+  }
+}
+
+.footerTitle {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+  padding-bottom: 15px;
+
+  @media only screen and (min-width: $small) {
+    font-size: 18px;
+    padding-bottom: 25px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 26px;
+    padding-bottom: 40px;
+  }
+
+  @media only screen and (min-width: $large) {
+    font-size: 20px;
+    padding-bottom: 0px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
     font-size: 30px;
+    padding-bottom: 10px;
   }
 }
