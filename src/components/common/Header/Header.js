@@ -15,7 +15,7 @@ class Header extends React.Component {
       return (
         <div className={css.header}>
           <div className={css.headerTitle}>
-            Welcome&nbsp;<span>{this.props.name}!</span>
+            Welcome&nbsp;<span>{this.props.name}</span>!
           </div>
         </div>
       );

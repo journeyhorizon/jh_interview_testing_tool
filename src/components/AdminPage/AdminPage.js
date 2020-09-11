@@ -7,8 +7,8 @@ class AdminPage extends React.Component {
   render() {
     return (
       <>
-        <Header />
-        <div style={{ flexGrow: 1, backgroundColor: "lightblue" }}>Admin Page</div>
+        <Header name="Admin" />
+        <div style={{ flexGrow: 1 }}>Admin Page</div>
         <Footer />
       </>
     )

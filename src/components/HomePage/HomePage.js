@@ -8,7 +8,7 @@ class HomePage extends React.Component {
     return (
       <>
         <Header />
-        <div style={{ flexGrow: 1, backgroundColor: "lightblue" }}>Home Page</div>
+        <div style={{ flexGrow: 1 }}>Home Page</div>
         <Footer />
       </>
     )

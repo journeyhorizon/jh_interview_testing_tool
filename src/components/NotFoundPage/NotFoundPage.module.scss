@@ -1,0 +1,103 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+
+  h1 {
+    margin: 5px 0;
+    font-size: 26px;
+    font-weight: 600;
+    color: #029aa8;
+
+    @media only screen and (min-width: $small) {
+      font-size: 28px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      font-size: 30px;
+    }
+
+    @media only screen and (min-width: $large) {
+      font-size: 22px;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 26px;
+    }
+  }
+
+  p {
+    margin: 0 40px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 200;
+    color: rgb(185, 185, 185);
+    margin-bottom: 5px;
+
+    @media only screen and (min-width: $small) {
+      font-size: 18px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      font-size: 20px;
+    }
+
+    @media only screen and (min-width: $large) {
+      font-size: 16px;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 20px;
+    }
+
+    a {
+      text-decoration: none;
+      font-weight: 400;
+      color: #029aa8;
+
+      span {
+        background-image: linear-gradient(
+          transparent calc(80% - 5px),
+          lighten(rgb(185, 185, 185), 15%) 1px
+        );
+        background-size: 0;
+        background-repeat: no-repeat;
+        display: inline;
+        transition: 0.5s ease-in-out;
+      }
+
+      &:hover {
+        span {
+          background-size: 100%;
+        }
+      }
+    }
+  }
+}
+
+.descriptiveImage {
+  width: 80%;
+
+  @media only screen and (min-width: $small) {
+    width: 65%;
+  }
+
+  @media only screen and (min-width: $medium) {
+    width: 45%;
+  }
+
+  @media only screen and (min-width: $large) {
+    width: 35%;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    width: 30%;
+  }
+}
