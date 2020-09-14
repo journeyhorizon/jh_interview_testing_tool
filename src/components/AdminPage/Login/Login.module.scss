@@ -8,6 +8,23 @@ $descriptionColor: rgb(185, 185, 185);
 .titleImage {
   width: 40%;
   margin-bottom: 10px;
+
+  @media only screen and (min-width: $small) {
+    width: 30%;
+    margin-bottom: 20px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    width: 20%;
+  }
+
+  @media only screen and (min-width: $large) {
+    width: 12%;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    width: 10%;
+  }
 }
 
 .description {
@@ -16,6 +33,19 @@ $descriptionColor: rgb(185, 185, 185);
   font-size: 14px;
   font-weight: 200;
   text-align: center;
+
+  @media only screen and (min-width: $small) {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 20px;
+  }
+
+  @media only screen and (min-width: $large) {
+    font-size: 14px;
+  }
 }
 
 .loginForm {
@@ -30,20 +60,38 @@ $descriptionColor: rgb(185, 185, 185);
   position: relative;
   margin-bottom: 15px;
 
-  label {
-    position: absolute;
-    top: -10px;
-    left: 8px;
-    font-size: 12px;
-    background-color: #fff;
-    padding: 0 5px;
+  @media only screen and (min-width: $small) {
+    margin-bottom: 25px;
+  }
+
+  @media only screen and (min-width: $large) {
+    margin-bottom: 15px;
   }
 
   input {
-    border-radius: 5px;
-    border: 1px solid #000;
     width: 200px;
     padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #000;
+
+    @media only screen and (min-width: $small) {
+      width: 250px;
+      padding: 12px;
+      font-size: 16px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      width: 300px;
+      padding: 14px;
+      font-size: 18px;
+    }
+
+    @media only screen and (min-width: $large) {
+      width: 250px;
+      padding: 10px;
+      font-size: 16px;
+    }
 
     &:focus {
       outline: none;
@@ -54,28 +102,97 @@ $descriptionColor: rgb(185, 185, 185);
       color: $mainColor;
     }
   }
+
+  label {
+    position: absolute;
+    top: -10px;
+    left: 8px;
+    padding: 0 5px;
+    font-size: 11px;
+    font-weight: 200;
+    background-color: #fff;
+
+    @media only screen and (min-width: $small) {
+      top: -11px;
+      font-size: 13px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      top: -12px;
+      font-size: 15px;
+    }
+
+    @media only screen and (min-width: $large) {
+      top: -11px;
+      font-size: 13px;
+    }
+  }
 }
 
 .passShowAndHide {
   position: absolute;
   right: 8px;
   top: 50%;
-  margin-top: -8px;
   width: 16px;
+  margin-top: -8px;
 }
 
 .formButton {
-  padding: 5px 10px;
-  background-color: none;
+  width: 218px;
+  padding: 8px;
+  background-color: $mainColor;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid $mainColor;
+
+  @media only screen and (min-width: $small) {
+    width: 276px;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    width: 330px;
+    padding: 14px;
+    font-size: 18px;
+  }
+
+  @media only screen and (min-width: $large) {
+    width: 272px;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .notification {
+  display: none;
+  margin-bottom: 10px;
   color: rgb(255, 29, 29);
   font-size: 10px;
   font-weight: 300;
   text-align: center;
-  margin-bottom: 10px;
-  display: none;
+
+  @media only screen and (min-width: $small) {
+    font-size: 12px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: $large) {
+    margin-bottom: 15px;
+    font-size: 12px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    font-size: 14px;
+  }
 }
 
 input:-webkit-autofill,
@@ -83,5 +200,5 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active,
 input:-webkit-autofill:visited {
   box-shadow: 0 0 0 30px #fff inset;
-  // -webkit-box-shadow: 0 0 0 30px #fff inset !important;
+  -webkit-box-shadow: 0 0 0 30px #fff inset !important;
 }
