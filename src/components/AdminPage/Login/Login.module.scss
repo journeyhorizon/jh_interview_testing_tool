@@ -1,0 +1,87 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$descriptionColor: rgb(185, 185, 185);
+
+.titleImage {
+  width: 40%;
+  margin-bottom: 10px;
+}
+
+.description {
+  margin: 0 0 10px 0;
+  color: $descriptionColor;
+  font-size: 14px;
+  font-weight: 200;
+  text-align: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.formInput {
+  position: relative;
+  margin-bottom: 15px;
+
+  label {
+    position: absolute;
+    top: -10px;
+    left: 8px;
+    font-size: 12px;
+    background-color: #fff;
+    padding: 0 5px;
+  }
+
+  input {
+    border-radius: 5px;
+    border: 1px solid #000;
+    width: 200px;
+    padding: 8px;
+
+    &:focus {
+      outline: none;
+      border-color: $mainColor;
+    }
+
+    &:focus ~ label {
+      color: $mainColor;
+    }
+  }
+}
+
+.passShowAndHide {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  margin-top: -8px;
+  width: 16px;
+}
+
+.formButton {
+  padding: 5px 10px;
+  background-color: none;
+}
+
+.notification {
+  color: rgb(255, 29, 29);
+  font-size: 10px;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 10px;
+  display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+input:-webkit-autofill:visited {
+  box-shadow: 0 0 0 30px #fff inset;
+  // -webkit-box-shadow: 0 0 0 30px #fff inset !important;
+}
