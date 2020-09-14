@@ -30,6 +30,7 @@ $descriptionColor: rgb(185, 185, 185);
   margin: 15px;
   background-color: $mainColor;
   border-radius: 5px;
+  opacity: 0.8;
 
   @media only screen and (min-width: $small) {
     width: 200px;

@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as css from "./NotFoundPage.module.scss";
 
+// Component
 import Header from "../common/Header/Header";
 import Footer from "../common/Footer/Footer";
 
+// Assets
 import notFoundImage from "../../assets/notFoundImage.png";
 
 class NotFoundPage extends React.Component {

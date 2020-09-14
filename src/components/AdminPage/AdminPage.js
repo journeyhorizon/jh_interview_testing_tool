@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import * as css from "./AdminPage.module.scss";
 
+// Components
 import Header from "../common/Header/Header";
 import Footer from "../common/Footer/Footer";
 import Login from "./Login/Login";
@@ -21,7 +22,7 @@ class AdminPage extends React.Component {
             <Route exact path="/admin" component={Login} />
             <Route exact path="/admin/dashboard" component={Dashboard} />
             <Route exact path="/admin/intervieweelist" component={IntervieweeList} />
-            <Route path="/admin/interviewee/:fullname" component={IntervieweeDetail} />
+            <Route exact path="/admin/interviewee/:fullname" component={IntervieweeDetail} />
             <Route path="/admin/interviewee/:fullname/logictest" component={ReviewPageOfLogicTest} />
             <Route path="/admin/interviewee/:fullname/englishtest" component={ReviewPageOfEnglishTest} />
             <Redirect to="/adminnotfound" />

@@ -1,10 +1,12 @@
 import React from "react";
 import * as css from "./Login.module.scss";
 
+// Assets
 import logoColor from "../../../assets/logo-color.png";
 import eye from "../../../assets/icons/eye.png";
 import eyeSlash from "../../../assets/icons/eye-slash.png";
 
+// ALIAS
 const NOTIFICATION_FOR_LACK_OF_INFORMATION = "Please enter both username and password";
 const NOTIFICATION_FOR_INCORRECT_INFORMATION = "Username or password is incorrect";
 

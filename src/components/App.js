@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
+// Component
 import HomePage from "./HomePage/HomePage";
 import AdminPage from "./AdminPage/AdminPage";
 import NotFoundPage from "./NotFoundPage/NotFoundPage";

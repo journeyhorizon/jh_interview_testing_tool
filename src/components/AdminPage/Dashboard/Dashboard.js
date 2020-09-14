@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as css from "./Dashboard.module.scss"
 
+// Assets
 import intervieweeList from "../../../assets/icons/interviewee-list.png";
 import logout from "../../../assets/icons/logout.png";
 
+// ALIAS
 const CATEGORY_INTERVIEWEE_LIST = "INTERVIEWEE LIST";
 const CATEGORY_LOGOUT = "LOGOUT";
 
