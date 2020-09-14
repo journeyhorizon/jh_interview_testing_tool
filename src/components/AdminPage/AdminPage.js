@@ -17,12 +17,12 @@ class AdminPage extends React.Component {
         <Header name="Admin" />
         <div className={css.container}>
           <Switch>
-            <Route path="/admin" component={Login} />
-            <Route path="/admin/intervieweelist" component={IntervieweeList} />
-            <Route exact path="/admin/interviewee/:fullname" component={IntervieweeDetail} />
+            <Route exact path="/admin" component={Login} />
+            <Route exact path="/admin/intervieweelist" component={IntervieweeList} />
+            <Route path="/admin/interviewee/:fullname" component={IntervieweeDetail} />
             <Route path="/admin/interviewee/:fullname/logictest" component={ReviewPageOfLogicTest} />
             <Route path="/admin/interviewee/:fullname/englishtest" component={ReviewPageOfEnglishTest} />
-            <Redirect from="/admin/*" to="/adminnotfound" />
+            <Redirect to="/adminnotfound" />
           </Switch>
         </div>
         <Footer />
