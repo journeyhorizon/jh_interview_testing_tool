@@ -23,7 +23,7 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    sessionStorage.getItem("admin") && this.props.history.push("/admin/intervieweeList");
+    sessionStorage.getItem("admin") && this.props.history.push("/admin/dashboard");
   }
 
   handleChange(event) {
@@ -48,7 +48,7 @@ class Login extends React.Component {
         this.changeDisplayOfWarningNotification("none");
         this.setState({ warningNotification: "" });
         sessionStorage.setItem("admin", true);
-        this.props.history.push("/admin/intervieweeList");
+        this.props.history.push("/admin/dashboard");
       }
     }
   }

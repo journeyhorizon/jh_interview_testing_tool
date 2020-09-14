@@ -5,6 +5,7 @@ import * as css from "./AdminPage.module.scss";
 import Header from "../common/Header/Header";
 import Footer from "../common/Footer/Footer";
 import Login from "./Login/Login";
+import Dashboard from "./Dashboard/Dashboard";
 import IntervieweeList from "./IntervieweeList/IntervieweeList";
 import IntervieweeDetail from "./IntervieweeDetail/IntervieweeDetail";
 import ReviewPageOfLogicTest from "./ReviewPageOfLogicTest/ReviewPageOfLogicTest";
@@ -18,6 +19,7 @@ class AdminPage extends React.Component {
         <div className={css.container}>
           <Switch>
             <Route exact path="/admin" component={Login} />
+            <Route exact path="/admin/dashboard" component={Dashboard} />
             <Route exact path="/admin/intervieweelist" component={IntervieweeList} />
             <Route path="/admin/interviewee/:fullname" component={IntervieweeDetail} />
             <Route path="/admin/interviewee/:fullname/logictest" component={ReviewPageOfLogicTest} />

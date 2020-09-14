@@ -27,10 +27,6 @@ $extraLarge: 1600px;
     @media only screen and (min-width: $large) {
       font-size: 22px;
     }
-
-    @media only screen and (min-width: $extraLarge) {
-      font-size: 26px;
-    }
   }
 
   p {
@@ -51,10 +47,6 @@ $extraLarge: 1600px;
 
     @media only screen and (min-width: $large) {
       font-size: 16px;
-    }
-
-    @media only screen and (min-width: $extraLarge) {
-      font-size: 20px;
     }
 
     a {

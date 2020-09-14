@@ -1,0 +1,78 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$descriptionColor: rgb(185, 185, 185);
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  @media only screen and (min-width: $large) {
+    flex-direction: row;
+  }
+}
+
+.link {
+  text-decoration: none;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  margin: 15px;
+  background-color: $mainColor;
+  border-radius: 5px;
+
+  @media only screen and (min-width: $small) {
+    width: 200px;
+    margin: 20px;
+  }
+
+  @media only screen and (min-width: $large) {
+    width: 250px;
+    margin: 30px;
+  }
+}
+
+.categoryIcon {
+  padding: 30px;
+  width: 40px;
+
+  @media only screen and (min-width: $small) {
+    padding: 40px;
+    width: 50px;
+  }
+
+  @media only screen and (min-width: $large) {
+    padding: 40px;
+    width: 70px;
+  }
+}
+
+.categoryName {
+  margin: 0;
+  padding: 5px;
+  width: calc(100% - 10px);
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  @media only screen and (min-width: $small) {
+    padding: 8px;
+    width: calc(100% - 16px);
+    font-size: 16px;
+  }
+}
