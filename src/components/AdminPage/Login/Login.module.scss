@@ -5,6 +5,14 @@ $extraLarge: 1600px;
 $mainColor: #029aa8;
 $descriptionColor: rgb(185, 185, 185);
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
 .titleImage {
   width: 40%;
   margin-bottom: 10px;
@@ -15,15 +23,7 @@ $descriptionColor: rgb(185, 185, 185);
   }
 
   @media only screen and (min-width: $medium) {
-    width: 20%;
-  }
-
-  @media only screen and (min-width: $large) {
-    width: 12%;
-  }
-
-  @media only screen and (min-width: $extraLarge) {
-    width: 10%;
+    width: 35%;
   }
 }
 
@@ -37,10 +37,6 @@ $descriptionColor: rgb(185, 185, 185);
   @media only screen and (min-width: $small) {
     font-size: 18px;
     margin-bottom: 20px;
-  }
-
-  @media only screen and (min-width: $medium) {
-    font-size: 20px;
   }
 
   @media only screen and (min-width: $large) {

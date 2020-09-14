@@ -64,7 +64,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <>
+      <div className={css.container}>
         <img className={css.titleImage} src={logoColor} alt="logo-company" />
         <p className={css.description}>Prove you're our admin!</p>
         <form className={css.loginForm} onSubmit={this.handleSubmit}>
@@ -80,7 +80,7 @@ class Login extends React.Component {
           <div id="warningNotification" className={css.notification}>{this.state.warningNotification}</div>
           <button className={css.formButton}>Login</button>
         </form>
-      </>
+      </div>
     )
   }
 }
