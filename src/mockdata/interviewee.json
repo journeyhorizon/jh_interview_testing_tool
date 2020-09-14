@@ -7,8 +7,26 @@
   },
   {
     "id": 1,
-    "fullname": "Chu Nguyen Anh Tuan",
-    "email": "tuan.chu@journeyh.io",
+    "fullname": "Nguyen Van A",
+    "email": "a.nguyen@journeyh.io",
     "phone": "0987654321"
+  },
+  {
+    "id": 2,
+    "fullname": "Le Thi Tuyet Tram",
+    "email": "tram.le@journeyh.io",
+    "phone": "0864213579"
+  },
+  {
+    "id": 3,
+    "fullname": "Hoang Van Thien",
+    "email": "thien.hoang@journeyh.io",
+    "phone": "0246897531"
+  },
+  {
+    "id": 4,
+    "fullname": "Chau Thi Ngoc Thao",
+    "email": "thao.chau@journeyh.io",
+    "phone": "0975312468"
   }
 ]
