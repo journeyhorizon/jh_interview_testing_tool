@@ -7,7 +7,7 @@
   },
   {
     "id": 1,
-    "fullname": "Nguyen Van A",
+    "fullname": "Nguyen Van An",
     "email": "a.nguyen@journeyh.io",
     "phone": "0987654321"
   },
@@ -28,5 +28,35 @@
     "fullname": "Chau Thi Ngoc Thao",
     "email": "thao.chau@journeyh.io",
     "phone": "0975312468"
+  },
+  {
+    "id": 5,
+    "fullname": "Tran Thi Xuan",
+    "email": "xuan.tran@journeyh.io",
+    "phone": "0135798642"
+  },
+  {
+    "id": 6,
+    "fullname": "Tran Thi Y",
+    "email": "y.tran@journeyh.io",
+    "phone": "0830831212"
+  },
+  {
+    "id": 7,
+    "fullname": "Tran Thi Z",
+    "email": "z.tran@journeyh.io",
+    "phone": "0380387575"
+  },
+  {
+    "id": 8,
+    "fullname": "Tran Thi N",
+    "email": "n.tran@journeyh.io",
+    "phone": "0780783535"
+  },
+  {
+    "id": 9,
+    "fullname": "Tran Thi M",
+    "email": "m.tran@journeyh.io",
+    "phone": "0730734848"
   }
 ]
