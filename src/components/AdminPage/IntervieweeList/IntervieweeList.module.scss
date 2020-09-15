@@ -1,0 +1,263 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$descriptionColor: rgb(185, 185, 185);
+$boxShadow: rgb(230, 230, 230);
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 10px;
+
+  @media only screen and (min-width: $small) {
+    margin: 10px 80px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    margin: 10px 100px;
+  }
+
+  @media only screen and (min-width: $large) {
+    margin: 15px 300px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    margin: 15px 350px;
+  }
+}
+
+.breadcrumb {
+  margin: 0 0 5px 0;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+
+  @media only screen and (min-width: $small) {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $large) {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+  }
+
+  span {
+    text-transform: uppercase;
+  }
+}
+
+.breadcrumbLink {
+  font-weight: 300;
+  text-decoration: none;
+  color: $descriptionColor;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 5px $boxShadow;
+}
+
+.tableTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: $mainColor;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 300;
+
+  @media only screen and (min-width: $small) {
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $large) {
+    font-size: 14px;
+  }
+}
+
+.tableList {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0px;
+  overflow: auto;
+  max-height: calc(100vh - 260px);
+
+  @media only screen and (min-width: $small) {
+    max-height: calc(100vh - 350px);
+  }
+
+  @media only screen and (min-width: $medium) {
+    max-height: calc(100vh - 450px);
+  }
+
+  @media only screen and (min-width: $large) {
+    max-height: calc(100vh - 370px);
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    max-height: calc(100vh - 400px);
+  }
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 0.5px solid $descriptionColor;
+  font-size: 12px;
+
+  @media only screen and (min-width: $small) {
+    padding: 15px 20px;
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $large) {
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    font-size: 16px;
+  }
+
+  &:hover {
+    background-color: $mainColor;
+    color: #fff;
+  }
+
+  &:hover .order {
+    border-color: #fff;
+  }
+
+  &:hover .time {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .order {
+    width: 5%;
+    padding: 0 5px;
+    text-align: left;
+    border-right: 0.5px solid $descriptionColor;
+
+    @media only screen and (min-width: $small) {
+      padding: 0 10px;
+    }
+  }
+
+  .name {
+    width: 50%;
+    padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media only screen and (min-width: $small) {
+      padding-left: 15px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      width: 30%;
+    }
+  }
+
+  .phone {
+    display: none;
+    padding-left: 10px;
+    width: 20%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media only screen and (min-width: $medium) {
+      display: block;
+    }
+  }
+
+  .email {
+    display: none;
+    padding-left: 10px;
+    width: 20%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media only screen and (min-width: $medium) {
+      display: block;
+    }
+  }
+
+  .time {
+    width: 45%;
+    padding: 0 5px 0 10px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media only screen and (min-width: $small) {
+      padding: 0 10px 0 15px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      width: 25%;
+    }
+  }
+}
+
+.tableStatistic {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 15px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: $mainColor;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 300;
+
+  @media only screen and (min-width: $small) {
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $large) {
+    font-size: 14px;
+  }
+
+  .categoryName {
+    flex-grow: 1;
+  }
+}
