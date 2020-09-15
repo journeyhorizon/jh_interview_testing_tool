@@ -4,6 +4,7 @@ $large: 1200px;
 $extraLarge: 1600px;
 
 .footer {
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -29,7 +30,7 @@ $extraLarge: 1600px;
   }
 
   @media only screen and (min-width: $extraLarge) {
-    height: 130px;
+    height: 100px;
   }
 }
 
@@ -55,7 +56,6 @@ $extraLarge: 1600px;
   }
 
   @media only screen and (min-width: $extraLarge) {
-    font-size: 30px;
-    padding-bottom: 10px;
+    font-size: 22px;
   }
 }

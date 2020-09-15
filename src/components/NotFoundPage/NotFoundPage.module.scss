@@ -2,6 +2,8 @@ $small: 768px;
 $medium: 1024px;
 $large: 1200px;
 $extraLarge: 1600px;
+$mainColor: #029aa8;
+$descriptionColor: rgb(185, 185, 185);
 
 .container {
   display: flex;
@@ -14,7 +16,7 @@ $extraLarge: 1600px;
     margin: 5px 0;
     font-size: 26px;
     font-weight: 600;
-    color: #029aa8;
+    color: $mainColor;
 
     @media only screen and (min-width: $small) {
       font-size: 28px;
@@ -32,17 +34,17 @@ $extraLarge: 1600px;
   p {
     margin: 0 40px;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 200;
-    color: rgb(185, 185, 185);
+    color: $descriptionColor;
     margin-bottom: 5px;
 
     @media only screen and (min-width: $small) {
-      font-size: 18px;
+      font-size: 16px;
     }
 
     @media only screen and (min-width: $medium) {
-      font-size: 20px;
+      font-size: 18px;
     }
 
     @media only screen and (min-width: $large) {
@@ -52,12 +54,12 @@ $extraLarge: 1600px;
     a {
       text-decoration: none;
       font-weight: 400;
-      color: #029aa8;
+      color: $mainColor;
 
       span {
         background-image: linear-gradient(
           transparent calc(80% - 5px),
-          lighten(rgb(185, 185, 185), 15%) 1px
+          lighten($descriptionColor, 15%) 1px
         );
         background-size: 0;
         background-repeat: no-repeat;

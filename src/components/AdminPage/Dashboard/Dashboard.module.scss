@@ -11,6 +11,7 @@ $descriptionColor: rgb(185, 185, 185);
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  margin: auto 0;
 
   @media only screen and (min-width: $large) {
     flex-direction: row;

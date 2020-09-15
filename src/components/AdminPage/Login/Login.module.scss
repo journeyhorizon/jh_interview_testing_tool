@@ -11,32 +11,41 @@ $descriptionColor: rgb(185, 185, 185);
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  margin: auto 0;
 }
 
 .titleImage {
-  width: 40%;
+  width: 35%;
   margin-bottom: 10px;
 
   @media only screen and (min-width: $small) {
-    width: 30%;
+    width: 25%;
     margin-bottom: 20px;
   }
 
-  @media only screen and (min-width: $medium) {
-    width: 35%;
+  @media only screen and (min-width: $large) {
+    width: 12%;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    width: 10%;
   }
 }
 
 .description {
   margin: 0 0 10px 0;
   color: $descriptionColor;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 200;
   text-align: center;
 
   @media only screen and (min-width: $small) {
-    font-size: 18px;
+    font-size: 14px;
     margin-bottom: 20px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 16px;
   }
 
   @media only screen and (min-width: $large) {
