@@ -2,7 +2,7 @@
   {
     "id": 0,
     "intervieweeId": 0,
-    "submitTime": "Mon Sep 07 2020 16:34:50 GMT+0700 (Indochina Time)",
+    "submitTime": "Sat Nov 16 2019 18:05:30 GMT+0700 (Indochina Time)",
     "resultOfEnglishTest": {
       "id": 2,
       "durationTime": 270,
@@ -27,7 +27,7 @@
         }
       ],
       "review": "",
-      "totalScore": 0
+      "totalScore": null
     },
     "resultOfLogicTest": {
       "id": 2,
@@ -176,7 +176,7 @@
   {
     "id": 1,
     "intervieweeId": 1,
-    "submitTime": "Thu Sep 10 2020 10:30:50 GMT+0700 (Indochina Time)",
+    "submitTime": "Mon Sep 07 2020 16:34:50 GMT+0700 (Indochina Time)",
     "resultOfEnglishTest": {
       "id": 2,
       "durationTime": 200,
@@ -201,7 +201,7 @@
         }
       ],
       "review": "This one is pretty good! We're impressed of him.",
-      "totalScore": 8.5
+      "totalScore": 10
     },
     "resultOfLogicTest": {
       "id": 2,
@@ -345,6 +345,576 @@
       ],
       "review": "He is intelligent and very clever!",
       "totalScore": 8
+    }
+  },
+  {
+    "id": 2,
+    "intervieweeId": 2,
+    "submitTime": "Thu Sep 10 2020 10:30:50 GMT+0700 (Indochina Time)",
+    "resultOfEnglishTest": {
+      "id": 3,
+      "durationTime": 480,
+      "answerList": [
+        {
+          "id": 0,
+          "type": "WH",
+          "questionContent": "What is your favourite anime? Tell us why you love it, otherwise why you don't?",
+          "answerContent": "Oh whao! I love Naruto the most, this is an Japanese anime (it also has manga). I love it because of everything it owns in the anime, from the content to the image/animation, from the character to the amazing world with ninja and their skills, from all the happy moments to each sadness screen, from EVERYTHING. This anime is perfect, from me with love!!"
+        }
+      ],
+      "review": "She is a real big fan and a beloved cute lovely girl. I can image her love expressed by these line. I am a fan too, goodjob girl! Ninja jutsu will never die.. Haha but your skill is not good enough, poor you.",
+      "totalScore": 6.4
+    },
+    "resultOfLogicTest": {
+      "id": 0,
+      "durationTime": 545,
+      "answerList": [
+        {
+          "id": 0,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "What is the main color of our company's logo?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Blue",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "White",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Black",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [2],
+          "point": false
+        },
+        {
+          "id": 1,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which studio is better on producing Hero films?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "DC",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Marvel",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Universal",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [1],
+          "answerContent": [1],
+          "point": true
+        },
+        {
+          "id": 2,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "What is the result of (5*2+5)?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "5+2*5",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "15",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "35",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0, 1],
+          "answerContent": [2],
+          "point": false
+        },
+        {
+          "id": 3,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Inside which HTML element do we put the JavaScript?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "&lt;script&gt;",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "&lt;js&gt;",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "&lt;scripting&gt;",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "&lt;javascript&gt;",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [3],
+          "point": false
+        },
+        {
+          "id": 4,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "Where do the dolphin live?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Lake",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Ocean",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Swimming pool",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Sea",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [1, 3],
+          "answerContent": [0, 2],
+          "point": false
+        },
+        {
+          "id": 5,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "How can we avoid fire from having a bbq?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Cancel the bbq",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Prepare safe solutions",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Buy the bbq-ed food outside",
+              "isCorrect": true
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Use water to do the bbq",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [1, 2, 3],
+          "answerContent": [0, 2],
+          "point": false
+        },
+        {
+          "id": 6,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "What time is the end of the afternoon breaktime?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "13:10",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "10:13",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "01:10 PM",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [0, 2],
+          "answerContent": [0, 2],
+          "point": true
+        },
+        {
+          "id": 7,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "How many characters included in this question?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "52",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "40",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "46",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [2],
+          "answerContent": [2],
+          "point": true
+        },
+        {
+          "id": 8,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which laptop is belong to Apple?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Macbook Pro 2020",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Dell Inspiration 16",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [1],
+          "point": false
+        },
+        {
+          "id": 9,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "This is an great website, isn't this?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Absolute awesome!",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Pretty good!",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [0, 1],
+          "answerContent": [0, 1],
+          "point": true
+        }
+      ],
+      "review": "",
+      "totalScore": 4
+    }
+  },
+  {
+    "id": 3,
+    "intervieweeId": 3,
+    "submitTime": "Wed Sep 16 2020 08:00:00 GMT+0700 (Indochina Time)",
+    "resultOfEnglishTest": {
+      "id": 0,
+      "durationTime": 524,
+      "questionList": [
+        {
+          "id": 0,
+          "type": "WH",
+          "questionContent": "Describe your personality in just 10 words!",
+          "answerContent": "Pretty cool"
+        },
+        {
+          "id": 1,
+          "type": "WH",
+          "questionContent": "What type of work environment do you prefer?",
+          "answerContent": "Free, joyful, flexible, comfortable and healthy environment is the one I prefer when I choose to work in a company."
+        }
+      ],
+      "review": "He is brilliant! He is good at speaking and very confident when having conversations.",
+      "totalScore": 8.8
+    },
+    "resultOfLogicTest": {
+      "id": 0,
+      "durationTime": 470,
+      "answerList": [
+        {
+          "id": 0,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "What is the main color of our company's logo?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Blue",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "White",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Black",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [0],
+          "point": true
+        },
+        {
+          "id": 1,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which studio is better on producing Hero films?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "DC",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Marvel",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Universal",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [1],
+          "answerContent": [1],
+          "point": true
+        },
+        {
+          "id": 2,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "What is the result of (5*2+5)?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "5+2*5",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "15",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "35",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0, 1],
+          "answerContent": [2],
+          "point": false
+        },
+        {
+          "id": 3,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Inside which HTML element do we put the JavaScript?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "&lt;script&gt;",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "&lt;js&gt;",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "&lt;scripting&gt;",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "&lt;javascript&gt;",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [0],
+          "point": true
+        },
+        {
+          "id": 4,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "Where do the dolphin live?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Lake",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Ocean",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Swimming pool",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Sea",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [1, 3],
+          "answerContent": [0, 2],
+          "point": false
+        },
+        {
+          "id": 5,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "How can we avoid fire from having a bbq?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Cancel the bbq",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Prepare safe solutions",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Buy the bbq-ed food outside",
+              "isCorrect": true
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Use water to do the bbq",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [1, 2, 3],
+          "answerContent": [1, 2, 3],
+          "point": true
+        },
+        {
+          "id": 6,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "What time is the end of the afternoon breaktime?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "13:10",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "10:13",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "01:10 PM",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [0, 2],
+          "answerContent": [0, 2],
+          "point": true
+        },
+        {
+          "id": 7,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "How many characters included in this question?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "52",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "40",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "46",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [2],
+          "answerContent": [2],
+          "point": true
+        },
+        {
+          "id": 8,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which laptop is belong to Apple?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Macbook Pro 2020",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Dell Inspiration 16",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [1],
+          "point": false
+        },
+        {
+          "id": 9,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "This is an great website, isn't this?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Absolute awesome!",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Pretty good!",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [0, 1],
+          "answerContent": [0],
+          "point": false
+        }
+      ],
+      "review": "He is not fast and good at Math, he need to improve his logical thinking.",
+      "totalScore": 6
     }
   }
 ]
