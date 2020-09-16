@@ -22,9 +22,9 @@ class AdminPage extends React.Component {
             <Route exact path="/admin" component={Login} />
             <Route exact path="/admin/dashboard" component={Dashboard} />
             <Route exact path="/admin/intervieweelist" component={IntervieweeList} />
-            <Route exact path="/admin/interviewee/:fullname" component={IntervieweeDetail} />
-            <Route path="/admin/interviewee/:fullname/logictest" component={ReviewPageOfLogicTest} />
-            <Route path="/admin/interviewee/:fullname/englishtest" component={ReviewPageOfEnglishTest} />
+            <Route exact path="/admin/interviewee/:id-:fullname" component={IntervieweeDetail} />
+            <Route path="/admin/interviewee/:id-:fullname/logictest" component={ReviewPageOfLogicTest} />
+            <Route path="/admin/interviewee/:id-:fullname/englishtest" component={ReviewPageOfEnglishTest} />
             <Redirect to="/adminnotfound" />
           </Switch>
         </div>

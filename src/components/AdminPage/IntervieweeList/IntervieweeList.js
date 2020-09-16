@@ -31,8 +31,6 @@ class IntervieweeList extends React.Component {
         list.push({
           ...eachInterviewee,
           submitTime: formatDate(intervieweeResult.submitTime),
-          resultOfEnglishTest: intervieweeResult.resultOfEnglishTest,
-          resultOfLogicTest: intervieweeResult.resultOfLogicTest,
           isValid: true
         });
       return null
@@ -51,7 +49,7 @@ class IntervieweeList extends React.Component {
           <div className={css.tableList}>
             {this.state.fullDetailIntervieweeList.map((result, index) => (
               result.isValid ?
-                <Link key={result.id} className={css.item} to={`/admin/interviewee/${result.fullname}`} style={{ borderBottom: index === this.state.fullDetailIntervieweeList.length - 1 && "none" }}>
+                <Link key={result.id} className={css.item} to={`/admin/interviewee/${result.id}-${result.fullname}`} style={{ borderBottom: index === this.state.fullDetailIntervieweeList.length - 1 && "none" }}>
                   <div className={css.order}>{index + 1}</div>
                   <div className={css.name}>{result.fullname}</div>
                   <div className={css.phone}>{result.phone}</div>
