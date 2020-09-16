@@ -1,0 +1,46 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+
+.container {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 30px;
+  height: 100%;
+  background-color: #fff;
+  font-size: 14px;
+
+  @media only screen and (min-width: $small) {
+    margin: 0 150px;
+    font-size: 20px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    margin: 0 200px;
+    font-size: 24px;
+  }
+
+  @media only screen and (min-width: $large) {
+    display: none;
+  }
+
+  .warningText {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .closeButton {
+    padding: 7px 15px;
+    border-radius: 30px;
+    color: #fff;
+    background-color: $mainColor;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
