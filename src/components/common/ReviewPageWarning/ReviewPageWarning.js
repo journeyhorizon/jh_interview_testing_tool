@@ -10,10 +10,10 @@ class ReviewPageWarning extends React.Component {
     return (
       <div id="reviewPageWarning" className={css.container}>
         <div className={css.warningText}>
-          If you want to write down your review or scores for this interviewee, please visit us on bigger screen (laptop, PC)
+          If you want to write down your reviews or scores for this interviewee, please visit us on a bigger screen (laptop, PC)
         </div>
         <div className={css.closeButton} onClick={this.closeWarning}>
-          Understand. Go through!
+          Get it. Go through!
         </div>
       </div>
     )

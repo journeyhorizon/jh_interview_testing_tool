@@ -11,18 +11,16 @@ $mainColor: #029aa8;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 30px;
+  padding: 0 30px;
   height: 100%;
   background-color: #fff;
   font-size: 14px;
 
   @media only screen and (min-width: $small) {
-    margin: 0 150px;
     font-size: 20px;
   }
 
   @media only screen and (min-width: $medium) {
-    margin: 0 200px;
     font-size: 24px;
   }
 
@@ -36,7 +34,7 @@ $mainColor: #029aa8;
   }
 
   .closeButton {
-    padding: 7px 15px;
+    padding: 7px 10px;
     border-radius: 30px;
     color: #fff;
     background-color: $mainColor;
