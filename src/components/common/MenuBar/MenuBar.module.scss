@@ -1,0 +1,174 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$descriptionColor: rgb(185, 185, 185);
+
+.container {
+  position: absolute;
+  top: -1200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 30px;
+  height: 100%;
+  width: calc(100% - 60px);
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+
+  @media only screen and (min-width: $small) {
+    font-size: 20px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 24px;
+  }
+
+  @media only screen and (min-width: $large) {
+    display: none;
+  }
+}
+
+.showMenuBar {
+  animation: slideIn 0.8s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideIn {
+  from {
+    top: -1200px;
+  }
+
+  to {
+    top: 0;
+  }
+}
+
+.hideMenuBar {
+  animation: slideOut 0.8s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideOut {
+  from {
+    top: 0;
+  }
+
+  to {
+    top: -1200px;
+  }
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+
+  @media only screen and (min-width: $small) {
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 16px;
+  }
+
+  span {
+    text-transform: uppercase;
+  }
+}
+
+.breadcrumbLink {
+  font-weight: 300;
+  text-decoration: none;
+  color: $descriptionColor;
+}
+
+.listQuestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 0;
+  margin: 15px 0;
+  width: 100%;
+  max-height: calc(100vh - 300px);
+  border-top: 1px solid $mainColor;
+  border-bottom: 1px solid $mainColor;
+
+  .listQuestionTitle {
+    margin: 0 0 5px 0;
+    padding: 0px 25px 5px 25px;
+    font-size: 12px;
+    font-weight: 500;
+
+    @media only screen and (min-width: $small) {
+      font-size: 14px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      font-size: 16px;
+    }
+  }
+
+  .list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: auto;
+
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 10px;
+      margin: 5px;
+      width: 15px;
+      height: 25px;
+      font-size: 12px;
+      color: $mainColor;
+      background-color: #fff;
+      border-radius: 5px;
+      border: 1px solid $mainColor;
+
+      @media only screen and (min-width: $small) {
+        font-size: 14px;
+      }
+
+      @media only screen and (min-width: $medium) {
+        font-size: 16px;
+      }
+    }
+
+    .currentItem {
+      color: #fff;
+      background-color: $mainColor;
+    }
+  }
+}
+
+.closeButton {
+  padding: 5px 10px;
+  color: #fff;
+  background-color: $mainColor;
+  text-align: center;
+  border-radius: 5px;
+
+  .buttonTitle {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 300;
+
+    @media only screen and (min-width: $small) {
+      font-size: 14px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      font-size: 16px;
+    }
+  }
+}
