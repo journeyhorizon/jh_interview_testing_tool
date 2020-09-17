@@ -187,6 +187,11 @@ $boxShadow: rgb(230, 230, 230);
 
       @media only screen and (min-width: $large) {
         align-items: center;
+        font-size: 12px;
+      }
+
+      @media only screen and (min-width: $extraLarge) {
+        align-items: center;
         font-size: 14px;
       }
 
@@ -205,6 +210,10 @@ $boxShadow: rgb(230, 230, 230);
         }
 
         @media only screen and (min-width: $large) {
+          font-size: 14px;
+        }
+
+        @media only screen and (min-width: $extraLarge) {
           font-size: 16px;
         }
       }
@@ -261,6 +270,10 @@ $boxShadow: rgb(230, 230, 230);
           @media only screen and (min-width: $large) {
             font-size: 12px;
           }
+
+          @media only screen and (min-width: $extraLarge) {
+            font-size: 14px;
+          }
         }
 
         .value {
@@ -276,6 +289,10 @@ $boxShadow: rgb(230, 230, 230);
 
           @media only screen and (min-width: $large) {
             font-size: 14px;
+          }
+
+          @media only screen and (min-width: $extraLarge) {
+            font-size: 16px;
           }
         }
 
@@ -296,6 +313,11 @@ $boxShadow: rgb(230, 230, 230);
           @media only screen and (min-width: $large) {
             padding-top: 3px;
             width: 14px;
+          }
+
+          @media only screen and (min-width: $extraLarge) {
+            padding-top: 3px;
+            width: 16px;
           }
         }
       }
@@ -388,6 +410,10 @@ $boxShadow: rgb(230, 230, 230);
 
       @media only screen and (min-width: $large) {
         padding: 10px 15px;
+        font-size: 14px;
+      }
+
+      @media only screen and (min-width: $extraLarge) {
         font-size: 16px;
       }
 

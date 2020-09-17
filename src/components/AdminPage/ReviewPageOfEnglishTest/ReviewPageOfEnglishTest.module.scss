@@ -185,11 +185,15 @@ $boxShadow: rgb(230, 230, 230);
     @media only screen and (min-width: $large) {
       margin: 0;
       padding: 5px 15px;
-      font-size: 14px;
+      font-size: 13px;
       color: #fff;
       background-color: $mainColor;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 14px;
     }
 
     span {
@@ -205,6 +209,10 @@ $boxShadow: rgb(230, 230, 230);
       }
 
       @media only screen and (min-width: $large) {
+        font-size: 14px;
+      }
+
+      @media only screen and (min-width: $extraLarge) {
         font-size: 16px;
       }
     }
@@ -242,6 +250,7 @@ $boxShadow: rgb(230, 230, 230);
       padding: 10px 15px;
       height: calc(100vh - 500px);
       border: none;
+      font-size: 14px;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       background-color: #fff;
@@ -250,6 +259,11 @@ $boxShadow: rgb(230, 230, 230);
 
     @media only screen and (min-width: $extraLarge) {
       height: calc(100vh - 600px);
+      font-size: 16px;
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 
@@ -273,6 +287,10 @@ $boxShadow: rgb(230, 230, 230);
 
         @media only screen and (min-width: $large) {
           padding: 5px;
+          width: 18px;
+        }
+
+        @media only screen and (min-width: $extraLarge) {
           width: 20px;
         }
       }
@@ -311,8 +329,12 @@ $boxShadow: rgb(230, 230, 230);
     .listQuestionTitle {
       margin: 0 0 5px 0;
       padding: 0;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 300;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 14px;
     }
 
     .list {
@@ -327,10 +349,14 @@ $boxShadow: rgb(230, 230, 230);
         margin: 0 5px 5px 0;
         width: 15px;
         height: 25px;
-        font-size: 14px;
+        font-size: 13px;
         color: #fff;
         background: $mainColor;
         border-radius: 5px;
+
+        @media only screen and (min-width: $extraLarge) {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -339,16 +365,24 @@ $boxShadow: rgb(230, 230, 230);
     display: flex;
     flex-direction: column;
     margin: 0 0 15px 0;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 300;
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 14px;
+    }
 
     .submitTime {
       margin-bottom: 5px;
     }
 
     span {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 16px;
+      }
     }
   }
 
@@ -363,12 +397,16 @@ $boxShadow: rgb(230, 230, 230);
     .reviewsTitle {
       margin: 0;
       padding: 5px 10px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 300;
       color: #fff;
       background-color: $mainColor;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 14px;
+      }
     }
 
     .reviewsContent {
@@ -376,7 +414,7 @@ $boxShadow: rgb(230, 230, 230);
       margin: 0 0 5px 0;
       padding: 5px 10px;
       height: 200px;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 300;
       text-align: justify;
       background-color: #fff;
@@ -384,6 +422,10 @@ $boxShadow: rgb(230, 230, 230);
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       box-shadow: 0 0 2px $boxShadow;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 16px;
+      }
 
       &:focus {
         outline: none;
@@ -409,12 +451,16 @@ $boxShadow: rgb(230, 230, 230);
       align-items: center;
       margin: 0;
       padding: 5px 10px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 300;
       color: #fff;
       background-color: $mainColor;
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 14px;
+      }
     }
 
     .scoresValue {
@@ -422,13 +468,17 @@ $boxShadow: rgb(230, 230, 230);
       display: flex;
       align-items: center;
       padding: 5px;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
       text-align: right;
       background-color: #fff;
       border: none;
       border-radius: 5px;
       box-shadow: 0 0 2px $boxShadow;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 16px;
+      }
 
       &:focus {
         outline: none;
@@ -451,8 +501,12 @@ $boxShadow: rgb(230, 230, 230);
     .buttonTitle {
       padding: 10px;
       margin: 0;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 300;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 16px;
+      }
     }
 
     &:hover {
