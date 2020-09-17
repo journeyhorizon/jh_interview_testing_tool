@@ -5,7 +5,7 @@
     "submitTime": "Sat Nov 16 2019 18:05:30 GMT+0700 (Indochina Time)",
     "resultOfEnglishTest": {
       "id": 2,
-      "durationTime": 270,
+      "durationTime": 300,
       "answerList": [
         {
           "id": 0,
@@ -26,12 +26,13 @@
           "answerContent": "I will be one of the company's employee but they're not."
         }
       ],
-      "review": "",
+      "completeDurationTime": 270,
+      "reviews": "",
       "totalScore": null
     },
     "resultOfLogicTest": {
       "id": 2,
-      "durationTime": 200,
+      "durationTime": 300,
       "answerList": [
         {
           "id": 0,
@@ -169,7 +170,8 @@
           "point": true
         }
       ],
-      "review": "",
+      "completeDurationTime": 200,
+      "reviews": "",
       "totalScore": 4
     }
   },
@@ -179,7 +181,7 @@
     "submitTime": "Mon Sep 07 2020 16:34:50 GMT+0700 (Indochina Time)",
     "resultOfEnglishTest": {
       "id": 2,
-      "durationTime": 200,
+      "durationTime": 300,
       "answerList": [
         {
           "id": 0,
@@ -200,12 +202,13 @@
           "answerContent": "I am the BOSS!"
         }
       ],
-      "review": "This one is pretty good! We're impressed of him.",
+      "completeDurationTime": 200,
+      "reviews": "This one is pretty good! We're impressed of him.",
       "totalScore": 10
     },
     "resultOfLogicTest": {
       "id": 2,
-      "durationTime": 180,
+      "durationTime": 300,
       "answerList": [
         {
           "id": 0,
@@ -343,7 +346,8 @@
           "point": true
         }
       ],
-      "review": "He is intelligent and very clever!",
+      "completeDurationTime": 180,
+      "reviews": "He is intelligent and very clever!",
       "totalScore": 8
     }
   },
@@ -362,12 +366,13 @@
           "answerContent": "Oh whao! I love Naruto the most, this is an Japanese anime (it also has manga). I love it because of everything it owns in the anime, from the content to the image/animation, from the character to the amazing world with ninja and their skills, from all the happy moments to each sadness screen, from EVERYTHING. This anime is perfect, from me with love!!"
         }
       ],
-      "review": "She is a real big fan and a beloved cute lovely girl. I can image her love expressed by these line. I am a fan too, goodjob girl! Ninja jutsu will never die.. Haha but your skill is not good enough, poor you.",
+      "completeDurationTime": 480,
+      "reviews": "She is a real big fan and a beloved cute lovely girl. I can image her love expressed by these line. I am a fan too, goodjob girl! Ninja jutsu will never die.. Haha but your skill is not good enough, poor you.",
       "totalScore": 6.4
     },
     "resultOfLogicTest": {
       "id": 0,
-      "durationTime": 545,
+      "durationTime": 600,
       "answerList": [
         {
           "id": 0,
@@ -625,7 +630,8 @@
           "point": true
         }
       ],
-      "review": "",
+      "completeDurationTime": 545,
+      "reviews": "",
       "totalScore": 4
     }
   },
@@ -635,8 +641,8 @@
     "submitTime": "Wed Sep 16 2020 08:00:00 GMT+0700 (Indochina Time)",
     "resultOfEnglishTest": {
       "id": 0,
-      "durationTime": 524,
-      "questionList": [
+      "durationTime": 600,
+      "answerList": [
         {
           "id": 0,
           "type": "WH",
@@ -650,12 +656,13 @@
           "answerContent": "Free, joyful, flexible, comfortable and healthy environment is the one I prefer when I choose to work in a company."
         }
       ],
-      "review": "He is brilliant! He is good at speaking and very confident when having conversations.",
+      "completeDurationTime": 524,
+      "reviews": "He is brilliant! He is good at speaking and very confident when having conversations.",
       "totalScore": 8.8
     },
     "resultOfLogicTest": {
       "id": 0,
-      "durationTime": 470,
+      "durationTime": 600,
       "answerList": [
         {
           "id": 0,
@@ -913,7 +920,8 @@
           "point": false
         }
       ],
-      "review": "He is not fast and good at Math, he need to improve his logical thinking.",
+      "completeDurationTime": 470,
+      "reviews": "He is not fast and good at Math, he need to improve his logical thinking.",
       "totalScore": 6
     }
   }
