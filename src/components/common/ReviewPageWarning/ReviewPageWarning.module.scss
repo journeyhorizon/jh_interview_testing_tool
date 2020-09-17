@@ -40,5 +40,9 @@ $mainColor: #029aa8;
     background-color: $mainColor;
     text-align: center;
     text-transform: uppercase;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

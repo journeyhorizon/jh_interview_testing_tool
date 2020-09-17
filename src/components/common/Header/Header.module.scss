@@ -9,11 +9,12 @@ $extraLarge: 1600px;
   justify-content: center;
   align-items: flex-start;
   height: 70px;
-  box-shadow: 0px 10px 25px 15px #fff;
+  box-shadow: 0px 5px 15px 5px #fff;
   background-image: url("../../../assets/headerBackground-big.png");
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 5;
 
   @media only screen and (min-width: $small) {
     height: 100px;

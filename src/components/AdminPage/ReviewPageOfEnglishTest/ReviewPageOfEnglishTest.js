@@ -4,6 +4,7 @@ import * as css from "./ReviewPageOfEnglishTest.module.scss"
 
 // Component
 import ReviewPageWarning from "../../common/ReviewPageWarning/ReviewPageWarning";
+import MenuBar from "../../common/MenuBar/MenuBar";
 
 // Utils
 import { formatTime } from "../../../utils/formatTime";
@@ -22,16 +23,21 @@ class ReviewPageOfEnglishTest extends React.Component {
       resultOfEnglishTest: {},
       currentQA: {},
       limitedQuestionContent: "",
-      isBigScreen: false
+      isBigScreen: false,
+      menuBar: null
     };
 
     this.limitLengthOfQuestionContent = this.limitLengthOfQuestionContent.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
     this.giveScoresAndScores = this.giveScoresAndScores.bind(this);
+    this.changeCurrentQA = this.changeCurrentQA.bind(this);
+    this.navigateQA = this.navigateQA.bind(this);
+    this.showMenuBar = this.showMenuBar.bind(this);
     this.saveChanges = this.saveChanges.bind(this);
   }
 
   componentDidMount() {
+    console.log("review mount");
     this._isMounted = true;
 
     !sessionStorage.getItem("admin") && this.props.history.push("/admin");
@@ -65,11 +71,39 @@ class ReviewPageOfEnglishTest extends React.Component {
     this.setState({ resultOfEnglishTest: { ...this.state.resultOfEnglishTest, [event.target.name]: event.target.value } });
   }
 
+  changeCurrentQA(index) {
+    this.setState({ currentQA: this.state.resultOfEnglishTest.answerList[index] });
+    this.limitLengthOfQuestionContent(this.state.resultOfEnglishTest.answerList[index].questionContent);
+  }
+
+  navigateQA(step) {
+    if (this.state.resultOfEnglishTest.answerList) {
+      const currentIndex = this.state.resultOfEnglishTest.answerList.findIndex(item => item.id === this.state.currentQA.id);
+      const newIndex = currentIndex + step;
+
+      if (newIndex < 0) {
+        this.setState({ currentQA: this.state.resultOfEnglishTest.answerList[this.state.resultOfEnglishTest.answerList.length - 1] });
+        this.limitLengthOfQuestionContent(this.state.resultOfEnglishTest.answerList[this.state.resultOfEnglishTest.answerList.length - 1].questionContent);
+      } else if (newIndex >= this.state.resultOfEnglishTest.answerList.length) {
+        this.setState({ currentQA: this.state.resultOfEnglishTest.answerList[0] });
+        this.limitLengthOfQuestionContent(this.state.resultOfEnglishTest.answerList[0].questionContent);
+      } else {
+        this.setState({ currentQA: this.state.resultOfEnglishTest.answerList[newIndex] });
+        this.limitLengthOfQuestionContent(this.state.resultOfEnglishTest.answerList[newIndex].questionContent);
+      }
+    }
+  }
+
+  showMenuBar() {
+    this.setState({ menuBar: !this.state.menuBar });
+  }
+
   saveChanges() {
     console.log(this.state.resultOfEnglishTest.reviews, this.state.resultOfEnglishTest.totalScore);
   }
 
   componentWillUnmount() {
+    console.log("review unmount")
     this._isMounted = false;
   }
 
@@ -85,7 +119,7 @@ class ReviewPageOfEnglishTest extends React.Component {
         </div>
         <div className={css.smallContainer}>
           <div className={css.mobileNavbar}>
-            <div className={css.menuButton}>
+            <div className={css.menuButton} onClick={this.showMenuBar}>
               <img src={menu} alt="menu" />
             </div>
             <div className={css.orderOfCurrentPage}><span>{currentQA.id + 1 || 0}</span>/{resultOfEnglishTest.answerList && resultOfEnglishTest.answerList.length}</div>
@@ -94,10 +128,10 @@ class ReviewPageOfEnglishTest extends React.Component {
             <h3 className={css.currentQuestion}>Question: <span>{this.state.isBigScreen ? currentQA.questionContent : this.state.limitedQuestionContent}</span></h3>
             <textarea className={css.currentAnswer} value={currentQA.answerContent} readOnly={true} />
             <div className={css.navigation}>
-              <div className={css.arrowButton}>
+              <div className={css.arrowButton} onClick={() => this.navigateQA(-1)}>
                 <img src={arrowLeft} alt="arrow left navigation" />
               </div>
-              <div className={css.arrowButton}>
+              <div className={css.arrowButton} onClick={() => this.navigateQA(1)}>
                 <img src={arrowRight} alt="arrow right navigation" />
               </div>
             </div>
@@ -106,8 +140,8 @@ class ReviewPageOfEnglishTest extends React.Component {
             <div className={css.listQuestion}>
               <h3 className={css.listQuestionTitle}>List of Questions</h3>
               <div className={css.list}>
-                {resultOfEnglishTest.answerList && resultOfEnglishTest.answerList.map(result => (
-                  <div key={result.id} className={css.item}>{result.id + 1}</div>
+                {resultOfEnglishTest.answerList && resultOfEnglishTest.answerList.map((result, index) => (
+                  <div key={result.id} className={`${css.item} ${this.state.currentQA.id === result.id ? css.currentItem : ""}`} onClick={() => this.changeCurrentQA(index)}>{result.id + 1}</div>
                 ))}
               </div>
             </div>
@@ -128,6 +162,7 @@ class ReviewPageOfEnglishTest extends React.Component {
             </div>
           </div>
         </div>
+        <MenuBar isShow={this.state.menuBar} detailInterviewee={detailInterviewee} currentQA={currentQA} resultOfEnglishTest={resultOfEnglishTest} changeCurrentQA={this.changeCurrentQA} showMenuBar={this.showMenuBar} />
         <ReviewPageWarning />
       </div>
     )

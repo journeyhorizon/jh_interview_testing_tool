@@ -40,7 +40,7 @@ $boxShadow: rgb(230, 230, 230);
 }
 
 .breadcrumb {
-  display: flex;
+  display: none;
   justify-content: center;
   flex-wrap: wrap;
   margin: 0 0 5px 0;
@@ -58,9 +58,10 @@ $boxShadow: rgb(230, 230, 230);
   }
 
   @media only screen and (min-width: $large) {
+    display: flex;
+    justify-content: flex-start;
     margin: 0 0 10px 10px;
     font-size: 14px;
-    justify-content: flex-start;
   }
 
   span {
@@ -222,7 +223,7 @@ $boxShadow: rgb(230, 230, 230);
     resize: none;
     margin: 0 0 5px 0;
     padding: 5px;
-    height: calc(100vh - 330px);
+    height: calc(100vh - 340px);
     font-size: 12px;
     font-weight: 300;
     text-align: justify;
@@ -350,13 +351,25 @@ $boxShadow: rgb(230, 230, 230);
         width: 15px;
         height: 25px;
         font-size: 13px;
-        color: #fff;
-        background: $mainColor;
+        color: $mainColor;
+        background-color: #fff;
         border-radius: 5px;
+        border: 1px solid $mainColor;
 
         @media only screen and (min-width: $extraLarge) {
           font-size: 14px;
         }
+
+        &:hover {
+          cursor: pointer;
+          color: #fff;
+          background-color: $mainColor;
+        }
+      }
+
+      .currentItem {
+        color: #fff;
+        background-color: $mainColor;
       }
     }
   }
@@ -493,10 +506,11 @@ $boxShadow: rgb(230, 230, 230);
 
   .saveButton {
     width: calc(100% - 5px);
-    color: #fff;
-    background-color: $mainColor;
+    color: $mainColor;
+    background-color: #fff;
     text-align: center;
     border-radius: 5px;
+    border: 1px solid $mainColor;
 
     .buttonTitle {
       padding: 10px;
@@ -511,6 +525,8 @@ $boxShadow: rgb(230, 230, 230);
 
     &:hover {
       cursor: pointer;
+      color: #fff;
+      background-color: $mainColor;
     }
   }
 }
