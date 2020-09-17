@@ -31,7 +31,7 @@ a {
   }
 
   @media only screen and (min-width: $large) {
-    margin: 15px 300px;
+    margin: 15px 200px;
   }
 
   @media only screen and (min-width: $extraLarge) {
@@ -55,9 +55,9 @@ a {
   }
 
   @media only screen and (min-width: $large) {
-    margin: 0 0 15px 15px;
+    margin: 0 0 10px 10px;
     font-size: 14px;
-    text-align: center;
+    text-align: left;
   }
 
   .breadcrumbLink {

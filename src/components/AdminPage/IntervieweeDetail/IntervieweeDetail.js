@@ -4,6 +4,7 @@ import * as css from "./IntervieweeDetail.module.scss";
 
 // Utils
 import { formatDate } from "../../../utils/formatDate";
+import { customizeStringLength } from "../../../utils/customizeStringLength";
 
 // Data
 import interviewee from "../../../mockdata/interviewee.json";
@@ -30,15 +31,18 @@ function ReviewContainer(props) {
     <div className={css.reviewContainer}>
       <div className={css.reviewTitle}>Reviews of <span>{props.title} TEST</span></div>
       <div className={`${css.reviews} ${props.isNotReviewYet && css.notReviewYet}`}>
-        {props.reviews}
-        <Link to={`/admin/interviewee/${props.id}-${props.fullname}/${props.title}test`}>View Details!</Link>
+        {props.isNotReviewYet ? props.limitedReviews : props.isBigScreen ? props.fullReviews : props.limitedReviews}
+        <Link to={{
+          pathname: `/admin/interviewee/${props.fullData.id}-${props.fullData.fullname}/${props.title}test`,
+          state: props.fullData
+        }}>View Details!</Link>
       </div>
     </div>
   )
 }
 
 class IntervieweeDetail extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
 
     this.state = {
@@ -47,21 +51,28 @@ class IntervieweeDetail extends React.Component {
         english: "",
         logic: ""
       },
-      rating: null
+      rating: null,
+      isBigScreen: null
     };
     this.loadDetailInterviewee = this.loadDetailInterviewee.bind(this);
     this.limitLengthOfReviews = this.limitLengthOfReviews.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
     this.checkRating = this.checkRating.bind(this);
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     !sessionStorage.getItem("admin") && this.props.history.push("/admin");
+    window.addEventListener("resize", this.updateDimensions);
 
     const detailInterviewee = this.loadDetailInterviewee();
-    this.limitLengthOfReviews(detailInterviewee);
-    this.checkValidPath(detailInterviewee);
-    this.checkRating(detailInterviewee);
-    this.setState({ detailInterviewee: detailInterviewee });
+    if (!this.checkInvalidPath(detailInterviewee)) {
+      this.updateDimensions();
+      this.limitLengthOfReviews(detailInterviewee);
+      this.checkRating(detailInterviewee);
+      this.setState({ detailInterviewee: detailInterviewee });
+    } else this.props.history.push("/admin/intervieweelist");
   }
 
   loadDetailInterviewee() {
@@ -85,26 +96,20 @@ class IntervieweeDetail extends React.Component {
       logic: ""
     }
 
-    limitedReviews.english = this.customizeReviews(detailInterviewee.resultOfEnglishTest.review);
-    limitedReviews.logic = this.customizeReviews(detailInterviewee.resultOfLogicTest.review);
+    limitedReviews.english = customizeStringLength(detailInterviewee.resultOfEnglishTest.reviews, 180);
+    limitedReviews.logic = customizeStringLength(detailInterviewee.resultOfLogicTest.reviews, 180);
     this.setState({ limitedReviews });
   }
 
-  customizeReviews(string) {
-    if (string.length === 0) {
-      return `You haven't reviewed this test yet!`;
-    } else if (string.length > 180) {
-      let newStr = string.substr(0, 180);
-      if (newStr[newStr.length - 1] === " ") newStr = newStr.substr(0, newStr.length - 1);
-      return `${newStr}...`;
-    } else {
-      return string;
-    }
+  updateDimensions() {
+    if (this._isMounted)
+      window.innerWidth > 1200 ? this.setState({ isBigScreen: true }) : this.setState({ isBigScreen: false })
   }
 
-  checkValidPath(object) {
+  checkInvalidPath(object) {
     if (Object.keys(object).length === 0 && object.constructor === Object)
-      this.props.history.push("/admin/intervieweelist");
+      return true;
+    else return false;
   }
 
   checkRating(detailInterviewee) {
@@ -114,6 +119,10 @@ class IntervieweeDetail extends React.Component {
       const averageScore = (detailInterviewee.resultOfEnglishTest.totalScore + detailInterviewee.resultOfLogicTest.totalScore) / 2;
       averageScore < 6.0 ? this.setState({ rating: emotionSad }) : averageScore < 9.0 ? this.setState({ rating: emotionHeart }) : this.setState({ rating: emotionStar });
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
@@ -151,17 +160,19 @@ class IntervieweeDetail extends React.Component {
           <div className={css.testReview}>
             <ReviewContainer
               title="logic"
-              reviews={this.state.limitedReviews.logic}
-              isNotReviewYet={detailInterviewee.resultOfLogicTest && detailInterviewee.resultOfLogicTest.review.length === 0 ? true : false}
-              id={detailInterviewee.id}
-              fullname={detailInterviewee.fullname}
+              limitedReviews={this.state.limitedReviews.logic}
+              fullReviews={detailInterviewee.resultOfLogicTest && detailInterviewee.resultOfLogicTest.reviews}
+              isNotReviewYet={detailInterviewee.resultOfLogicTest && detailInterviewee.resultOfLogicTest.reviews.length === 0 ? true : false}
+              isBigScreen={this.state.isBigScreen}
+              fullData={detailInterviewee}
             />
             <ReviewContainer
               title="english"
-              reviews={this.state.limitedReviews.english}
-              isNotReviewYet={detailInterviewee.resultOfEnglishTest && detailInterviewee.resultOfEnglishTest.review.length === 0 ? true : false}
-              id={detailInterviewee.id}
-              fullname={detailInterviewee.fullname}
+              limitedReviews={this.state.limitedReviews.english}
+              fullReviews={detailInterviewee.resultOfEnglishTest && detailInterviewee.resultOfEnglishTest.reviews}
+              isNotReviewYet={detailInterviewee.resultOfEnglishTest && detailInterviewee.resultOfEnglishTest.reviews.length === 0 ? true : false}
+              isBigScreen={this.state.isBigScreen}
+              fullData={detailInterviewee}
             />
           </div>
         </div>
