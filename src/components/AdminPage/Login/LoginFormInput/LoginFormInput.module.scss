@@ -1,0 +1,95 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$descriptionColor: rgb(185, 185, 185);
+
+.formInput {
+  position: relative;
+  margin-bottom: 15px;
+
+  @media only screen and (min-width: $small) {
+    margin-bottom: 25px;
+  }
+
+  @media only screen and (min-width: $large) {
+    margin-bottom: 15px;
+  }
+
+  input {
+    width: 200px;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #000;
+
+    @media only screen and (min-width: $small) {
+      width: 250px;
+      padding: 12px;
+      font-size: 16px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      width: 300px;
+      padding: 14px;
+      font-size: 18px;
+    }
+
+    @media only screen and (min-width: $large) {
+      width: 250px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $mainColor;
+    }
+
+    &:focus ~ label {
+      color: $mainColor;
+    }
+  }
+
+  label {
+    position: absolute;
+    top: -10px;
+    left: 8px;
+    padding: 0 5px;
+    font-size: 11px;
+    font-weight: 200;
+    background-color: #fff;
+
+    @media only screen and (min-width: $small) {
+      top: -11px;
+      font-size: 13px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      top: -12px;
+      font-size: 15px;
+    }
+
+    @media only screen and (min-width: $large) {
+      top: -11px;
+      font-size: 13px;
+    }
+  }
+}
+
+.passShowAndHide {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  width: 16px;
+  margin-top: -8px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+input:-webkit-autofill:visited {
+  box-shadow: 0 0 0 30px #fff inset;
+  -webkit-box-shadow: 0 0 0 30px #fff inset !important;
+}

@@ -1,0 +1,233 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$descriptionColor: rgb(185, 185, 185);
+$boxShadow: rgb(230, 230, 230);
+
+.controlPanel {
+  flex: 0 1 320px;
+  display: none;
+  flex-direction: column;
+  margin: 0 0 0 20px;
+  padding: 0 20px 15px 20px;
+  border-left: 2px solid rgb(245, 245, 245);
+  overflow: auto;
+
+  @media only screen and (min-width: $large) {
+    display: flex;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    flex: 0 1 360px;
+  }
+
+  .listQuestion {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 10px 0;
+
+    .listQuestionTitle {
+      margin: 0 0 5px 0;
+      padding: 0;
+      font-size: 13px;
+      font-weight: 300;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 14px;
+    }
+
+    .list {
+      display: flex;
+      flex-wrap: wrap;
+
+      .item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 10px;
+        margin: 0 5px 5px 0;
+        width: 15px;
+        height: 25px;
+        font-size: 13px;
+        color: $mainColor;
+        background-color: #fff;
+        border-radius: 5px;
+        border: 1px solid $mainColor;
+
+        @media only screen and (min-width: $extraLarge) {
+          font-size: 14px;
+        }
+
+        &:hover {
+          cursor: pointer;
+          color: #fff;
+          background-color: $mainColor;
+        }
+      }
+
+      .currentItem {
+        color: #fff;
+        background-color: $mainColor;
+      }
+    }
+  }
+
+  .timeDisplay {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 15px 0;
+    font-size: 13px;
+    font-weight: 300;
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 14px;
+    }
+
+    .submitTime {
+      margin-bottom: 5px;
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .reviews {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 15px 0;
+    width: calc(100% - 5px);
+    border: none;
+    border-radius: 5px;
+
+    .reviewsTitle {
+      margin: 0;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: 300;
+      color: #fff;
+      background-color: $mainColor;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 14px;
+      }
+    }
+
+    .reviewsContent {
+      resize: none;
+      margin: 0 0 5px 0;
+      padding: 5px 10px;
+      height: 200px;
+      font-size: 14px;
+      font-weight: 300;
+      text-align: justify;
+      background-color: #fff;
+      border: none;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      box-shadow: 0 0 2px $boxShadow;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 16px;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .emptyReviewsContent {
+      color: $descriptionColor;
+    }
+  }
+
+  .scores {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 5px);
+    margin: 0 0 15px 0;
+    border: none;
+    border-radius: 5px;
+
+    .scoresTitle {
+      flex-grow: 2;
+      display: flex;
+      align-items: center;
+      margin: 0;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: 300;
+      color: #fff;
+      background-color: $mainColor;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 14px;
+      }
+    }
+
+    .scoresValue {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: right;
+      background-color: #fff;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 0 2px $boxShadow;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 16px;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .saveButton {
+    width: calc(100% - 5px);
+    color: $mainColor;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid $mainColor;
+
+    .buttonTitle {
+      padding: 10px;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 300;
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 16px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: #fff;
+      background-color: $mainColor;
+    }
+  }
+}

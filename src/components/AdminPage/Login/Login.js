@@ -1,6 +1,9 @@
 import React from "react";
 import * as css from "./Login.module.scss";
 
+// Component
+import LoginFormInput from "./LoginFormInput/LoginFormInput";
+
 // Assets
 import logoColor from "../../../assets/logo-color.png";
 import eye from "../../../assets/icons/eye.png";
@@ -11,7 +14,7 @@ const NOTIFICATION_FOR_LACK_OF_INFORMATION = "Please enter both username and pas
 const NOTIFICATION_FOR_INCORRECT_INFORMATION = "Username or password is incorrect";
 
 class Login extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
 
     this.state = {
@@ -70,15 +73,24 @@ class Login extends React.Component {
         <img className={css.titleImage} src={logoColor} alt="logo-company" />
         <p className={css.description}>Prove you're our admin!</p>
         <form className={css.loginForm} onSubmit={this.handleSubmit}>
-          <div className={css.formInput}>
-            <input id="inputUsername" type="text" name="username" value={this.state.username} onChange={this.handleChange} />
-            <label htmlFor="inputUsername">Username</label>
-          </div>
-          <div className={css.formInput}>
-            <input id="inputPassword" type="password" name="password" value={this.state.password} onChange={this.handleChange} autoComplete="on" />
-            <label htmlFor="inputPassword">Password</label>
-            <img className={css.passShowAndHide} src={eye} alt="show-and-hide-password" onClick={this.handleDisplayPassword} />
-          </div>
+          <LoginFormInput
+            id="inputUsername"
+            type="text"
+            name="username"
+            value={this.state.username}
+            handleChange={this.handleChange}
+            label="Username"
+          />
+          <LoginFormInput
+            id="inputPassword"
+            type="password"
+            name="password"
+            value={this.state.password}
+            handleChange={this.handleChange}
+            label="Password"
+            isPasswordType={true}
+            handleDisplayPassword={this.handleDisplayPassword}
+          />
           <div id="warningNotification" className={css.notification}>{this.state.warningNotification}</div>
           <button className={css.formButton}>Login</button>
         </form>

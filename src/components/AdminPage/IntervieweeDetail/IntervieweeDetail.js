@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as css from "./IntervieweeDetail.module.scss";
 
+// Component
+import Breadcrumb from "../../common/Breadcrumb/Breadcrumb";
+
 // Utils
 import { formatDate } from "../../../utils/formatDate";
 import { customizeStringLength } from "../../../utils/customizeStringLength";
@@ -130,9 +133,7 @@ class IntervieweeDetail extends React.Component {
 
     return (
       <div className={css.container}>
-        <div className={css.breadcrumb}>
-          <Link className={css.breadcrumbLink} to={"/admin/dashboard"}>Dashboard | </Link> <Link className={css.breadcrumbLink} to={"/admin/intervieweelist"}>Interviewee List | </Link> <span>{detailInterviewee.fullname}</span>
-        </div>
+        <Breadcrumb detailInterviewee={detailInterviewee} />
         <div className={css.profile}>
           <div className={css.profileCard}>
             <div className={css.cardTitle}>Personal Information</div>
