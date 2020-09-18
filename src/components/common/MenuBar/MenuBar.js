@@ -5,8 +5,9 @@ import * as css from "./MenuBar.module.scss";
 class MenuBar extends React.Component {
   render() {
     const detailInterviewee = this.props.detailInterviewee;
-    return (
-      <div className={`${css.container} ${this.props.isShow === null ? "" : this.props.isShow ? css.showMenuBar : css.hideMenuBar}`}>
+
+    return detailInterviewee === undefined ? "" : (
+      <div className={`${css.container} ${this.props.isBigScreen ? "" : this.props.isShow === null ? "" : this.props.isShow ? css.showMenuBar : css.hideMenuBar}`}>
         <div className={css.breadcrumb}>
           <Link className={css.breadcrumbLink} to={"/admin/dashboard"}>Dashboard |&nbsp;</Link> <Link className={css.breadcrumbLink} to={"/admin/intervieweelist"}>Interviewee List |&nbsp;</Link> <Link className={css.breadcrumbLink} to={`/admin/interviewee/${detailInterviewee.id}-${detailInterviewee.fullname}`}>{detailInterviewee.fullname} |&nbsp;</Link> <span> English Test </span>
         </div>
