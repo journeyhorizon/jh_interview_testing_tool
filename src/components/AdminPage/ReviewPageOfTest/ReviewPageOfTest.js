@@ -1,5 +1,5 @@
 import React from "react";
-import * as css from "./ReviewPageOfLogicTest.module.scss"
+import * as css from "./ReviewPageOfTest.module.scss"
 
 // Component
 import Breadcrumb from "../../common/Breadcrumb/Breadcrumb";
@@ -12,13 +12,14 @@ import MenuBar from "../../common/MenuBar/MenuBar";
 // Utils
 import { customizeStringLength } from "../../../utils/customizeStringLength";
 
-class ReviewPageOfLogicTest extends React.Component {
+class ReviewPageOfTest extends React.Component {
   constructor() {
     super();
 
     this.state = {
       resultOfTest: {},
       currentQA: {},
+      testType: "",
       limitedQuestionContent: "",
       isBigScreen: false,
       menuBar: null
@@ -44,6 +45,7 @@ class ReviewPageOfLogicTest extends React.Component {
 
       const detailInterviewee = this.props.location.state;
       this.limitLengthOfQuestionContent(detailInterviewee[detailInterviewee.resultTest].answerList[0].questionContent);
+      this.setState({ testType: detailInterviewee.resultTest });
       this.setState({ currentQA: detailInterviewee[detailInterviewee.resultTest].answerList[0] });
       this.setState({ resultOfTest: { ...detailInterviewee[detailInterviewee.resultTest], totalScore: detailInterviewee[detailInterviewee.resultTest].totalScore === null ? 0 : detailInterviewee[detailInterviewee.resultTest].totalScore } });
     } else this.props.history.push(`/admin/interviewee/${this.props.match.params.id}-${this.props.match.params.fullname}`);
@@ -109,6 +111,7 @@ class ReviewPageOfLogicTest extends React.Component {
     const detailInterviewee = this.props.location.state;
     const resultOfTest = this.state.resultOfTest;
     const currentQA = this.state.currentQA;
+    const testType = this.state.testType;
 
     return (
       <div className={css.container}>
@@ -132,7 +135,7 @@ class ReviewPageOfLogicTest extends React.Component {
             changeCurrentQA={this.changeCurrentQA}
             giveReviewsAndScores={this.giveReviewsAndScores}
             saveChanges={this.saveChanges}
-            disabledScoresInput={true}
+            disabledScoresInput={testType === "resultOfLogicTest"}
           />
         </div>
         <MenuBar isBigScreen={this.state.isBigScreen} isShow={this.state.menuBar} detailInterviewee={detailInterviewee} currentQA={currentQA} resultOfTest={resultOfTest} changeCurrentQA={this.changeCurrentQA} showMenuBar={this.showMenuBar} />
@@ -142,4 +145,4 @@ class ReviewPageOfLogicTest extends React.Component {
   }
 }
 
-export default ReviewPageOfLogicTest;
+export default ReviewPageOfTest;

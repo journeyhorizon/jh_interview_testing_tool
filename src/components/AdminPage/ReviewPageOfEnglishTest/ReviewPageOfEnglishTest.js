@@ -17,7 +17,7 @@ class ReviewPageOfEnglishTest extends React.Component {
     super();
 
     this.state = {
-      resultOfEnglishTest: {},
+      resultOfTest: {},
       currentQA: {},
       limitedQuestionContent: "",
       isBigScreen: false,
@@ -43,9 +43,9 @@ class ReviewPageOfEnglishTest extends React.Component {
       this.updateDimensions();
 
       const detailInterviewee = this.props.location.state;
-      this.limitLengthOfQuestionContent(detailInterviewee.resultOfEnglishTest.answerList[0].questionContent);
-      this.setState({ currentQA: detailInterviewee.resultOfEnglishTest.answerList[0] });
-      this.setState({ resultOfEnglishTest: { ...detailInterviewee.resultOfEnglishTest, totalScore: detailInterviewee.resultOfEnglishTest.totalScore === null ? 0 : detailInterviewee.resultOfEnglishTest.totalScore } });
+      this.limitLengthOfQuestionContent(detailInterviewee[detailInterviewee.resultTest].answerList[0].questionContent);
+      this.setState({ currentQA: detailInterviewee[detailInterviewee.resultTest].answerList[0] });
+      this.setState({ resultOfTest: { ...detailInterviewee[detailInterviewee.resultTest], totalScore: detailInterviewee[detailInterviewee.resultTest].totalScore === null ? 0 : detailInterviewee[detailInterviewee.resultTest].totalScore } });
     } else this.props.history.push(`/admin/interviewee/${this.props.match.params.id}-${this.props.match.params.fullname}`);
   }
 
@@ -67,28 +67,28 @@ class ReviewPageOfEnglishTest extends React.Component {
   }
 
   giveReviewsAndScores(event) {
-    this.setState({ resultOfEnglishTest: { ...this.state.resultOfEnglishTest, [event.target.name]: event.target.value } });
+    this.setState({ resultOfTest: { ...this.state.resultOfTest, [event.target.name]: event.target.value } });
   }
 
   changeCurrentQA(index) {
-    this.setState({ currentQA: this.state.resultOfEnglishTest.answerList[index] });
-    this.limitLengthOfQuestionContent(this.state.resultOfEnglishTest.answerList[index].questionContent);
+    this.setState({ currentQA: this.state.resultOfTest.answerList[index] });
+    this.limitLengthOfQuestionContent(this.state.resultOfTest.answerList[index].questionContent);
   }
 
   navigateQA(step) {
-    if (this.state.resultOfEnglishTest.answerList) {
-      const currentIndex = this.state.resultOfEnglishTest.answerList.findIndex(item => item.id === this.state.currentQA.id);
+    if (this.state.resultOfTest.answerList) {
+      const currentIndex = this.state.resultOfTest.answerList.findIndex(item => item.id === this.state.currentQA.id);
       const newIndex = currentIndex + step;
 
       if (newIndex < 0) {
-        this.setState({ currentQA: this.state.resultOfEnglishTest.answerList[this.state.resultOfEnglishTest.answerList.length - 1] });
-        this.limitLengthOfQuestionContent(this.state.resultOfEnglishTest.answerList[this.state.resultOfEnglishTest.answerList.length - 1].questionContent);
-      } else if (newIndex >= this.state.resultOfEnglishTest.answerList.length) {
-        this.setState({ currentQA: this.state.resultOfEnglishTest.answerList[0] });
-        this.limitLengthOfQuestionContent(this.state.resultOfEnglishTest.answerList[0].questionContent);
+        this.setState({ currentQA: this.state.resultOfTest.answerList[this.state.resultOfTest.answerList.length - 1] });
+        this.limitLengthOfQuestionContent(this.state.resultOfTest.answerList[this.state.resultOfTest.answerList.length - 1].questionContent);
+      } else if (newIndex >= this.state.resultOfTest.answerList.length) {
+        this.setState({ currentQA: this.state.resultOfTest.answerList[0] });
+        this.limitLengthOfQuestionContent(this.state.resultOfTest.answerList[0].questionContent);
       } else {
-        this.setState({ currentQA: this.state.resultOfEnglishTest.answerList[newIndex] });
-        this.limitLengthOfQuestionContent(this.state.resultOfEnglishTest.answerList[newIndex].questionContent);
+        this.setState({ currentQA: this.state.resultOfTest.answerList[newIndex] });
+        this.limitLengthOfQuestionContent(this.state.resultOfTest.answerList[newIndex].questionContent);
       }
     }
   }
@@ -98,7 +98,7 @@ class ReviewPageOfEnglishTest extends React.Component {
   }
 
   saveChanges() {
-    console.log(this.state.resultOfEnglishTest.reviews, this.state.resultOfEnglishTest.totalScore);
+    console.log(this.state.resultOfTest.reviews, this.state.resultOfTest.totalScore);
   }
 
   componentWillUnmount() {
@@ -107,7 +107,7 @@ class ReviewPageOfEnglishTest extends React.Component {
 
   render() {
     const detailInterviewee = this.props.location.state;
-    const resultOfEnglishTest = this.state.resultOfEnglishTest;
+    const resultOfTest = this.state.resultOfTest;
     const currentQA = this.state.currentQA;
 
     return (
@@ -117,7 +117,7 @@ class ReviewPageOfEnglishTest extends React.Component {
           <MobileNavbar
             showMenuBar={this.showMenuBar}
             currentQA={currentQA}
-            resultOfEnglishTest={resultOfEnglishTest}
+            resultOfTest={resultOfTest}
           />
           <SetOfQA
             isBigScreen={this.state.isBigScreen}
@@ -126,7 +126,7 @@ class ReviewPageOfEnglishTest extends React.Component {
             navigateQA={this.navigateQA}
           />
           <ControlPanel
-            resultOfEnglishTest={resultOfEnglishTest}
+            resultOfTest={resultOfTest}
             detailInterviewee={detailInterviewee}
             currentQA={currentQA}
             changeCurrentQA={this.changeCurrentQA}
@@ -134,7 +134,7 @@ class ReviewPageOfEnglishTest extends React.Component {
             saveChanges={this.saveChanges}
           />
         </div>
-        <MenuBar isBigScreen={this.state.isBigScreen} isShow={this.state.menuBar} detailInterviewee={detailInterviewee} currentQA={currentQA} resultOfEnglishTest={resultOfEnglishTest} changeCurrentQA={this.changeCurrentQA} showMenuBar={this.showMenuBar} />
+        <MenuBar isBigScreen={this.state.isBigScreen} isShow={this.state.menuBar} detailInterviewee={detailInterviewee} currentQA={currentQA} resultOfTest={resultOfTest} changeCurrentQA={this.changeCurrentQA} showMenuBar={this.showMenuBar} />
         <ReviewPageWarning />
       </div>
     )
