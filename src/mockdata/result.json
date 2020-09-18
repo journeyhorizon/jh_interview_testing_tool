@@ -363,7 +363,7 @@
           "id": 0,
           "type": "WH",
           "questionContent": "What is your favourite anime? Tell us why you love it, otherwise why you don't?",
-          "answerContent": "Oh whao! I love Naruto the most, this is an Japanese anime (it also has manga). I love it because of everything it owns in the anime, from the content to the image/animation, from the character to the amazing world with ninja and their skills, from all the happy moments to each sadness screen, from EVERYTHING. This anime is perfect, from me with love!!"
+          "answerContent": "Oh whao!\nI love Naruto the most, this is an Japanese anime (it also has manga). I love it because of everything it owns in the anime, from the content to the image/animation, from the character to the amazing world with ninja and their skills, from all the happy moments to each sadness screen, from EVERYTHING.\nThis anime is perfect, from me with love!!"
         }
       ],
       "completeDurationTime": 480,
@@ -923,6 +923,487 @@
       "completeDurationTime": 470,
       "reviews": "He is not fast and good at Math, he need to improve his logical thinking.",
       "totalScore": 6
+    }
+  },
+  {
+    "id": 4,
+    "intervieweeId": 4,
+    "submitTime": "Fri Sep 18 2020 16:20:00 GMT+0700 (Indochina Time)",
+    "resultOfEnglishTest": {
+      "id": 1,
+      "durationTime": 900,
+      "answerList": [
+        {
+          "id": 0,
+          "type": "WH",
+          "questionContent": "Write a letter to your leader for being absent for a week!",
+          "answerContent": "Dear my beloved Boss (aka Mr.Chu),\n\nI wrote this letter because I want to request to be absent from the next Thursday and Friday. On that day, I will have final examinations at my class.\nCan you please approve me to be absent? Thank you very much.\nI will have done all my tasks before that day to make sure everything will be fine.\nI hope to see your response email.\n\nYour sincerely,\nNgocThao"
+        },
+        {
+          "id": 1,
+          "type": "WH",
+          "questionContent": "If you have 1 billion dollars, what will be your future plan?",
+          "answerContent": "If I have 1 billion dollars, this mi my future plan:\n - Blow through it helping my family\n - Going on vacation with friends\n - Buy my wife\n - Buy a transportation\n - Buy a new big glorious house\n - Buy some trademarks\n - Burn the rest haha"
+        },
+        {
+          "id": 2,
+          "type": "WH",
+          "questionContent": "What do you expect from our company?",
+          "answerContent": "I expect many thing and I will show it to you when we are co-operate. So hire me ahihi!"
+        }
+      ],
+      "completeDurationTime": 783,
+      "reviews": "",
+      "totalScore": null
+    },
+    "resultOfLogicTest": {
+      "id": 1,
+      "durationTime": 900,
+      "answerList": [
+        {
+          "id": 0,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which is the most viewable youtube video in Viet Nam?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Bống bống bang bang - 365 DaBand",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Baby Shark - Pinkfong",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Cả nhà thương nhau - VnChilds",
+              "isCorrect": true
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Xúc xắc xúc xẻ - bé Bảo An ft Phi Long",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [2],
+          "answerContent": [2],
+          "point": true
+        },
+        {
+          "id": 1,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which is the most viewable MV in youtube?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Despacito - Luis Fonsi ft Daddy Yankee",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Shape of You - Ed Sheeran",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "See You Again - Wiz Khalifa ft Charlie Puth",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [1],
+          "point": false
+        },
+        {
+          "id": 2,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "Who is Viet Nam's DIVA?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Mỹ Linh",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Thanh Lam",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Hồng Nhung",
+              "isCorrect": true
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Trần Thu Hà",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [0, 1, 2, 3],
+          "answerContent": [0, 3],
+          "point": false
+        },
+        {
+          "id": 3,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which artists producing parody MV has the highest subcriber on youtube?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Hậu Hoàng",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Di Di",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Đỗ Duy Nam",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Vanh LEG",
+              "isCorrect": true
+            },
+            {
+              "answerId": 4,
+              "answerContent": "Thiên An",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [3],
+          "answerContent": [2],
+          "point": false
+        },
+        {
+          "id": 4,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "Who is on the Top 3 Instagram followers in Viet Nam?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Sơn Tùng MTP",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Trấn Thành",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Chi Pu",
+              "isCorrect": true
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Ngọc Trinh",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [0, 2, 3],
+          "answerContent": [0, 2, 3],
+          "point": true
+        },
+        {
+          "id": 5,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "Who is on the Top 3 artists having most dislikes MV in Viet Nam?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Chi Pu",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "K-ICM",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Sơn Tùng MTP",
+              "isCorrect": true
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Linh Ka",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [1, 2, 3],
+          "answerContent": [0, 1],
+          "point": false
+        },
+        {
+          "id": 6,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which anime is the Top 1 Kim Đồng Comics Tournament 2020?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Doraemon",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Naruto",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "One Piece",
+              "isCorrect": true
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Card Capture Sakura",
+              "isCorrect": false
+            },
+            {
+              "answerId": 4,
+              "answerContent": "Gia sư Hitman Reborn!",
+              "isCorrect": false
+            },
+            {
+              "answerId": 5,
+              "answerContent": "Haikyu! Chàng khổng lồ tí hon",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [2],
+          "answerContent": [1],
+          "point": false
+        },
+        {
+          "id": 7,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "Which app is on the Top 10 most popular Android apps in Viet Nam?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Facebook",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Messenger",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Subway Surfers",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Bluezone",
+              "isCorrect": true
+            },
+            {
+              "answerId": 4,
+              "answerContent": "Tiki",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [3],
+          "answerContent": [0, 1, 4],
+          "point": false
+        },
+        {
+          "id": 8,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which app is the Top 1 most popular iOS apps in Viet Nam?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Tiktok",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Zalo",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Youtube",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Facebook",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [1],
+          "answerContent": [1],
+          "point": true
+        },
+        {
+          "id": 9,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "Which front-end framework/library is the Top 1 Github score?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "VueJS",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "AngularJS",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "ReactJS",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [2],
+          "point": false
+        },
+        {
+          "id": 10,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "How many keys on our company's common Macbook keyboard?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "79",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "78",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "89",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "88",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [1],
+          "answerContent": [1],
+          "point": true
+        },
+        {
+          "id": 11,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "What is the max index of this question list?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "14",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "15",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "0",
+              "isCorrect": false
+            }
+          ],
+          "rightChoices": [0],
+          "answerContent": [0],
+          "point": true
+        },
+        {
+          "id": 12,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "What is the most correct training route of the company?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "ReactJS",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Front-end basic - Coding advance - ReactJS",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [1],
+          "answerContent": [0],
+          "point": false
+        },
+        {
+          "id": 13,
+          "type": "SINGLE_CHOICE",
+          "questionContent": "What is the most trending tool for designing stuffs now?",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Adobe Illustrator",
+              "isCorrect": false
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Corel Draw",
+              "isCorrect": false
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Figma",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [2],
+          "answerContent": [0],
+          "point": false
+        },
+        {
+          "id": 14,
+          "type": "MULTIPLE_CHOICES",
+          "questionContent": "Which is the most favourite food in the company's pantry",
+          "choices": [
+            {
+              "answerId": 0,
+              "answerContent": "Sữa chua Vinamilk",
+              "isCorrect": true
+            },
+            {
+              "answerId": 1,
+              "answerContent": "Xúc xích",
+              "isCorrect": true
+            },
+            {
+              "answerId": 2,
+              "answerContent": "Bánh solite",
+              "isCorrect": false
+            },
+            {
+              "answerId": 3,
+              "answerContent": "Bánh gì đó nhân trứng muối",
+              "isCorrect": true
+            }
+          ],
+          "rightChoices": [0, 1, 3],
+          "answerContent": [0, 1, 3],
+          "point": true
+        }
+      ],
+      "completeDurationTime": 857,
+      "reviews": "",
+      "totalScore": 4
     }
   }
 ]
