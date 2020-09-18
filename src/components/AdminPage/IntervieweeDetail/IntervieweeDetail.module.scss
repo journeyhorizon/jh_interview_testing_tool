@@ -37,7 +37,7 @@ $boxShadow: rgb(230, 230, 230);
 .profile {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 190px);
+  height: calc(100vh - 250px);
 
   @media only screen and (min-width: $small) {
     height: calc(100vh - 290px);

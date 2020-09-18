@@ -20,6 +20,10 @@ import emotionSad from "../../../assets/rating-emo/sad.png";
 import emotionHeart from "../../../assets/rating-emo/heart.png";
 import emotionStar from "../../../assets/rating-emo/star.png";
 
+// ALIAS
+const RESULT_OF_ENGLISH_TEST_TYPE = "resultOfEnglishTest";
+const RESULT_OF_LOGIC_TEST_TYPE = "resultOfLogicTest";
+
 function ScoreContainer(props) {
   return (
     <div className={css.statisticsCategory}>
@@ -37,7 +41,7 @@ function ReviewContainer(props) {
         {props.isNotReviewYet ? props.limitedReviews : props.isBigScreen ? props.fullReviews : props.limitedReviews}
         <Link to={{
           pathname: `/admin/interviewee/${props.fullData.id}-${props.fullData.fullname}/${props.title}test`,
-          state: props.fullData
+          state: { ...props.fullData, resultTest: props.resultTest }
         }}>View Details!</Link>
       </div>
     </div>
@@ -99,8 +103,8 @@ class IntervieweeDetail extends React.Component {
       logic: ""
     }
 
-    limitedReviews.english = customizeStringLength(detailInterviewee.resultOfEnglishTest.reviews, 180);
-    limitedReviews.logic = customizeStringLength(detailInterviewee.resultOfLogicTest.reviews, 180);
+    limitedReviews.english = customizeStringLength(detailInterviewee.resultOfEnglishTest.reviews, 150);
+    limitedReviews.logic = customizeStringLength(detailInterviewee.resultOfLogicTest.reviews, 150);
     this.setState({ limitedReviews });
   }
 
@@ -161,6 +165,7 @@ class IntervieweeDetail extends React.Component {
           <div className={css.testReview}>
             <ReviewContainer
               title="logic"
+              resultTest={RESULT_OF_LOGIC_TEST_TYPE}
               limitedReviews={this.state.limitedReviews.logic}
               fullReviews={detailInterviewee.resultOfLogicTest && detailInterviewee.resultOfLogicTest.reviews}
               isNotReviewYet={detailInterviewee.resultOfLogicTest && detailInterviewee.resultOfLogicTest.reviews.length === 0 ? true : false}
@@ -169,6 +174,7 @@ class IntervieweeDetail extends React.Component {
             />
             <ReviewContainer
               title="english"
+              resultTest={RESULT_OF_ENGLISH_TEST_TYPE}
               limitedReviews={this.state.limitedReviews.english}
               fullReviews={detailInterviewee.resultOfEnglishTest && detailInterviewee.resultOfEnglishTest.reviews}
               isNotReviewYet={detailInterviewee.resultOfEnglishTest && detailInterviewee.resultOfEnglishTest.reviews.length === 0 ? true : false}

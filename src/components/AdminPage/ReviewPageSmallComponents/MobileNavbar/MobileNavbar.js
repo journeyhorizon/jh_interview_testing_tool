@@ -11,7 +11,7 @@ class MobileNavbar extends React.Component {
         <div className={css.menuButton} onClick={this.props.showMenuBar}>
           <img src={menu} alt="menu" />
         </div>
-        <div className={css.orderOfCurrentPage}><span>{this.props.currentQA.id + 1 || 0}</span>/{this.props.resultOfEnglishTest.answerList && this.props.resultOfEnglishTest.answerList.length}</div>
+        <div className={css.orderOfCurrentPage}><span>{this.props.currentQA.id + 1 || 0}</span>/{this.props.resultOfTest.answerList && this.props.resultOfTest.answerList.length}</div>
       </div>
     )
   }

@@ -71,6 +71,10 @@ $boxShadow: rgb(230, 230, 230);
       .currentItem {
         color: #fff;
         background-color: $mainColor;
+
+        &:hover {
+          cursor: default;
+        }
       }
     }
   }

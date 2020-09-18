@@ -9,8 +9,7 @@ import Login from "./Login/Login";
 import Dashboard from "./Dashboard/Dashboard";
 import IntervieweeList from "./IntervieweeList/IntervieweeList";
 import IntervieweeDetail from "./IntervieweeDetail/IntervieweeDetail";
-import ReviewPageOfLogicTest from "./ReviewPageOfLogicTest/ReviewPageOfLogicTest";
-import ReviewPageOfEnglishTest from "./ReviewPageOfEnglishTest/ReviewPageOfEnglishTest";
+import ReviewPageOfTest from "./ReviewPageOfTest/ReviewPageOfTest";
 
 class AdminPage extends React.Component {
   render() {
@@ -23,8 +22,8 @@ class AdminPage extends React.Component {
             <Route exact path="/admin/dashboard" component={Dashboard} />
             <Route exact path="/admin/intervieweelist" component={IntervieweeList} />
             <Route exact path="/admin/interviewee/:id-:fullname" component={IntervieweeDetail} />
-            <Route path="/admin/interviewee/:id-:fullname/logictest" component={ReviewPageOfLogicTest} />
-            <Route path="/admin/interviewee/:id-:fullname/englishtest" component={ReviewPageOfEnglishTest} />
+            <Route path="/admin/interviewee/:id-:fullname/logictest" component={ReviewPageOfTest} />
+            <Route path="/admin/interviewee/:id-:fullname/englishtest" component={ReviewPageOfTest} />
             <Redirect to="/adminnotfound" />
           </Switch>
         </div>
