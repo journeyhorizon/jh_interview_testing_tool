@@ -1,0 +1,21 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-grow: 1;
+  margin: 5px 10px;
+
+  @media only screen and (min-width: $medium) {
+    margin: 20px 0;
+  }
+
+  @media only screen and (min-width: $large) {
+    margin: 0;
+  }
+}
