@@ -1,0 +1,93 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+
+.formInput {
+  position: relative;
+  margin-bottom: 10px;
+
+  @media only screen and (min-width: $small) {
+    margin-bottom: 15px;
+  }
+
+  input {
+    width: 200px;
+    padding: 8px 10px;
+    font-size: 14px;
+    font-weight: 300;
+    border-radius: 5px;
+    border: 1px solid #000;
+    background-size: 11px;
+    background-position: 7px 13.5px;
+    background-repeat: no-repeat;
+    text-indent: 13px;
+
+    @media only screen and (min-width: $small) {
+      width: 250px;
+      padding: 12px 15px;
+      font-size: 16px;
+      background-size: 13px;
+      background-position: 8px 18px;
+      background-repeat: no-repeat;
+      text-indent: 15px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      width: 300px;
+      padding: 14px 15px;
+      font-size: 18px;
+      background-size: 15px;
+      background-position: 10px 20px;
+      background-repeat: no-repeat;
+      text-indent: 15px;
+    }
+
+    @media only screen and (min-width: $large) {
+      width: 250px;
+      padding: 10px 15px;
+      font-size: 16px;
+      background-size: 13px;
+      background-position: 10px 16px;
+      background-repeat: no-repeat;
+      text-indent: 15px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .inputError {
+    color: rgb(255, 29, 29);
+    border: 1px solid rgb(255, 29, 29);
+  }
+}
+
+.inputFullname {
+  background-image: url("../../../../assets/icons/fullname.png");
+}
+
+.inputEmail {
+  background-image: url("../../../../assets/icons/email.png");
+}
+
+.inputEmailError {
+  background-image: url("../../../../assets/icons/email-error.png");
+}
+
+.inputPhone {
+  background-image: url("../../../../assets/icons/phone.png");
+}
+
+.inputPhoneError {
+  background-image: url("../../../../assets/icons/phone-error.png");
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+input:-webkit-autofill:visited {
+  box-shadow: 0 0 0 30px #fff inset;
+  -webkit-box-shadow: 0 0 0 30px #fff inset !important;
+}

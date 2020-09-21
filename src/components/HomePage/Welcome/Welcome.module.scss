@@ -10,5 +10,117 @@ $boxShadow: rgb(230, 230, 230);
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin: auto 0;
+}
+
+.titleImage {
+  width: 35%;
+  margin-bottom: 10px;
+
+  @media only screen and (min-width: $small) {
+    width: 25%;
+    margin-bottom: 20px;
+  }
+
+  @media only screen and (min-width: $large) {
+    width: 12%;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    width: 10%;
+  }
+}
+
+.description {
+  margin: 10px 0;
+  color: $descriptionColor;
+  font-size: 12px;
+  font-weight: 200;
+  text-align: center;
+
+  @media only screen and (min-width: $small) {
+    font-size: 14px;
+    margin: 20px 0;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $large) {
+    font-size: 14px;
+  }
+}
+
+.intervieweeInformationForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.formButton {
+  display: none;
+  width: 222px;
+  padding: 8px;
+  background-color: $mainColor;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid $mainColor;
+
+  @media only screen and (min-width: $small) {
+    width: 282px;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    width: 332px;
+    padding: 14px;
+    font-size: 18px;
+  }
+
+  @media only screen and (min-width: $large) {
+    width: 282px;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.notification {
+  display: none;
+  margin-bottom: 10px;
+  color: rgb(255, 29, 29);
+  font-size: 10px;
+  font-weight: 300;
+  text-align: center;
+
+  @media only screen and (min-width: $small) {
+    margin-bottom: 15px;
+    font-size: 12px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: $large) {
+    font-size: 12px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    font-size: 14px;
+  }
 }
