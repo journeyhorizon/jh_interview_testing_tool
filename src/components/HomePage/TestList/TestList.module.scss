@@ -47,7 +47,7 @@ $boxShadow: rgb(230, 230, 230);
   @media only screen and (min-width: $small) {
     width: 200px;
     margin: 15px;
-    padding: 20px;
+    padding: 30px;
   }
 
   @media only screen and (min-width: $large) {
@@ -56,24 +56,28 @@ $boxShadow: rgb(230, 230, 230);
     border: none;
   }
 
+  @media only screen and (min-width: $extraLarge) {
+    padding: 35px;
+  }
+
   &:hover {
     @media only screen and (min-width: $large) {
       padding: 30px;
       box-shadow: 0 0 10px 5px $mainColor;
     }
 
-    @media only screen and (min-width: $large) {
-      padding: 40px;
+    @media only screen and (min-width: $extraLarge) {
+      padding: 50px;
     }
   }
 
   &:hover .categoryIcon {
     @media only screen and (min-width: $large) {
-      width: 110px;
+      width: 150px;
     }
 
     @media only screen and (min-width: $extraLarge) {
-      width: 125px;
+      width: 200px;
     }
   }
 }
@@ -84,16 +88,16 @@ $boxShadow: rgb(230, 230, 230);
   transition: width 0.1s;
 
   @media only screen and (min-width: $small) {
-    width: 75px;
+    width: 110px;
     margin-bottom: 15px;
   }
 
   @media only screen and (min-width: $large) {
-    width: 90px;
+    width: 110px;
   }
 
   @media only screen and (min-width: $extraLarge) {
-    width: 110px;
+    width: 150px;
   }
 }
 
