@@ -1,0 +1,156 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$descriptionColor: rgb(185, 185, 185);
+$boxShadow: rgb(230, 230, 230);
+
+.container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0;
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 300;
+
+  @media only screen and (min-width: $small) {
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 18px;
+  }
+
+  @media only screen and (min-width: $large) {
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    font-size: 18px;
+  }
+}
+
+.link {
+  text-decoration: none;
+}
+
+.categoryList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media only screen and (min-width: $large) {
+    flex-direction: row;
+  }
+}
+
+.categoryItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  margin: 10px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #000;
+  box-shadow: 0 0 2px $boxShadow;
+  transition: padding 0.2s;
+
+  @media only screen and (min-width: $small) {
+    width: 200px;
+    margin: 15px;
+    padding: 20px;
+  }
+
+  @media only screen and (min-width: $large) {
+    width: 250px;
+    padding: 25px;
+    border: none;
+  }
+
+  &:hover {
+    @media only screen and (min-width: $large) {
+      padding: 30px;
+      box-shadow: 0 0 5px 5px $boxShadow;
+    }
+
+    @media only screen and (min-width: $large) {
+      padding: 40px;
+    }
+  }
+
+  &:hover .categoryIcon {
+    @media only screen and (min-width: $large) {
+      width: 110px;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      width: 125px;
+    }
+  }
+}
+
+.categoryIcon {
+  width: 50px;
+  margin-bottom: 10px;
+  transition: width 0.1s;
+
+  @media only screen and (min-width: $small) {
+    width: 75px;
+    margin-bottom: 15px;
+  }
+
+  @media only screen and (min-width: $large) {
+    width: 90px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    width: 110px;
+  }
+}
+
+.categoryName {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  color: #000;
+
+  @media only screen and (min-width: $small) {
+    font-size: 18px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 20px;
+  }
+
+  @media only screen and (min-width: $large) {
+    font-size: 18px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    font-size: 20px;
+  }
+}
+
+.showedCategory {
+  display: flex;
+}
+
+.hideCategory {
+  display: none;
+}
+
+.deactivedCategory {
+  pointer-events: none;
+  opacity: 0.5;
+}

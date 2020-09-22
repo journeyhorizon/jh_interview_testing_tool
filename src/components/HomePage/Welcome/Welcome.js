@@ -5,6 +5,9 @@ import * as inputCss from "./WelcomeFormInput/WelcomeFormInput.module.scss";
 // Components
 import WelcomeFormInput from "./WelcomeFormInput/WelcomeFormInput";
 
+// Data
+import interviewee from "../../../mockdata/interviewee.json";
+
 // Assets
 import logoColor from "../../../assets/logo-color.png";
 
@@ -24,9 +27,6 @@ class Welcome extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.checkFulfillInputFormForShowingButton = this.checkFulfillInputFormForShowingButton.bind(this);
-    this.handleInvalidInput = this.handleInvalidInput.bind(this);
-    this.handleValidInput = this.handleValidInput.bind(this);
   }
 
   componentDidMount() {
@@ -92,7 +92,7 @@ class Welcome extends React.Component {
     this.setState({ warningNotification: "" });
 
     const { warningNotification, ...intervieweeDetail } = this.state;
-    localStorage.setItem("interviewee", JSON.stringify(intervieweeDetail));
+    localStorage.setItem("interviewee", JSON.stringify({ id: interviewee.length, ...intervieweeDetail }));
     this.props.history.push("/testlist");
   }
 

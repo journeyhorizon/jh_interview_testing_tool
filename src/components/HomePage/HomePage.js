@@ -18,10 +18,10 @@ class HomePage extends React.Component {
         <div className={css.container}>
           <Switch>
             <Route exact path="/" component={Welcome} />
-            <Route path="/testlist" component={TestList} />
+            <Route exact path="/testlist" component={TestList} />
             <Route path="/test/logictest" component={TestDetail} />
             <Route path="/test/englishtest" component={TestDetail} />
-            <Route path="/complete" component={CompleteNotification} />
+            <Route exact path="/complete" component={CompleteNotification} />
             <Redirect to="/notfound" />
           </Switch>
         </div>
