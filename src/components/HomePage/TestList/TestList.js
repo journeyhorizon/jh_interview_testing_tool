@@ -2,8 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as css from "./TestList.module.scss";
 
+// Utils
+import { randomizeTestAndSaveResult } from "../../../utils/randomizeTestAndSaveResult";
+
 // Data
 import result from "../../../mockdata/result.json";
+import englishTestData from "../../../mockdata/english-test.json";
+import logicTestData from "../../../mockdata/logic-test.json";
 
 // Assets
 import logicCategory from "../../../assets/testlist-category/logicCategory.png";
@@ -11,15 +16,15 @@ import englishCategory from "../../../assets/testlist-category/englishCategory.p
 import completeCategory from "../../../assets/testlist-category/completeCategory.png";
 
 // ALIAS
-const DESCRIPTION = {
-  CHOOSE_TEST: "Choose your test:",
-  COMPLETE_TEST: "Your test is over!"
-}
-
 const CATEGORY_TYPE = {
   LOGIC_TEST: "Logic Test",
   ENGLISH_TEST: "English Test",
   COMPLETE_NOTIFICATION: "Go!"
+}
+
+const TEST_TYPE = {
+  LOGIC: "currentSetOfTestAndResultOfLogic",
+  ENGLISH: "currentSetOfTestAndResultOfEnglish"
 }
 
 function TestListCategory(props) {
@@ -49,25 +54,40 @@ class TestList extends React.Component {
 
     this.state = {
       isLogicTestCompleted: false,
-      isEnglishTestCompleted: false,
-      descriptionOfPage: DESCRIPTION.CHOOSE_TEST
+      isEnglishTestCompleted: false
     }
   }
 
   componentDidMount() {
     !localStorage.getItem("interviewee") && this.props.history.push("/");
-    localStorage.getItem("logictestResult") && this.setState({ isLogicTestCompleted: true });
-    localStorage.getItem("englishtestResult") && this.setState({ isEnglishTestCompleted: true });
+    this.enableNavigationPrompt();
+    this.updateStatusOfTestCompleted();
+    this.randomizeTestAndCreateAnswerResultForSavingData();
 
     if (this.checkAllTestCompleted()) {
       this.showCompleteCategory();
       this.hideTestCategory();
-      this.changeDescriptionOfPage();
       this.mergeAllTestResult();
     } else {
       this.state.isLogicTestCompleted && this.deactiveTestCategory("logicCategory");
       this.state.isEnglishTestCompleted && this.deactiveTestCategory("englishCategory");
     }
+  }
+
+  enableNavigationPrompt() {
+    window.onbeforeunload = function () {
+      return true;
+    };
+  }
+
+  updateStatusOfTestCompleted() {
+    localStorage.getItem("logicTestResult") && this.setState({ isLogicTestCompleted: true });
+    localStorage.getItem("englishTestResult") && this.setState({ isEnglishTestCompleted: true });
+  }
+
+  randomizeTestAndCreateAnswerResultForSavingData() {
+    !localStorage.getItem(TEST_TYPE.LOGIC) && randomizeTestAndSaveResult(TEST_TYPE.LOGIC, logicTestData);
+    !localStorage.getItem(TEST_TYPE.ENGLISH) && randomizeTestAndSaveResult(TEST_TYPE.ENGLISH, englishTestData);
   }
 
   checkAllTestCompleted() {
@@ -85,10 +105,6 @@ class TestList extends React.Component {
     document.getElementById("logicCategory").classList.add(css.hideCategory);
     document.getElementById("englishCategory").classList.remove(css.showedCategory);
     document.getElementById("englishCategory").classList.add(css.hideCategory);
-  }
-
-  changeDescriptionOfPage() {
-    this.setState({ descriptionOfPage: DESCRIPTION.COMPLETE_TEST });
   }
 
   mergeAllTestResult() {
@@ -109,12 +125,17 @@ class TestList extends React.Component {
   render() {
     return (
       <div className={css.container}>
-        <p className={css.description}>{this.state.descriptionOfPage}</p>
         <div className={css.categoryList}>
-          <Link id="logicCategory" className={`${css.link} ${css.showedCategory}`} to={`/test/logictest`}>
+          <Link id="logicCategory" className={`${css.link} ${css.showedCategory}`} to={{
+            pathname: `/test/logictest`,
+            state: {}
+          }}>
             <TestListCategory type={CATEGORY_TYPE.LOGIC_TEST} />
           </Link>
-          <Link id="englishCategory" className={`${css.link} ${css.showedCategory}`} to={`/test/englishtest`}>
+          <Link id="englishCategory" className={`${css.link} ${css.showedCategory}`} to={{
+            pathname: `/test/englishtest`,
+            state: {}
+          }}>
             <TestListCategory type={CATEGORY_TYPE.ENGLISH_TEST} />
           </Link>
           <Link id="completeCategory" className={`${css.link} ${css.hideCategory}`} to={`/complete`}>
