@@ -5,7 +5,7 @@ class WelcomeFormInput extends React.Component {
   render() {
     return (
       <div className={css.formInput}>
-        <input id={this.props.id} className={this.props.class} type={this.props.type} name={this.props.name} placeholder={this.props.placeholder} pattern={this.props.pattern} value={this.props.value} onChange={this.props.onChange} required />
+        <input id={this.props.id} className={this.props.class} type={this.props.type} name={this.props.name} placeholder={this.props.placeholder} pattern={this.props.pattern} value={this.props.value} onChange={this.props.onChange} autoComplete="off" required />
         <label htmlFor={this.props.id}></label>
       </div>
     )

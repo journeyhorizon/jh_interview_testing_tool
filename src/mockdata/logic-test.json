@@ -79,22 +79,22 @@
         "choices": [
           {
             "answerId": 0,
-            "answerContent": "&lt;script&gt;",
+            "answerContent": "<script>",
             "isCorrect": true
           },
           {
             "answerId": 1,
-            "answerContent": "&lt;js&gt;",
+            "answerContent": "<js>",
             "isCorrect": false
           },
           {
             "answerId": 2,
-            "answerContent": "&lt;scripting&gt;",
+            "answerContent": "<scripting>;",
             "isCorrect": false
           },
           {
             "answerId": 3,
-            "answerContent": "&lt;javascript&gt;",
+            "answerContent": "<javascript>",
             "isCorrect": false
           }
         ],

@@ -22,9 +22,19 @@ const CATEGORY_TYPE = {
   COMPLETE_NOTIFICATION: "Go!"
 }
 
-const TEST_TYPE = {
+const LOCAL_STORAGE_TEST_TYPE_NAME = {
   LOGIC: "currentSetOfTestAndResultOfLogic",
   ENGLISH: "currentSetOfTestAndResultOfEnglish"
+}
+
+const STARTING_TIME = {
+  LOGIC: "LOGIC_STARTING_TIME",
+  ENGLISH: "ENGLISH_STARTING_TIME"
+}
+
+const TEST_RESULT = {
+  LOGIC: "logicTestResult",
+  ENGLISH: "englishTestResult"
 }
 
 function TestListCategory(props) {
@@ -49,18 +59,9 @@ function TestListCategory(props) {
 }
 
 class TestList extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      isLogicTestCompleted: false,
-      isEnglishTestCompleted: false
-    }
-  }
-
   componentDidMount() {
     !localStorage.getItem("interviewee") && this.props.history.push("/");
-    this.enableNavigationPrompt();
+    // this.enableNavigationPrompt();
     this.updateStatusOfTestCompleted();
     this.randomizeTestAndCreateAnswerResultForSavingData();
 
@@ -68,9 +69,6 @@ class TestList extends React.Component {
       this.showCompleteCategory();
       this.hideTestCategory();
       this.mergeAllTestResult();
-    } else {
-      this.state.isLogicTestCompleted && this.deactiveTestCategory("logicCategory");
-      this.state.isEnglishTestCompleted && this.deactiveTestCategory("englishCategory");
     }
   }
 
@@ -81,17 +79,17 @@ class TestList extends React.Component {
   }
 
   updateStatusOfTestCompleted() {
-    localStorage.getItem("logicTestResult") && this.setState({ isLogicTestCompleted: true });
-    localStorage.getItem("englishTestResult") && this.setState({ isEnglishTestCompleted: true });
+    localStorage.getItem(TEST_RESULT.LOGIC) && this.deactiveTestCategory("logicCategory");
+    localStorage.getItem(TEST_RESULT.ENGLISH) && this.deactiveTestCategory("englishCategory");
   }
 
   randomizeTestAndCreateAnswerResultForSavingData() {
-    !localStorage.getItem(TEST_TYPE.LOGIC) && randomizeTestAndSaveResult(TEST_TYPE.LOGIC, logicTestData);
-    !localStorage.getItem(TEST_TYPE.ENGLISH) && randomizeTestAndSaveResult(TEST_TYPE.ENGLISH, englishTestData);
+    !localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC) && randomizeTestAndSaveResult(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC, logicTestData);
+    !localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH) && randomizeTestAndSaveResult(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH, englishTestData);
   }
 
   checkAllTestCompleted() {
-    if (this.state.isLogicTestCompleted && this.state.isEnglishTestCompleted) return true;
+    if (localStorage.getItem(TEST_RESULT.LOGIC) && localStorage.getItem(TEST_RESULT.ENGLISH)) return true;
     else return false;
   }
 
@@ -108,14 +106,14 @@ class TestList extends React.Component {
   }
 
   mergeAllTestResult() {
-    const logictestResult = JSON.parse(localStorage.getItem("logictestResult"));
-    const englishtestResult = JSON.parse(localStorage.getItem("englishtestResult"));
+    const logicTestResult = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC));
+    const englishtestResult = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH));
 
     const resultId = result.length;
     const intervieweeId = JSON.parse(localStorage.getItem("interviewee")).id;
     const submitTime = new Date();
 
-    localStorage.setItem("result", { id: resultId, intervieweeId, submitTime, resultOfEnglishTest: englishtestResult, resultOfLogicTest: logictestResult });
+    localStorage.setItem("result", JSON.stringify({ id: resultId, intervieweeId, submitTime, resultOfEnglishTest: englishtestResult, resultOfLogicTest: logicTestResult }));
   }
 
   deactiveTestCategory(categoryId) {
@@ -128,13 +126,22 @@ class TestList extends React.Component {
         <div className={css.categoryList}>
           <Link id="logicCategory" className={`${css.link} ${css.showedCategory}`} to={{
             pathname: `/test/logictest`,
-            state: {}
+            state: {
+              localStorageTestTypeName: LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC,
+              testStartingTime: STARTING_TIME.LOGIC,
+              testResult: TEST_RESULT.LOGIC
+            }
           }}>
             <TestListCategory type={CATEGORY_TYPE.LOGIC_TEST} />
           </Link>
           <Link id="englishCategory" className={`${css.link} ${css.showedCategory}`} to={{
             pathname: `/test/englishtest`,
-            state: {}
+            state: {
+              localStorageTestTypeName: LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH,
+              testStartingTime: STARTING_TIME.ENGLISH,
+              testResult: TEST_RESULT.ENGLISH
+
+            }
           }}>
             <TestListCategory type={CATEGORY_TYPE.ENGLISH_TEST} />
           </Link>

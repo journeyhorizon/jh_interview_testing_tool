@@ -89,5 +89,6 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active,
 input:-webkit-autofill:visited {
   box-shadow: 0 0 0 30px #fff inset;
+  -moz-box-shadow: 0 0 0 30px #fff inset;
   -webkit-box-shadow: 0 0 0 30px #fff inset !important;
 }
