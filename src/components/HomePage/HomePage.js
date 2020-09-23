@@ -19,8 +19,8 @@ class HomePage extends React.Component {
           <Switch>
             <Route exact path="/" component={Welcome} />
             <Route exact path="/testlist" component={TestList} />
-            <Route path="/test/logictest" component={TestDetail} />
-            <Route path="/test/englishtest" component={TestDetail} />
+            <Route exact path="/test/logictest" component={TestDetail} />
+            <Route exact path="/test/englishtest" component={TestDetail} />
             <Route exact path="/complete" component={CompleteNotification} />
             <Redirect to="/notfound" />
           </Switch>

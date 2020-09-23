@@ -15,6 +15,12 @@ $boxShadow: rgb(230, 230, 230);
   margin: auto 0;
 }
 
+.link {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .titleImage {
   width: 35%;
   margin-bottom: 10px;
