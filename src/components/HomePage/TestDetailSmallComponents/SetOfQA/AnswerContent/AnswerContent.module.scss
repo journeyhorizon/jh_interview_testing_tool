@@ -1,0 +1,126 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$descriptionColor: rgb(185, 185, 185);
+$boxShadow: rgb(230, 230, 230);
+
+.currentAnswer {
+  margin: 0 0 5px 0;
+  padding: 5px;
+  max-height: calc(100vh - 340px);
+  text-align: justify;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+
+  @media only screen and (min-width: $small) {
+    margin: 0 0 10px 0;
+    padding: 10px;
+    max-height: calc(100vh - 420px);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+
+  @media only screen and (min-width: $medium) {
+    margin: 0 0 15px 0;
+    padding: 15px;
+    max-height: calc(100vh - 600px);
+  }
+
+  @media only screen and (min-width: $large) {
+    margin: 0 0 10px 0;
+    max-height: calc(100vh - 500px);
+    border: none;
+    font-size: 14px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #fff;
+    box-shadow: 0 0 2px $boxShadow;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    max-height: calc(100vh - 600px);
+  }
+
+  textarea {
+    resize: none;
+    padding: 0;
+    width: 100%;
+    height: calc(100vh - 360px);
+    font-size: 12px;
+    font-weight: 300;
+    background-color: transparent;
+    border: none;
+
+    @media only screen and (min-width: $small) {
+      height: calc(100vh - 440px);
+      font-size: 16px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      height: calc(100vh - 620px);
+      font-size: 18px;
+    }
+
+    @media only screen and (min-width: $large) {
+      margin: -5px 0;
+      height: 200px;
+      font-size: 14px;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      height: 250px;
+      font-size: 16px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.choice {
+  display: flex;
+  padding: 5px;
+  margin: 2px 0;
+  font-size: 12px;
+
+  @media only screen and (min-width: $small) {
+    font-size: 16px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    font-size: 18px;
+  }
+
+  @media only screen and (min-width: $large) {
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    font-size: 16px;
+  }
+
+  input {
+    margin-top: 1.5px;
+
+    @media only screen and (min-width: $small) {
+      margin-top: 5px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      margin-top: 7px;
+    }
+
+    @media only screen and (min-width: $large) {
+      margin-top: 3px;
+    }
+  }
+
+  label {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 3px;
+  }
+}

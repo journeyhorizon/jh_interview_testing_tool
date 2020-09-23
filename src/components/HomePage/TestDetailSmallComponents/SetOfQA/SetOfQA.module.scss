@@ -1,0 +1,112 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$boxShadow: rgb(230, 230, 230);
+
+.setOfQA {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+
+  @media only screen and (min-width: $small) {
+    padding: 10px 0;
+  }
+
+  @media only screen and (min-width: $medium) {
+    padding: 15px 0;
+  }
+
+  @media only screen and (min-width: $large) {
+    padding: 0;
+  }
+
+  .currentQuestion {
+    margin: 0 0 5px 0;
+    font-size: 11px;
+    font-weight: 300;
+
+    @media only screen and (min-width: $small) {
+      margin: 0 0 10px 0;
+      font-size: 13px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      margin: 0 0 15px 0;
+      font-size: 15px;
+    }
+
+    @media only screen and (min-width: $large) {
+      margin: 0;
+      padding: 5px 15px;
+      font-size: 13px;
+      color: #fff;
+      background-color: $mainColor;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 14px;
+    }
+
+    span {
+      font-size: 12px;
+      font-weight: 500;
+
+      @media only screen and (min-width: $small) {
+        font-size: 16px;
+      }
+
+      @media only screen and (min-width: $medium) {
+        font-size: 18px;
+      }
+
+      @media only screen and (min-width: $large) {
+        font-size: 14px;
+      }
+
+      @media only screen and (min-width: $extraLarge) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: center;
+
+    .arrowButton {
+      margin: 0 10px;
+
+      img {
+        width: 12px;
+
+        @media only screen and (min-width: $small) {
+          width: 14px;
+        }
+
+        @media only screen and (min-width: $medium) {
+          width: 16px;
+        }
+
+        @media only screen and (min-width: $large) {
+          padding: 5px;
+          width: 18px;
+        }
+
+        @media only screen and (min-width: $extraLarge) {
+          width: 20px;
+        }
+      }
+
+      @media only screen and (min-width: $large) {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
