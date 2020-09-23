@@ -1,0 +1,31 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+
+.handleButton {
+  width: calc(100% - 5px);
+  color: $mainColor;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid $mainColor;
+
+  .buttonTitle {
+    padding: 10px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 300;
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 16px;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: $mainColor;
+  }
+}

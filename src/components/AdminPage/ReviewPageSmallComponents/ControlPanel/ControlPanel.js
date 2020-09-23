@@ -1,6 +1,9 @@
 import React from "react";
 import * as css from "./ControlPanel.module.scss";
 
+// Components
+import ControlPanelHandleButton from "../../../common/ControlPanelHandleButton/ControlPanelHandleButton";
+
 // Utils
 import { formatTime } from "../../../../utils/formatTime";
 
@@ -17,8 +20,11 @@ class ControlPanel extends React.Component {
           </div>
         </div>
         <div className={css.timeDisplay}>
-          <div className={css.submitTime}>Submit time: <span>{this.props.detailInterviewee && this.props.detailInterviewee.submitTime}</span></div>
-          <div className={css.durationTime}>Duration time: <span>{formatTime(this.props.resultOfTest.completeDurationTime)}</span> (total: <span>{formatTime(this.props.resultOfTest.durationTime)}</span>)</div>
+          <h3 className={css.timeDisplayTitle}>Time management</h3>
+          <div className={css.timeDisplayContent}>
+            <div className={css.submitTime}>Submit time: <span>{this.props.detailInterviewee && this.props.detailInterviewee.submitTime}</span></div>
+            <div className={css.durationTime}>Duration time: <span>{formatTime(this.props.resultOfTest.completeDurationTime)}</span> (total: <span>{formatTime(this.props.resultOfTest.durationTime)}</span>)</div>
+          </div>
         </div>
         <div className={css.reviews}>
           <h3 className={css.reviewsTitle}>Reviews</h3>
@@ -28,9 +34,7 @@ class ControlPanel extends React.Component {
           <h3 className={css.scoresTitle}>Scores</h3>
           <input className={css.scoresValue} type="number" name="totalScore" step={0.1} min={0} max={10} value={this.props.resultOfTest.totalScore || 0} onChange={this.props.giveReviewsAndScores} disabled={this.props.disabledScoresInput ? "disabled" : ""} />
         </div>
-        <div className={css.saveButton} onClick={this.props.saveChanges}>
-          <h3 className={css.buttonTitle}>Save changes</h3>
-        </div>
+        <ControlPanelHandleButton handleClick={this.props.saveChanges} typeOfHandleButton="Save changes" />
       </div>
     )
   }
