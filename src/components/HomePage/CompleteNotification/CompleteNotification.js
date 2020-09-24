@@ -2,29 +2,24 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as css from "./CompleteNotification.module.scss";
 
+// Api
+import myApi from "../../../api/myApi";
+
 // Assets
 import logoColor from "../../../assets/logo-color.png";
 
 class CompleteNotification extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      isTestCompleted: false
-    }
-  }
-  componentDidMount() {
+  async componentDidMount() {
     if (!localStorage.getItem("interviewee") || !localStorage.getItem("result"))
-      this.props.history.push("/testlist");
+      this.props.history.push("/");
     else {
-      this.setState({ isTestCompleted: true });
-      console.log(JSON.parse(localStorage.getItem("result")));
-      console.log("Call API for saving interviewee and its result into database");
-    }
-  }
+      const newInterviewee = JSON.parse(localStorage.getItem("interviewee"));
+      const newResult = JSON.parse(localStorage.getItem("result"));
 
-  componentWillUnmount() {
-    this.state.isTestCompleted && localStorage.clear();
+      await myApi().post("/interviewee/saveIntervieweeRecord", newInterviewee);
+      await myApi().post("/interviewee/saveTestRecord", newResult);
+      localStorage.clear();
+    }
   }
 
   render() {

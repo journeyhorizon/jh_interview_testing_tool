@@ -5,12 +5,11 @@ import * as css from "./IntervieweeList.module.scss";
 // Component
 import Breadcrumb from "../../common/Breadcrumb/Breadcrumb";
 
+// Api
+import myApi from "../../../api/myApi";
+
 // Utils
 import { formatDate } from "../../../utils/formatDate";
-
-// Data
-import interviewee from "../../../mockdata/interviewee.json";
-import result from "../../../mockdata/result.json";
 
 function EachInterviewee(props) {
   return (
@@ -29,7 +28,6 @@ class IntervieweeList extends React.Component {
     super();
 
     this.state = { fullDetailIntervieweeList: [] }
-    this.loadData = this.loadData.bind(this);
   }
 
   componentDidMount() {
@@ -37,20 +35,24 @@ class IntervieweeList extends React.Component {
     this.loadData();
   }
 
-  loadData() {
-    const list = [];
-    interviewee.map(eachInterviewee => {
-      const intervieweeResult = result.filter(_result => _result.intervieweeId === eachInterviewee.id)[0];
-      intervieweeResult === undefined ?
-        list.push({ ...eachInterviewee, submitTime: "", isValid: false }) :
-        list.push({
+  async loadData() {
+    const intervieweeList = await myApi().get("/admin/getAllInterviewee").then(response => response.data);
+    const resultList = await myApi().get("/admin/getAllResult").then(response => response.data);
+
+    const fullDetailIntervieweeList = intervieweeList.map(eachInterviewee => {
+      const intervieweeResult = resultList.filter(item => item.intervieweeId === eachInterviewee.id)[0];
+      if (intervieweeResult === undefined) {
+        return { ...eachInterviewee, submitTime: "", isValid: false };
+      } else {
+        return {
           ...eachInterviewee,
           submitTime: formatDate(intervieweeResult.submitTime),
           isValid: true
-        });
-      return null
-    })
-    this.setState({ fullDetailIntervieweeList: list });
+        }
+      }
+    });
+
+    this.setState({ fullDetailIntervieweeList });
   }
 
   render() {

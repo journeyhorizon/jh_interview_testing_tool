@@ -5,13 +5,12 @@ import * as css from "./IntervieweeDetail.module.scss";
 // Component
 import Breadcrumb from "../../common/Breadcrumb/Breadcrumb";
 
+// Api
+import myApi from "../../../api/myApi";
+
 // Utils
 import { formatDate } from "../../../utils/formatDate";
 import { customizeStringLength } from "../../../utils/customizeStringLength";
-
-// Data
-import interviewee from "../../../mockdata/interviewee.json";
-import result from "../../../mockdata/result.json";
 
 // Assets
 import avatarLogo from "../../../assets/avatar.png";
@@ -67,13 +66,13 @@ class IntervieweeDetail extends React.Component {
     this.checkRating = this.checkRating.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this._isMounted = true;
 
     !sessionStorage.getItem("admin") && this.props.history.push("/admin");
     window.addEventListener("resize", this.updateDimensions);
 
-    const detailInterviewee = this.loadDetailInterviewee();
+    const detailInterviewee = await this.loadDetailInterviewee();
     if (!this.checkInvalidPath(detailInterviewee)) {
       this.updateDimensions();
       this.limitLengthOfReviews(detailInterviewee);
@@ -82,19 +81,22 @@ class IntervieweeDetail extends React.Component {
     } else this.props.history.push("/admin/intervieweelist");
   }
 
-  loadDetailInterviewee() {
-    return interviewee.reduce((neccessaryInterview, eachInterviewee) => {
-      if (eachInterviewee.id === parseInt(this.props.match.params.id) && eachInterviewee.fullname === this.props.match.params.fullname) {
-        const intervieweeResult = result.filter(item => item.intervieweeId === eachInterviewee.id)[0];
-        neccessaryInterview = {
-          ...eachInterviewee,
-          submitTime: formatDate(intervieweeResult.submitTime),
-          resultOfEnglishTest: intervieweeResult.resultOfEnglishTest,
-          resultOfLogicTest: intervieweeResult.resultOfLogicTest
-        };
-      }
-      return neccessaryInterview;
-    }, {});
+  async loadDetailInterviewee() {
+    const intervieweeParam = {
+      id: this.props.match.params.id,
+      fullname: this.props.match.params.fullname
+    };
+
+    const oneInterviewee = await myApi().get("/admin/getInterviewee", { params: intervieweeParam }).then(response => response.data);
+    const resultList = await myApi().get("/admin/getAllResult").then(response => response.data);
+    const intervieweeResult = resultList.filter(item => item.intervieweeId === oneInterviewee.id)[0];
+
+    return {
+      ...oneInterviewee,
+      submitTime: formatDate(intervieweeResult.submitTime),
+      resultOfEnglishTest: intervieweeResult.resultOfEnglishTest,
+      resultOfLogicTest: intervieweeResult.resultOfLogicTest
+    };
   }
 
   limitLengthOfReviews(detailInterviewee) {

@@ -64,12 +64,11 @@ $boxShadow: rgb(230, 230, 230);
 
     @media only screen and (min-width: $large) {
       margin: -5px 0;
-      height: 200px;
+      height: 300px;
       font-size: 14px;
     }
 
     @media only screen and (min-width: $extraLarge) {
-      height: 250px;
       font-size: 16px;
     }
 

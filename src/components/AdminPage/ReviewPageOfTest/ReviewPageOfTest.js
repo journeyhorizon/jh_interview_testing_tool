@@ -3,11 +3,14 @@ import * as css from "./ReviewPageOfTest.module.scss"
 
 // Component
 import Breadcrumb from "../../common/Breadcrumb/Breadcrumb";
-import MobileNavbar from "../ReviewPageSmallComponents/MobileNavbar/MobileNavbar";
+import MobileNavbar from "../../common/MobileNavbar/MobileNavbar";
 import SetOfQA from "../ReviewPageSmallComponents/SetOfQA/SetOfQA";
 import ControlPanel from "../ReviewPageSmallComponents/ControlPanel/ControlPanel";
 import ReviewPageWarning from "../ReviewPageWarning/ReviewPageWarning";
 import MenuBar from "../../common/MenuBar/MenuBar";
+
+// Api
+import myApi from "../../../api/myApi";
 
 // Utils
 import { customizeStringLength } from "../../../utils/customizeStringLength";
@@ -68,8 +71,8 @@ class ReviewPageOfTest extends React.Component {
       } else this.setState({ isBigScreen: false });
   }
 
-  giveReviewsAndScores(event) {
-    this.setState({ resultOfTest: { ...this.state.resultOfTest, [event.target.name]: event.target.value } });
+  giveReviewsAndScores({ target }) {
+    this.setState({ resultOfTest: { ...this.state.resultOfTest, [target.name]: target.name === "totalScore" ? parseFloat(target.value) : target.value } });
   }
 
   changeCurrentQA(index) {
@@ -99,8 +102,16 @@ class ReviewPageOfTest extends React.Component {
     this.setState({ menuBar: !this.state.menuBar });
   }
 
-  saveChanges() {
-    console.log(this.state.resultOfTest.reviews, this.state.resultOfTest.totalScore);
+  async saveChanges() {
+    const item = {
+      id: parseInt(this.props.match.params.id),
+      testType: this.state.testType,
+      newData: this.state.resultOfTest
+    }
+
+    const newData = await myApi().post("/admin/saveIntervieweeTestRecord", item).then(result => result.data);
+    console.log(newData);
+    this.props.history.push(`/admin/interviewee/${this.props.match.params.id}-${this.props.match.params.fullname}`);
   }
 
   componentWillUnmount() {
@@ -120,7 +131,7 @@ class ReviewPageOfTest extends React.Component {
           <MobileNavbar
             showMenuBar={this.showMenuBar}
             currentQA={currentQA}
-            resultOfTest={resultOfTest}
+            storage={resultOfTest}
           />
           <SetOfQA
             isBigScreen={this.state.isBigScreen}
@@ -138,7 +149,16 @@ class ReviewPageOfTest extends React.Component {
             disabledScoresInput={testType === "resultOfLogicTest"}
           />
         </div>
-        <MenuBar isBigScreen={this.state.isBigScreen} isShow={this.state.menuBar} detailInterviewee={detailInterviewee} currentQA={currentQA} resultOfTest={resultOfTest} changeCurrentQA={this.changeCurrentQA} showMenuBar={this.showMenuBar} />
+        <MenuBar
+          isAdmin={true}
+          isBigScreen={this.state.isBigScreen}
+          isShow={this.state.menuBar}
+          detailInterviewee={detailInterviewee}
+          currentQA={currentQA}
+          resultOfTest={resultOfTest}
+          changeCurrentQA={this.changeCurrentQA}
+          showMenuBar={this.showMenuBar}
+        />
         <ReviewPageWarning />
       </div>
     )

@@ -5,10 +5,8 @@ import * as css from "./TestList.module.scss";
 // Utils
 import { randomizeTestAndSaveResult } from "../../../utils/randomizeTestAndSaveResult";
 
-// Data
-import result from "../../../mockdata/result.json";
-import englishTestData from "../../../mockdata/english-test.json";
-import logicTestData from "../../../mockdata/logic-test.json";
+// Api
+import myApi from "../../../api/myApi";
 
 // Assets
 import logicCategory from "../../../assets/testlist-category/logicCategory.png";
@@ -83,7 +81,10 @@ class TestList extends React.Component {
     localStorage.getItem(TEST_RESULT.ENGLISH) && this.deactiveTestCategory("englishCategory");
   }
 
-  randomizeTestAndCreateAnswerResultForSavingData() {
+  async randomizeTestAndCreateAnswerResultForSavingData() {
+    const logicTestData = await myApi().get("/interviewee/getListOfLogicTest", { params: { tableName: "logic-test" } }).then(response => response.data);
+    const englishTestData = await myApi().get("/interviewee/getListOfEnglishTest", { params: { tableName: "english-test" } }).then(response => response.data);
+
     !localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC) && randomizeTestAndSaveResult(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC, logicTestData);
     !localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH) && randomizeTestAndSaveResult(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH, englishTestData);
   }
@@ -105,15 +106,15 @@ class TestList extends React.Component {
     document.getElementById("englishCategory").classList.add(css.hideCategory);
   }
 
-  mergeAllTestResult() {
+  async mergeAllTestResult() {
+    const resultLength = await myApi().get("/interviewee/getLength", { params: { tableName: "result" } }).then(response => response.data);
     const logicTestResult = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC));
     const englishtestResult = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH));
 
-    const resultId = result.length;
     const intervieweeId = JSON.parse(localStorage.getItem("interviewee")).id;
     const submitTime = new Date();
 
-    localStorage.setItem("result", JSON.stringify({ id: resultId, intervieweeId, submitTime, resultOfEnglishTest: englishtestResult, resultOfLogicTest: logicTestResult }));
+    localStorage.setItem("result", JSON.stringify({ id: resultLength, intervieweeId, submitTime, resultOfEnglishTest: englishtestResult, resultOfLogicTest: logicTestResult }));
   }
 
   deactiveTestCategory(categoryId) {

@@ -5,8 +5,8 @@ import * as inputCss from "./WelcomeFormInput/WelcomeFormInput.module.scss";
 // Components
 import WelcomeFormInput from "./WelcomeFormInput/WelcomeFormInput";
 
-// Data
-import interviewee from "../../../mockdata/interviewee.json";
+// Api
+import myApi from "../../../api/myApi";
 
 // Assets
 import logoColor from "../../../assets/logo-color.png";
@@ -85,14 +85,15 @@ class Welcome extends React.Component {
     else this.modifyIsErrorInput("intervieweePhone", false, inputCss.inputPhoneError);
   }
 
-  handleValidInput() {
+  async handleValidInput() {
     this.modifyIsErrorInput("intervieweeEmail", false, inputCss.inputEmailError);
     this.modifyIsErrorInput("intervieweePhone", false, inputCss.inputPhoneError);
     this.changeDisplayOfElement("warningNotification", "none");
     this.setState({ warningNotification: "" });
 
+    const intervieweeLength = await myApi().get("/interviewee/getLength", { params: { tableName: "interviewee" } }).then(response => response.data);
     const { warningNotification, ...intervieweeDetail } = this.state;
-    localStorage.setItem("interviewee", JSON.stringify({ id: interviewee.length, ...intervieweeDetail }));
+    localStorage.setItem("interviewee", JSON.stringify({ id: intervieweeLength, ...intervieweeDetail }));
     this.props.history.push("/testlist");
   }
 
