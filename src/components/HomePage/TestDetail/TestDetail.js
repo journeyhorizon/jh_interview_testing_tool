@@ -5,6 +5,8 @@ import * as css from "./TestDetail.module.scss";
 import MobileNavbar from "../../common/MobileNavbar/MobileNavbar";
 import SetOfQA from "../TestDetailSmallComponents/SetOfQA/SetOfQA";
 import ControlPanel from "../TestDetailSmallComponents/ControlPanel/ControlPanel";
+import MenuBar from "../../common/MenuBar/MenuBar";
+
 
 // Utils
 import { countdownTimer } from "../../../utils/countdownTimer";
@@ -35,9 +37,11 @@ class TestDetail extends React.Component {
       currentQA: {},
       currentMinutes: null,
       currentSeconds: null,
-      menuBar: null
+      menuBar: null,
+      isBigScreen: false,
     }
     this.activateCountdownTimer = this.activateCountdownTimer.bind(this);
+    this.updateDimensions = this.updateDimensions.bind(this);
     this.showMenuBar = this.showMenuBar.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.changeCurrentQA = this.changeCurrentQA.bind(this);
@@ -46,9 +50,13 @@ class TestDetail extends React.Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
+
     !localStorage.getItem("interviewee") && this.props.history.push("/");
+    window.addEventListener("resize", this.updateDimensions);
 
     if (!this.checkIsTestCompleted(this.props.location.pathname)) {
+      this.updateDimensions();
       !this.checkCountdownTimerIsStarted() && this.signStartingTime();
 
       const testStorage = JSON.parse(localStorage.getItem(this.props.location.state.localStorageTestTypeName));
@@ -66,6 +74,14 @@ class TestDetail extends React.Component {
       this.props.history.push("/testlist");
       return true;
     } else return false;
+  }
+
+  updateDimensions() {
+    if (this._isMounted)
+      if (window.innerWidth > 1200) {
+        this.setState({ menuBar: null });
+        this.setState({ isBigScreen: true });
+      } else this.setState({ isBigScreen: false });
   }
 
   checkCountdownTimerIsStarted() {
@@ -161,6 +177,8 @@ class TestDetail extends React.Component {
 
   scoresLogicQA() {
     const newAnswerList = this.state.testStorage.answerList.map(result => {
+      if (result.type === QUESTION_TYPE.WH) return null;
+
       if (result.type === QUESTION_TYPE.SINGLE_CHOICE) {
         if (result.answerContent.length === 0) result.point = false;
         else {
@@ -182,26 +200,32 @@ class TestDetail extends React.Component {
       return result;
     })
 
-    const newTestStorage = { ...this.state.testStorage, answerList: newAnswerList };
-    this.updateNewDataForStateAndLocalStorage(newTestStorage);
+    const totalCorrectAnswer = newAnswerList.reduce((score, item) => {
+      if (item.point) score += 1;
+      return score;
+    }, 0)
+
+    const totalScore = Number(parseFloat((totalCorrectAnswer / newAnswerList.length) * 10).toFixed(1));
+
+    return { newAnswerList, totalScore };
   }
 
   saveCompleteDurationTime() {
-    if (this.isOutOfTime()) {
-      const completeDurationTime = this.state.testStorage.durationTime;
-      const newTestStorage = { ...this.state.testStorage, completeDurationTime };
-      this.updateNewDataForStateAndLocalStorage(newTestStorage);
-    } else {
-      const completeDurationTime = this.state.testStorage.durationTime - (parseInt(this.state.currentMinutes) * 60 + parseInt(this.state.currentSeconds));
-      const newTestStorage = { ...this.state.testStorage, completeDurationTime };
-      this.updateNewDataForStateAndLocalStorage(newTestStorage);
-    }
+    if (this.isOutOfTime()) return this.state.testStorage.durationTime;
+    else return this.state.testStorage.durationTime - (parseInt(this.state.currentMinutes) * 60 + parseInt(this.state.currentSeconds));
+  }
+
+  saveIntervieweeTestingRecord() {
+    const completeDurationTime = this.saveCompleteDurationTime();
+    const { newAnswerList, totalScore } = this.props.location.state.testResult === TEST_RESULT.LOGIC && this.scoresLogicQA();
+
+    const newTestStorage = this.props.location.state.testResult === TEST_RESULT.LOGIC ? { ...this.state.testStorage, answerList: newAnswerList, completeDurationTime, totalScore } : { ...this.state.testStorage, completeDurationTime };
+    this.updateNewDataForStateAndLocalStorage(newTestStorage);
   }
 
   submitTest() {
     localStorage.setItem(this.props.location.state.testResult, true);
-    this.props.location.state.testResult === TEST_RESULT.LOGIC && this.scoresLogicQA();
-    this.saveCompleteDurationTime();
+    this.saveIntervieweeTestingRecord();
     this.props.history.push("/testlist");
   }
 
@@ -210,6 +234,7 @@ class TestDetail extends React.Component {
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
     this.deactivateCountdownTimer();
   }
 
@@ -233,12 +258,24 @@ class TestDetail extends React.Component {
           <ControlPanel
             currentMinutes={this.state.currentMinutes}
             currentSeconds={this.state.currentSeconds}
+            isBigScreen={this.state.isBigScreen}
             testStorage={testStorage}
             currentQA={currentQA}
             changeCurrentQA={this.changeCurrentQA}
             handleSubmit={this.submitTest}
           />
         </div>
+        <MenuBar
+          isBigScreen={this.state.isBigScreen}
+          isShow={this.state.menuBar}
+          currentQA={currentQA}
+          testStorage={testStorage}
+          currentMinutes={this.state.currentMinutes}
+          currentSeconds={this.state.currentSeconds}
+          changeCurrentQA={this.changeCurrentQA}
+          showMenuBar={this.showMenuBar}
+          handleSubmit={this.submitTest}
+        />
       </div>
     )
   }
