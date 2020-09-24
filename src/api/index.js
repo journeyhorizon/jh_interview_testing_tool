@@ -27,17 +27,31 @@ const insert = async ({
   return updateData;
 }
 
-const getOne = async ({
+const getOneInterviewee = async ({
   id,
-  tableName
+  fullname
 }) => {
-  const currentData = require(`../mockdata/${tableName}.json`);
-  return currentData.find(data => data.id === id);
+  const currentData = require(`../mockdata/interviewee.json`);
+  return currentData.find(data => data.id === id && data.fullname === fullname);
 }
 
 const getAll = async (tableName) => {
   const currentData = require(`../mockdata/${tableName}.json`);
   return currentData;
+}
+
+const saveTestReviewAndScore = async ({ id, testType, newData }) => {
+  const currentResult = require(`../mockdata/result.json`);
+
+  const newResult = currentResult.map(item => {
+    if (item.id === id) return {
+      ...item,
+      [testType]: newData
+    }; else return item;
+  })
+
+  // await fs.writeFile(`../mockdata/result.json`, newResult, 'utf-8');
+  return newResult;
 }
 
 const deleteItem = async ({
@@ -52,8 +66,9 @@ const deleteItem = async ({
 
 const sdk = {
   insert,
-  getOne,
+  getOneInterviewee,
   getAll,
+  saveTestReviewAndScore,
   delete: deleteItem
 };
 
