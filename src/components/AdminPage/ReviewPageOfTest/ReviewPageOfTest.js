@@ -103,13 +103,14 @@ class ReviewPageOfTest extends React.Component {
   }
 
   async saveChanges() {
+    const testResultId = await myApi().get("/admin/getResultIdByIntervieweeId", { params: { intervieweeId: this.props.match.params.id } }).then(response => response.data);
     const item = {
-      id: parseInt(this.props.match.params.id),
+      id: testResultId,
       testType: this.state.testType,
       newData: this.state.resultOfTest
     }
 
-    const newData = await myApi().post("/admin/saveIntervieweeTestRecord", item).then(result => result.data);
+    const newData = await myApi().post("/admin/saveIntervieweeTestRecord", item).then(response => response.data);
     console.log(newData);
     this.props.history.push(`/admin/interviewee/${this.props.match.params.id}-${this.props.match.params.fullname}`);
   }
