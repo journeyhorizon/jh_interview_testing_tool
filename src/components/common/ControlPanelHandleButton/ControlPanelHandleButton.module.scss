@@ -5,18 +5,39 @@ $extraLarge: 1600px;
 $mainColor: #029aa8;
 
 .handleButton {
-  width: calc(100% - 5px);
-  color: $mainColor;
-  background-color: #fff;
+  margin: 5px;
+  padding: 5px 10px;
+  color: #fff;
+  background-color: $mainColor;
   text-align: center;
   border-radius: 5px;
-  border: 1px solid $mainColor;
+
+  @media only screen and (min-width: $small) {
+    margin: 10px;
+  }
+
+  @media only screen and (min-width: $large) {
+    margin: 0;
+    padding: 0;
+    width: calc(100% - 5px);
+    color: $mainColor;
+    background-color: #fff;
+    border: 1px solid $mainColor;
+  }
 
   .buttonTitle {
-    padding: 10px;
     margin: 0;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 300;
+
+    @media only screen and (min-width: $small) {
+      font-size: 16px;
+    }
+
+    @media only screen and (min-width: $large) {
+      padding: 10px;
+      font-size: 14px;
+    }
 
     @media only screen and (min-width: $extraLarge) {
       font-size: 16px;

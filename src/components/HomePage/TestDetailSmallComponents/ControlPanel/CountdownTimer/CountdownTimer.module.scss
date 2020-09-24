@@ -1,0 +1,155 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$boxShadow: rgb(230, 230, 230);
+
+.countdownTimer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 0;
+  margin: 5px 0 0 0;
+  width: 100%;
+
+  @media only screen and (min-width: $large) {
+    align-items: stretch;
+    padding: 0;
+    margin: 0 0 15px 0;
+    width: calc(100% - 5px);
+    border: none;
+    border-radius: 5px;
+  }
+
+  .countdownTimerTitle {
+    margin: 0 0 5px 0;
+    padding: 0px 10px 5px 10px;
+    font-size: 12px;
+    font-weight: 500;
+
+    @media only screen and (min-width: $small) {
+      font-size: 14px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      font-size: 16px;
+    }
+
+    @media only screen and (min-width: $large) {
+      margin: 0;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: 300;
+      color: #fff;
+      background-color: $mainColor;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 14px;
+    }
+  }
+
+  .countdownTimerDisplay {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: justify;
+    border: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 0 2px $boxShadow;
+
+    @media only screen and (min-width: $small) {
+      font-size: 16px;
+    }
+
+    @media only screen and (min-width: $large) {
+      font-size: 14px;
+      background-color: #fff;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 16px;
+    }
+  }
+
+  .timerCountingSet {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 60px;
+    margin: 0 10px;
+
+    @media only screen and (min-width: $small) {
+      width: 80px;
+    }
+
+    @media only screen and (min-width: $small) {
+      width: 100px;
+    }
+
+    @media only screen and (min-width: $large) {
+      width: 110px;
+      margin: 10px 15px;
+    }
+  }
+
+  .timerCountingSet_countingNumber {
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 500;
+
+    @media only screen and (min-width: $small) {
+      font-size: 60px;
+      line-height: 60px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      font-size: 70px;
+      line-height: 70px;
+    }
+
+    @media only screen and (min-width: $large) {
+      font-size: 80px;
+      line-height: 80px;
+    }
+  }
+
+  .timerCountingSet_unit {
+    font-size: 12px;
+    font-weight: 400;
+    margin: 0;
+
+    @media only screen and (min-width: $medium) {
+      font-size: 14px;
+    }
+
+    @media only screen and (min-width: $medium) {
+      font-size: 16px;
+    }
+
+    @media only screen and (min-width: $large) {
+      font-size: 18px;
+    }
+  }
+
+  .gapBetweenTwoCountingNumber {
+    font-size: 16px;
+
+    @media only screen and (min-width: $medium) {
+      font-size: 20px;
+    }
+
+    @media only screen and (min-width: $large) {
+      font-size: 50px;
+    }
+  }
+}

@@ -1,0 +1,121 @@
+$small: 768px;
+$medium: 1024px;
+$large: 1200px;
+$extraLarge: 1600px;
+$mainColor: #029aa8;
+$boxShadow: rgb(230, 230, 230);
+
+.listQuestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 0;
+  margin: 5px 0 0 0;
+  width: 100%;
+  max-height: calc(100vh - 490px);
+  border-top: 1px solid $mainColor;
+  border-bottom: 1px solid $mainColor;
+
+  @media only screen and (min-width: $large) {
+    align-items: stretch;
+    padding: 0;
+    margin: 0 0 15px 0;
+    width: calc(100% - 5px);
+    max-height: none;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .listQuestionTitle {
+    margin: 0 0 5px 0;
+    padding: 0px 10px 5px 10px;
+    font-size: 12px;
+    font-weight: 500;
+
+    @media only screen and (min-width: $large) {
+      margin: 0;
+      padding: 5px 10px;
+      font-size: 13px;
+      font-weight: 300;
+      color: #fff;
+      background-color: $mainColor;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 14px;
+    }
+  }
+
+  .list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    overflow: auto;
+
+    @media only screen and (min-width: $large) {
+      justify-content: flex-start;
+      overflow: visible;
+      margin: 0;
+      padding: 10px 10px 5px 10px;
+      background-color: #fff;
+      border: none;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      box-shadow: 0 0 2px $boxShadow;
+    }
+
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 10px;
+      margin: 5px;
+      width: 15px;
+      height: 25px;
+      font-size: 12px;
+      color: $mainColor;
+      background-color: #fff;
+      border-radius: 5px;
+      border: 1px solid $mainColor;
+
+      @media only screen and (min-width: $small) {
+        font-size: 14px;
+      }
+
+      @media only screen and (min-width: $medium) {
+        font-size: 16px;
+      }
+
+      @media only screen and (min-width: $large) {
+        padding: 5px 10px;
+        margin: 0 5px 5px 0;
+        width: 15px;
+        height: 25px;
+        font-size: 13px;
+      }
+
+      @media only screen and (min-width: $extraLarge) {
+        width: 20px;
+        height: 30px;
+        font-size: 14px;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: #fff;
+        background-color: $mainColor;
+      }
+    }
+
+    .currentItem {
+      color: #fff;
+      background-color: $mainColor;
+
+      &:hover {
+        cursor: default;
+      }
+    }
+  }
+}

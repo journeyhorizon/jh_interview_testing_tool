@@ -72,6 +72,8 @@ $boxShadow: rgb(230, 230, 230);
         border: 1px solid $mainColor;
 
         @media only screen and (min-width: $extraLarge) {
+          width: 20px;
+          height: 30px;
           font-size: 14px;
         }
 
