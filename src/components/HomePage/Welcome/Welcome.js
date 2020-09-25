@@ -128,7 +128,7 @@ class Welcome extends React.Component {
             type="tel"
             name="phone"
             placeholder="Phone"
-            pattern="[0-9]{10}"
+            pattern="^[0-9]{10}$"
             value={this.state.phone}
             onChange={this.handleChange}
           />

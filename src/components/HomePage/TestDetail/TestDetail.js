@@ -5,6 +5,7 @@ import * as css from "./TestDetail.module.scss";
 import MobileNavbar from "../../common/MobileNavbar/MobileNavbar";
 import SetOfQA from "../TestDetailSmallComponents/SetOfQA/SetOfQA";
 import ControlPanel from "../TestDetailSmallComponents/ControlPanel/ControlPanel";
+import WarningNotification from "../TestDetailSmallComponents/WarningNotification/WarningNotification";
 import MenuBar from "../../common/MenuBar/MenuBar";
 
 
@@ -28,6 +29,19 @@ const QUESTION_TYPE = {
   MULTIPLE_CHOICES: "MULTIPLE_CHOICES"
 };
 
+const STATUS_OF_SUBMIT = {
+  OUT_OF_TIME: "out of time",
+  NOT_FULFILL_ANSWER_LIST: "not fulfill answer list",
+  FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE: "time still available",
+  FORCE_SUBMIT: "force submit"
+}
+
+const NOTIFICATION_MESSAGE_FOR_DEFER_SUBMIT = {
+  NO_DISPLAY: "",
+  NOT_FULFILL_ANSWER_LIST: "You haven't fulfill all questions. Please check carefully!",
+  FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE: "You still have time left. Make sure you check carefully!",
+}
+
 class TestDetail extends React.Component {
   constructor() {
     super();
@@ -39,6 +53,7 @@ class TestDetail extends React.Component {
       currentSeconds: null,
       menuBar: null,
       isBigScreen: false,
+      notificationWhenDeferSubmit: { isShow: false, message: "" }
     }
     this.activateCountdownTimer = this.activateCountdownTimer.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
@@ -46,6 +61,7 @@ class TestDetail extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.changeCurrentQA = this.changeCurrentQA.bind(this);
     this.navigateQA = this.navigateQA.bind(this);
+    this.showNotificationWhenDeferSubmit = this.showNotificationWhenDeferSubmit.bind(this);
     this.submitTest = this.submitTest.bind(this);
   }
 
@@ -215,6 +231,45 @@ class TestDetail extends React.Component {
     else return this.state.testStorage.durationTime - (parseInt(this.state.currentMinutes) * 60 + parseInt(this.state.currentSeconds));
   }
 
+  checkOutOfTimeAndFulfillAnswerList(isForceSubmit) {
+    const currentAnswerList = this.state.testStorage.answerList;
+    console.log(isForceSubmit);
+    if (isForceSubmit) return STATUS_OF_SUBMIT.FORCE_SUBMIT;
+    else {
+      console.log("voo day");
+      const isOutOfTime = this.state.currentMinutes === "00" ? this.state.currentSeconds === "00" ? true : false : false;
+      const isNotFulFill = () => {
+        if (this.props.location.pathname === PATHNAME.LOGIC)
+          return currentAnswerList.some(item => item.answerContent.length === 0);
+        if (this.props.location.pathname === PATHNAME.ENGLISH)
+          return currentAnswerList.some(item => item.answerContent === "");
+      }
+
+      console.log(isOutOfTime, isNotFulFill());
+
+      if (isOutOfTime) return STATUS_OF_SUBMIT.OUT_OF_TIME;
+      else {
+        if (isNotFulFill()) return STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST;
+        else return STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE;
+      }
+    }
+  }
+
+  showNotificationWhenDeferSubmit(status, isNotShow) {
+    const newMessage = (status) => {
+      if (status === "") return NOTIFICATION_MESSAGE_FOR_DEFER_SUBMIT.NO_DISPLAY;
+      if (status === STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST) return NOTIFICATION_MESSAGE_FOR_DEFER_SUBMIT.NOT_FULFILL_ANSWER_LIST;
+      if (status === STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE) return NOTIFICATION_MESSAGE_FOR_DEFER_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE;
+    }
+
+    const newNotification = {
+      isShow: !isNotShow,
+      message: newMessage(status)
+    }
+
+    this.setState({ notificationWhenDeferSubmit: newNotification });
+  }
+
   saveIntervieweeTestingRecord() {
     const completeDurationTime = this.saveCompleteDurationTime();
     const { newAnswerList, totalScore } = this.props.location.state.testResult === TEST_RESULT.LOGIC && this.scoresLogicQA();
@@ -223,10 +278,28 @@ class TestDetail extends React.Component {
     this.updateNewDataForStateAndLocalStorage(newTestStorage);
   }
 
-  submitTest() {
-    localStorage.setItem(this.props.location.state.testResult, true);
-    this.saveIntervieweeTestingRecord();
-    this.props.history.push("/testlist");
+  submitTest(isForceSubmit) {
+    switch (this.checkOutOfTimeAndFulfillAnswerList(isForceSubmit)) {
+      case STATUS_OF_SUBMIT.OUT_OF_TIME: {
+        this.submitTest(true);
+        break;
+      }
+      case STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST: {
+        this.showNotificationWhenDeferSubmit(STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST);
+        break;
+      }
+      case STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE: {
+        this.showNotificationWhenDeferSubmit(STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE);
+        break;
+      }
+      case STATUS_OF_SUBMIT.FORCE_SUBMIT: {
+        localStorage.setItem(this.props.location.state.testResult, true);
+        this.saveIntervieweeTestingRecord();
+        this.props.history.push("/testlist");
+        break;
+      }
+      default: console.log("Bug");
+    }
   }
 
   componentDidUpdate() {
@@ -243,40 +316,47 @@ class TestDetail extends React.Component {
     const currentQA = this.state.currentQA;
 
     return (
-      <div className={css.container}>
-        <div className={css.smallContainer}>
-          <MobileNavbar
+      <>
+        <div className={css.container}>
+          <div className={css.smallContainer}>
+            <MobileNavbar
+              currentQA={currentQA}
+              storage={testStorage}
+              showMenuBar={this.showMenuBar}
+            />
+            <SetOfQA
+              currentQA={currentQA}
+              handleChange={this.handleChange}
+              navigateQA={this.navigateQA}
+            />
+            <ControlPanel
+              currentMinutes={this.state.currentMinutes}
+              currentSeconds={this.state.currentSeconds}
+              isBigScreen={this.state.isBigScreen}
+              testStorage={testStorage}
+              currentQA={currentQA}
+              changeCurrentQA={this.changeCurrentQA}
+              handleSubmit={this.submitTest}
+            />
+          </div>
+          <MenuBar
+            isBigScreen={this.state.isBigScreen}
+            isShow={this.state.menuBar}
             currentQA={currentQA}
-            storage={testStorage}
-            showMenuBar={this.showMenuBar}
-          />
-          <SetOfQA
-            currentQA={currentQA}
-            handleChange={this.handleChange}
-            navigateQA={this.navigateQA}
-          />
-          <ControlPanel
+            testStorage={testStorage}
             currentMinutes={this.state.currentMinutes}
             currentSeconds={this.state.currentSeconds}
-            isBigScreen={this.state.isBigScreen}
-            testStorage={testStorage}
-            currentQA={currentQA}
             changeCurrentQA={this.changeCurrentQA}
+            showMenuBar={this.showMenuBar}
             handleSubmit={this.submitTest}
           />
         </div>
-        <MenuBar
-          isBigScreen={this.state.isBigScreen}
-          isShow={this.state.menuBar}
-          currentQA={currentQA}
-          testStorage={testStorage}
-          currentMinutes={this.state.currentMinutes}
-          currentSeconds={this.state.currentSeconds}
-          changeCurrentQA={this.changeCurrentQA}
-          showMenuBar={this.showMenuBar}
-          handleSubmit={this.submitTest}
+        <WarningNotification
+          notificationWhenDeferSubmit={this.state.notificationWhenDeferSubmit}
+          showNotificationWhenDeferSubmit={this.showNotificationWhenDeferSubmit}
+          submitTest={this.submitTest}
         />
-      </div>
+      </>
     )
   }
 }

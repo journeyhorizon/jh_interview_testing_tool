@@ -11,6 +11,14 @@ $extraLarge: 1600px;
     margin-bottom: 15px;
   }
 
+  @media only screen and (min-width: $large) {
+    margin-bottom: 10px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    margin-bottom: 15px;
+  }
+
   input {
     width: 200px;
     padding: 8px 10px;
@@ -46,11 +54,16 @@ $extraLarge: 1600px;
     @media only screen and (min-width: $large) {
       width: 250px;
       padding: 10px 15px;
-      font-size: 16px;
+      font-size: 14px;
       background-size: 13px;
-      background-position: 10px 16px;
+      background-position: 10px 14px;
       background-repeat: no-repeat;
       text-indent: 15px;
+    }
+
+    @media only screen and (min-width: $extraLarge) {
+      font-size: 16px;
+      background-position: 10px 16px;
     }
 
     &:focus {

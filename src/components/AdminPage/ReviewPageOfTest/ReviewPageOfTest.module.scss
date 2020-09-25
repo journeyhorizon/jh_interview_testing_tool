@@ -48,10 +48,10 @@ $extraLarge: 1600px;
   @media only screen and (min-width: $large) {
     flex-direction: row;
     margin: 0;
-    height: calc(100vh - 330px);
+    height: calc(100vh - 270px);
   }
 
   @media only screen and (min-width: $extraLarge) {
-    height: calc(100vh - 360px);
+    height: calc(100vh - 290px);
   }
 }

@@ -26,10 +26,12 @@ $boxShadow: rgb(230, 230, 230);
 
   @media only screen and (min-width: $large) {
     width: 12%;
+    margin-bottom: 15px;
   }
 
   @media only screen and (min-width: $extraLarge) {
     width: 10%;
+    margin-bottom: 20px;
   }
 }
 
@@ -50,6 +52,12 @@ $boxShadow: rgb(230, 230, 230);
   }
 
   @media only screen and (min-width: $large) {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    margin: 10px 0;
     font-size: 14px;
   }
 }
@@ -117,10 +125,12 @@ $boxShadow: rgb(230, 230, 230);
   }
 
   @media only screen and (min-width: $large) {
+    margin-bottom: 10px;
     font-size: 12px;
   }
 
   @media only screen and (min-width: $extraLarge) {
+    margin-bottom: 15px;
     font-size: 14px;
   }
 }
