@@ -13,6 +13,19 @@ $boxShadow: rgb(230, 230, 230);
   justify-content: center;
   align-items: center;
   margin: auto 0;
+  padding-bottom: 70px;
+
+  @media only screen and (min-width: $small) {
+    padding-bottom: 100px;
+  }
+
+  @media only screen and (min-width: $medium) {
+    padding-bottom: 130px;
+  }
+
+  @media only screen and (min-width: $extraLarge) {
+    padding-bottom: 120px;
+  }
 }
 
 .titleImage {
