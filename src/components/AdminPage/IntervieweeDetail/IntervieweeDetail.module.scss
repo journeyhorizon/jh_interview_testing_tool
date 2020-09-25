@@ -361,6 +361,11 @@ $boxShadow: rgb(230, 230, 230);
       span {
         text-transform: uppercase;
       }
+
+      i {
+        text-decoration: underline;
+        font-style: normal;
+      }
     }
 
     .reviews {

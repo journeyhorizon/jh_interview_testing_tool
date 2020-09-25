@@ -27,15 +27,18 @@ function ScoreContainer(props) {
   return (
     <div className={css.statisticsCategory}>
       <div className={css.title}>{props.title}</div>
-      <div className={css.value}>{props.scores || ""}</div>
+      <div className={css.value}>{props.scores !== null ? props.scores : ""}</div>
     </div>
   )
 }
 
 function ReviewContainer(props) {
+  const data = props.fullData;
+  const rightAnsStatistic = props.isLogicTest && data.resultOfLogicTest && Math.round(data.resultOfLogicTest.totalScore * data.resultOfLogicTest.answerList.length / 10);
+
   return (
     <div className={css.reviewContainer}>
-      <div className={css.reviewTitle}>Reviews of <span>{props.title} TEST</span></div>
+      <div className={css.reviewTitle}>Reviews of <span>{props.title} TEST</span> {props.isLogicTest && <i>(Number of correct answer: {rightAnsStatistic}/{data.resultOfLogicTest ? data.resultOfLogicTest.answerList.length : 0})</i>} </div>
       <div className={`${css.reviews} ${props.isNotReviewYet && css.notReviewYet}`}>
         {props.isNotReviewYet ? props.limitedReviews : props.isBigScreen ? props.fullReviews : props.limitedReviews}
         <Link to={{
@@ -173,6 +176,7 @@ class IntervieweeDetail extends React.Component {
               isNotReviewYet={detailInterviewee.resultOfLogicTest && detailInterviewee.resultOfLogicTest.reviews.length === 0 ? true : false}
               isBigScreen={this.state.isBigScreen}
               fullData={detailInterviewee}
+              isLogicTest={true}
             />
             <ReviewContainer
               title="english"
