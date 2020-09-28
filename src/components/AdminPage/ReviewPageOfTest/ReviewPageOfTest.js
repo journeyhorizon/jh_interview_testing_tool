@@ -4,10 +4,10 @@ import * as css from "./ReviewPageOfTest.module.scss"
 // Component
 import Breadcrumb from "../../common/Breadcrumb/Breadcrumb";
 import MobileNavbar from "../../common/MobileNavbar/MobileNavbar";
+import MenuBar from "../../common/MenuBar/MenuBar";
 import SetOfQA from "../ReviewPageSmallComponents/SetOfQA/SetOfQA";
 import ControlPanel from "../ReviewPageSmallComponents/ControlPanel/ControlPanel";
 import ReviewPageWarning from "../ReviewPageWarning/ReviewPageWarning";
-import MenuBar from "../../common/MenuBar/MenuBar";
 
 // Api
 import myApi from "../../../api/myApi";
@@ -28,8 +28,6 @@ class ReviewPageOfTest extends React.Component {
       menuBar: null
     };
 
-    this.limitLengthOfQuestionContent = this.limitLengthOfQuestionContent.bind(this);
-    this.updateDimensions = this.updateDimensions.bind(this);
     this.giveReviewsAndScores = this.giveReviewsAndScores.bind(this);
     this.changeCurrentQA = this.changeCurrentQA.bind(this);
     this.navigateQA = this.navigateQA.bind(this);
@@ -58,17 +56,17 @@ class ReviewPageOfTest extends React.Component {
     return this.props.location.state === undefined ? true : false;
   }
 
-  limitLengthOfQuestionContent(currentQuestion) {
-    const limitedQuestionContent = customizeStringLength(currentQuestion, 115);
-    this.setState({ limitedQuestionContent });
-  }
-
   updateDimensions() {
     if (this._isMounted)
       if (window.innerWidth > 1200) {
         this.setState({ menuBar: null });
         this.setState({ isBigScreen: true });
       } else this.setState({ isBigScreen: false });
+  }
+
+  limitLengthOfQuestionContent(currentQuestion) {
+    const limitedQuestionContent = customizeStringLength(currentQuestion, 115);
+    this.setState({ limitedQuestionContent });
   }
 
   giveReviewsAndScores({ target }) {
@@ -85,16 +83,9 @@ class ReviewPageOfTest extends React.Component {
       const currentIndex = this.state.resultOfTest.answerList.findIndex(item => item.id === this.state.currentQA.id);
       const newIndex = currentIndex + step;
 
-      if (newIndex < 0) {
-        this.setState({ currentQA: this.state.resultOfTest.answerList[this.state.resultOfTest.answerList.length - 1] });
-        this.limitLengthOfQuestionContent(this.state.resultOfTest.answerList[this.state.resultOfTest.answerList.length - 1].questionContent);
-      } else if (newIndex >= this.state.resultOfTest.answerList.length) {
-        this.setState({ currentQA: this.state.resultOfTest.answerList[0] });
-        this.limitLengthOfQuestionContent(this.state.resultOfTest.answerList[0].questionContent);
-      } else {
-        this.setState({ currentQA: this.state.resultOfTest.answerList[newIndex] });
-        this.limitLengthOfQuestionContent(this.state.resultOfTest.answerList[newIndex].questionContent);
-      }
+      if (newIndex < 0) this.changeCurrentQA(this.state.resultOfTest.answerList.length - 1);
+      else if (newIndex >= this.state.resultOfTest.answerList.length) this.changeCurrentQA(0);
+      else this.changeCurrentQA(newIndex);
     }
   }
 
@@ -110,8 +101,8 @@ class ReviewPageOfTest extends React.Component {
       newData: this.state.resultOfTest
     }
 
+    // eslint-disable-next-line no-unused-vars
     const newData = await myApi().post("/admin/saveIntervieweeTestRecord", item).then(response => response.data);
-    console.log(newData);
     this.props.history.push(`/admin/interviewee/${this.props.match.params.id}-${this.props.match.params.fullname}`);
   }
 

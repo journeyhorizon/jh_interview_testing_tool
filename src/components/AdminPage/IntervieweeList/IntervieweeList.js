@@ -39,7 +39,12 @@ class IntervieweeList extends React.Component {
     const intervieweeList = await myApi().get("/admin/getAllInterviewee").then(response => response.data);
     const resultList = await myApi().get("/admin/getAllResult").then(response => response.data);
 
-    const fullDetailIntervieweeList = intervieweeList.map(eachInterviewee => {
+    const fullDetailIntervieweeList = this.customizeData(intervieweeList, resultList);
+    this.setState({ fullDetailIntervieweeList });
+  }
+
+  customizeData(intervieweeList, resultList) {
+    return intervieweeList.map(eachInterviewee => {
       const intervieweeResult = resultList.filter(item => item.intervieweeId === eachInterviewee.id)[0];
       if (intervieweeResult === undefined) {
         return { ...eachInterviewee, submitTime: "", isValid: false };
@@ -51,8 +56,6 @@ class IntervieweeList extends React.Component {
         }
       }
     });
-
-    this.setState({ fullDetailIntervieweeList });
   }
 
   render() {

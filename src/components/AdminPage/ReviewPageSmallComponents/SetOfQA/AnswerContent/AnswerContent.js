@@ -8,6 +8,17 @@ const QUESTION_TYPE = {
   MULTIPLE_CHOICES: "MULTIPLE_CHOICES"
 };
 
+class AnswerContent extends React.Component {
+  render() {
+    const currentQA = this.props.currentQA;
+
+    if (currentQA.type === QUESTION_TYPE.WH) return <AnswerContentOfWhQuestion currentQA={this.props.currentQA} />
+    else if (currentQA.type === QUESTION_TYPE.SINGLE_CHOICE) return <AnswerContentOfSingleChoiceQuestion currentQA={this.props.currentQA} />
+    else if (currentQA.type === QUESTION_TYPE.MULTIPLE_CHOICES) return <AnswerContentOfMultipleChoicesQuestion currentQA={this.props.currentQA} />
+    else return "";
+  }
+}
+
 function AnswerContentOfWhQuestion(props) {
   const currentQA = props.currentQA;
   return (
@@ -67,17 +78,6 @@ function AnswerContentOfMultipleChoicesQuestion(props) {
       })}
     </div>
   )
-}
-
-class AnswerContent extends React.Component {
-  render() {
-    const currentQA = this.props.currentQA;
-
-    if (currentQA.type === QUESTION_TYPE.WH) return <AnswerContentOfWhQuestion currentQA={this.props.currentQA} />
-    else if (currentQA.type === QUESTION_TYPE.SINGLE_CHOICE) return <AnswerContentOfSingleChoiceQuestion currentQA={this.props.currentQA} />
-    else if (currentQA.type === QUESTION_TYPE.MULTIPLE_CHOICES) return <AnswerContentOfMultipleChoicesQuestion currentQA={this.props.currentQA} />
-    else return ""
-  }
 }
 
 export default AnswerContent;
