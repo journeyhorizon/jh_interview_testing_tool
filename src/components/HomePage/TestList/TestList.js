@@ -14,7 +14,7 @@ import englishCategory from "../../../assets/testlist-category/englishCategory.p
 import completeCategory from "../../../assets/testlist-category/completeCategory.png";
 
 // ALIAS
-const CATEGORY_TYPE = {
+const TESTLIST_CATEGORY_TYPE = {
   LOGIC_TEST: "Logic Test",
   ENGLISH_TEST: "English Test",
   COMPLETE_NOTIFICATION: "Go!"
@@ -38,11 +38,11 @@ const TEST_RESULT = {
 function TestListCategory(props) {
   const imageSource = (type) => {
     switch (type) {
-      case CATEGORY_TYPE.LOGIC_TEST:
+      case TESTLIST_CATEGORY_TYPE.LOGIC_TEST:
         return logicCategory;
-      case CATEGORY_TYPE.ENGLISH_TEST:
+      case TESTLIST_CATEGORY_TYPE.ENGLISH_TEST:
         return englishCategory;
-      case CATEGORY_TYPE.COMPLETE_NOTIFICATION:
+      case TESTLIST_CATEGORY_TYPE.COMPLETE_NOTIFICATION:
         return completeCategory;
       default: return null;
     }
@@ -59,26 +59,24 @@ function TestListCategory(props) {
 class TestList extends React.Component {
   componentDidMount() {
     !localStorage.getItem("interviewee") && this.props.history.push("/");
-    // this.enableNavigationPrompt();
+
     this.updateStatusOfTestCompleted();
     this.randomizeTestAndCreateAnswerResultForSavingData();
 
     if (this.checkAllTestCompleted()) {
-      this.showCompleteCategory();
-      this.hideTestCategory();
+      this.showCompleteCategoryOfTestList();
+      this.hideTestCategoryOfTestList();
       this.mergeAllTestResult();
     }
-  }
-
-  enableNavigationPrompt() {
-    window.onbeforeunload = function () {
-      return true;
-    };
   }
 
   updateStatusOfTestCompleted() {
     localStorage.getItem(TEST_RESULT.LOGIC) && this.deactiveTestCategory("logicCategory");
     localStorage.getItem(TEST_RESULT.ENGLISH) && this.deactiveTestCategory("englishCategory");
+  }
+
+  deactiveTestCategory(categoryId) {
+    document.getElementById(categoryId).classList.add(css.deactivedCategory);
   }
 
   async randomizeTestAndCreateAnswerResultForSavingData() {
@@ -94,16 +92,18 @@ class TestList extends React.Component {
     else return false;
   }
 
-  showCompleteCategory() {
-    document.getElementById("completeCategory").classList.add(css.showedCategory);
-    document.getElementById("completeCategory").classList.remove(css.hideCategory);
+  showCompleteCategoryOfTestList() {
+    this.changeCategoryApperance("completeCategory", css.showedCategory, css.hideCategory);
   }
 
-  hideTestCategory() {
-    document.getElementById("logicCategory").classList.remove(css.showedCategory);
-    document.getElementById("logicCategory").classList.add(css.hideCategory);
-    document.getElementById("englishCategory").classList.remove(css.showedCategory);
-    document.getElementById("englishCategory").classList.add(css.hideCategory);
+  hideTestCategoryOfTestList() {
+    this.changeCategoryApperance("logicCategory", css.hideCategory, css.showedCategory);
+    this.changeCategoryApperance("englishCategory", css.hideCategory, css.showedCategory);
+  }
+
+  changeCategoryApperance(elementId, addClass, removeClass) {
+    document.getElementById(elementId).classList.add(addClass);
+    document.getElementById(elementId).classList.remove(removeClass);
   }
 
   async mergeAllTestResult() {
@@ -115,10 +115,6 @@ class TestList extends React.Component {
     const submitTime = new Date();
 
     localStorage.setItem("result", JSON.stringify({ id: resultLength, intervieweeId, submitTime, resultOfEnglishTest: englishtestResult, resultOfLogicTest: logicTestResult }));
-  }
-
-  deactiveTestCategory(categoryId) {
-    document.getElementById(categoryId).classList.add(css.deactivedCategory);
   }
 
   render() {
@@ -133,7 +129,7 @@ class TestList extends React.Component {
               testResult: TEST_RESULT.LOGIC
             }
           }}>
-            <TestListCategory type={CATEGORY_TYPE.LOGIC_TEST} />
+            <TestListCategory type={TESTLIST_CATEGORY_TYPE.LOGIC_TEST} />
           </Link>
           <Link id="englishCategory" className={`${css.link} ${css.showedCategory}`} to={{
             pathname: `/test/englishtest`,
@@ -141,13 +137,12 @@ class TestList extends React.Component {
               localStorageTestTypeName: LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH,
               testStartingTime: STARTING_TIME.ENGLISH,
               testResult: TEST_RESULT.ENGLISH
-
             }
           }}>
-            <TestListCategory type={CATEGORY_TYPE.ENGLISH_TEST} />
+            <TestListCategory type={TESTLIST_CATEGORY_TYPE.ENGLISH_TEST} />
           </Link>
           <Link id="completeCategory" className={`${css.link} ${css.hideCategory}`} to={`/complete`}>
-            <TestListCategory type={CATEGORY_TYPE.COMPLETE_NOTIFICATION} />
+            <TestListCategory type={TESTLIST_CATEGORY_TYPE.COMPLETE_NOTIFICATION} />
           </Link>
         </div>
       </div>

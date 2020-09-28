@@ -25,6 +25,7 @@ class Welcome extends React.Component {
       phone: "",
       warningNotification: ""
     }
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -40,6 +41,7 @@ class Welcome extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     if (this.state.fullname === "" || this.state.email === "" || this.state.phone === "") {
       this.changeDisplayOfElement("warningNotification", "flex");
       this.setState({ warningNotification: NOTIFICATION_FOR_LACK_OF_INFORMATION });
@@ -51,9 +53,7 @@ class Welcome extends React.Component {
 
       if (!regExpEmail.test(inputElementEmail.value) || !regExpPhone.test(inputElementPhone.value)) {
         this.handleInvalidInput(regExpEmail, inputElementEmail, regExpPhone, inputElementPhone);
-      } else {
-        this.handleValidInput();
-      }
+      } else this.handleValidInput();
     }
   }
 
@@ -65,11 +65,6 @@ class Welcome extends React.Component {
 
   changeDisplayOfElement(elementId, displayStatus) {
     document.getElementById(elementId).style.display = displayStatus;
-  }
-
-  modifyIsErrorInput(elementId, isError, specifiedClass) {
-    isError ? document.getElementById(elementId).classList.add(inputCss.inputError, specifiedClass)
-      : document.getElementById(elementId).classList.remove(inputCss.inputError, specifiedClass);
   }
 
   handleInvalidInput(regExpEmail, inputElementEmail, regExpPhone, inputElementPhone) {
@@ -95,6 +90,11 @@ class Welcome extends React.Component {
     const { warningNotification, ...intervieweeDetail } = this.state;
     localStorage.setItem("interviewee", JSON.stringify({ id: intervieweeLength, ...intervieweeDetail }));
     this.props.history.push("/testlist");
+  }
+
+  modifyIsErrorInput(elementId, isError, specifiedClass) {
+    isError ? document.getElementById(elementId).classList.add(inputCss.inputError, specifiedClass)
+      : document.getElementById(elementId).classList.remove(inputCss.inputError, specifiedClass);
   }
 
   render() {

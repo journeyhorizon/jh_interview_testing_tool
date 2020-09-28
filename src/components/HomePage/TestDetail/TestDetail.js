@@ -3,10 +3,10 @@ import * as css from "./TestDetail.module.scss";
 
 // Components
 import MobileNavbar from "../../common/MobileNavbar/MobileNavbar";
+import MenuBar from "../../common/MenuBar/MenuBar";
 import SetOfQA from "../TestDetailSmallComponents/SetOfQA/SetOfQA";
 import ControlPanel from "../TestDetailSmallComponents/ControlPanel/ControlPanel";
 import WarningNotification from "../TestDetailSmallComponents/WarningNotification/WarningNotification";
-import MenuBar from "../../common/MenuBar/MenuBar";
 
 
 // Utils
@@ -55,8 +55,7 @@ class TestDetail extends React.Component {
       isBigScreen: false,
       notificationWhenDeferSubmit: { isShow: false, message: "" }
     }
-    this.activateCountdownTimer = this.activateCountdownTimer.bind(this);
-    this.updateDimensions = this.updateDimensions.bind(this);
+
     this.showMenuBar = this.showMenuBar.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.changeCurrentQA = this.changeCurrentQA.bind(this);
@@ -125,12 +124,6 @@ class TestDetail extends React.Component {
     this.setState({ menuBar: !this.state.menuBar });
   }
 
-  updateNewDataForStateAndLocalStorage(newTestStorage, newCurrentQA) {
-    newCurrentQA && this.setState({ currentQA: newCurrentQA });
-    this.setState({ testStorage: newTestStorage });
-    localStorage.setItem(this.props.location.state.localStorageTestTypeName, JSON.stringify(newTestStorage));
-  }
-
   handleChange(event, questionType, isChecked) {
     const newCurrentQA = this.autoSaveCurrentQA(event.target.value, questionType, isChecked);
 
@@ -166,6 +159,12 @@ class TestDetail extends React.Component {
     }
   }
 
+  updateNewDataForStateAndLocalStorage(newTestStorage, newCurrentQA) {
+    newCurrentQA && this.setState({ currentQA: newCurrentQA });
+    this.setState({ testStorage: newTestStorage });
+    localStorage.setItem(this.props.location.state.localStorageTestTypeName, JSON.stringify(newTestStorage));
+  }
+
   changeCurrentQA(index) {
     this.setState({ currentQA: this.state.testStorage.answerList[index] });
   }
@@ -175,13 +174,9 @@ class TestDetail extends React.Component {
       const currentIndex = this.state.testStorage.answerList.findIndex(item => item.id === this.state.currentQA.id);
       const newIndex = currentIndex + step;
 
-      if (newIndex < 0) {
-        this.setState({ currentQA: this.state.testStorage.answerList[this.state.testStorage.answerList.length - 1] });
-      } else if (newIndex >= this.state.testStorage.answerList.length) {
-        this.setState({ currentQA: this.state.testStorage.answerList[0] });
-      } else {
-        this.setState({ currentQA: this.state.testStorage.answerList[newIndex] });
-      }
+      if (newIndex < 0) this.changeCurrentQA(this.state.testStorage.answerList.length - 1);
+      else if (newIndex >= this.state.testStorage.answerList.length) this.changeCurrentQA(0);
+      else this.changeCurrentQA(newIndex);
     }
   }
 
@@ -189,6 +184,79 @@ class TestDetail extends React.Component {
     if (this.state.currentMinutes === "00" && this.state.currentSeconds === "00")
       return true;
     else return false;
+  }
+
+  submitTest(isForceSubmit) {
+    switch (this.checkOutOfTimeAndFulfillAnswerList(isForceSubmit)) {
+      case STATUS_OF_SUBMIT.OUT_OF_TIME: {
+        this.submitTest(true);
+        break;
+      }
+      case STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST: {
+        this.showNotificationWhenDeferSubmit(STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST);
+        break;
+      }
+      case STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE: {
+        this.showNotificationWhenDeferSubmit(STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE);
+        break;
+      }
+      case STATUS_OF_SUBMIT.FORCE_SUBMIT: {
+        localStorage.setItem(this.props.location.state.testResult, true);
+        this.saveIntervieweeTestingRecord();
+        this.props.history.push("/testlist");
+        break;
+      }
+      default: console.log("Bug");
+    }
+  }
+
+  checkOutOfTimeAndFulfillAnswerList(isForceSubmit) {
+    const currentAnswerList = this.state.testStorage.answerList;
+
+    if (isForceSubmit) return STATUS_OF_SUBMIT.FORCE_SUBMIT;
+    else {
+      const isOutOfTime = this.state.currentMinutes === "00" ? this.state.currentSeconds === "00" ? true : false : false;
+      const isNotFulFill = () => {
+        if (this.props.location.pathname === PATHNAME.LOGIC)
+          return currentAnswerList.some(item => item.answerContent.length === 0);
+        if (this.props.location.pathname === PATHNAME.ENGLISH)
+          return currentAnswerList.some(item => item.answerContent === "");
+      }
+
+      if (isOutOfTime) return STATUS_OF_SUBMIT.OUT_OF_TIME;
+      else {
+        if (isNotFulFill()) return STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST;
+        else return STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE;
+      }
+    }
+  }
+
+  showNotificationWhenDeferSubmit(status, isNotShow) {
+    const newMessage = (status) => {
+      if (status === "") return NOTIFICATION_MESSAGE_FOR_DEFER_SUBMIT.NO_DISPLAY;
+      if (status === STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST) return NOTIFICATION_MESSAGE_FOR_DEFER_SUBMIT.NOT_FULFILL_ANSWER_LIST;
+      if (status === STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE) return NOTIFICATION_MESSAGE_FOR_DEFER_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE;
+    }
+
+    const newNotification = {
+      isShow: !isNotShow,
+      message: newMessage(status)
+    }
+
+    this.setState({ notificationWhenDeferSubmit: newNotification });
+  }
+
+  saveIntervieweeTestingRecord() {
+    const completeDurationTime = this.saveCompleteDurationTime();
+    const { newAnswerList, totalScore } = this.props.location.state.testResult === TEST_RESULT.LOGIC && this.scoresLogicQA();
+
+    const newTestStorage = this.props.location.state.testResult === TEST_RESULT.LOGIC ? { ...this.state.testStorage, answerList: newAnswerList, completeDurationTime, totalScore } : { ...this.state.testStorage, completeDurationTime };
+    this.updateNewDataForStateAndLocalStorage(newTestStorage);
+  }
+
+  saveCompleteDurationTime() {
+    if (this.isOutOfTime()) return this.state.testStorage.durationTime;
+    else return this.state.testStorage.durationTime - (parseInt(this.state.currentMinutes) * 60 + parseInt(this.state.currentSeconds));
   }
 
   scoresLogicQA() {
@@ -226,84 +294,8 @@ class TestDetail extends React.Component {
     return { newAnswerList, totalScore };
   }
 
-  saveCompleteDurationTime() {
-    if (this.isOutOfTime()) return this.state.testStorage.durationTime;
-    else return this.state.testStorage.durationTime - (parseInt(this.state.currentMinutes) * 60 + parseInt(this.state.currentSeconds));
-  }
-
-  checkOutOfTimeAndFulfillAnswerList(isForceSubmit) {
-    const currentAnswerList = this.state.testStorage.answerList;
-    console.log(isForceSubmit);
-    if (isForceSubmit) return STATUS_OF_SUBMIT.FORCE_SUBMIT;
-    else {
-      console.log("voo day");
-      const isOutOfTime = this.state.currentMinutes === "00" ? this.state.currentSeconds === "00" ? true : false : false;
-      const isNotFulFill = () => {
-        if (this.props.location.pathname === PATHNAME.LOGIC)
-          return currentAnswerList.some(item => item.answerContent.length === 0);
-        if (this.props.location.pathname === PATHNAME.ENGLISH)
-          return currentAnswerList.some(item => item.answerContent === "");
-      }
-
-      console.log(isOutOfTime, isNotFulFill());
-
-      if (isOutOfTime) return STATUS_OF_SUBMIT.OUT_OF_TIME;
-      else {
-        if (isNotFulFill()) return STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST;
-        else return STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE;
-      }
-    }
-  }
-
-  showNotificationWhenDeferSubmit(status, isNotShow) {
-    const newMessage = (status) => {
-      if (status === "") return NOTIFICATION_MESSAGE_FOR_DEFER_SUBMIT.NO_DISPLAY;
-      if (status === STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST) return NOTIFICATION_MESSAGE_FOR_DEFER_SUBMIT.NOT_FULFILL_ANSWER_LIST;
-      if (status === STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE) return NOTIFICATION_MESSAGE_FOR_DEFER_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE;
-    }
-
-    const newNotification = {
-      isShow: !isNotShow,
-      message: newMessage(status)
-    }
-
-    this.setState({ notificationWhenDeferSubmit: newNotification });
-  }
-
-  saveIntervieweeTestingRecord() {
-    const completeDurationTime = this.saveCompleteDurationTime();
-    const { newAnswerList, totalScore } = this.props.location.state.testResult === TEST_RESULT.LOGIC && this.scoresLogicQA();
-
-    const newTestStorage = this.props.location.state.testResult === TEST_RESULT.LOGIC ? { ...this.state.testStorage, answerList: newAnswerList, completeDurationTime, totalScore } : { ...this.state.testStorage, completeDurationTime };
-    this.updateNewDataForStateAndLocalStorage(newTestStorage);
-  }
-
-  submitTest(isForceSubmit) {
-    switch (this.checkOutOfTimeAndFulfillAnswerList(isForceSubmit)) {
-      case STATUS_OF_SUBMIT.OUT_OF_TIME: {
-        this.submitTest(true);
-        break;
-      }
-      case STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST: {
-        this.showNotificationWhenDeferSubmit(STATUS_OF_SUBMIT.NOT_FULFILL_ANSWER_LIST);
-        break;
-      }
-      case STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE: {
-        this.showNotificationWhenDeferSubmit(STATUS_OF_SUBMIT.FULFILL_ANSWER_LIST_BUT_TIME_STILL_AVAILABLE);
-        break;
-      }
-      case STATUS_OF_SUBMIT.FORCE_SUBMIT: {
-        localStorage.setItem(this.props.location.state.testResult, true);
-        this.saveIntervieweeTestingRecord();
-        this.props.history.push("/testlist");
-        break;
-      }
-      default: console.log("Bug");
-    }
-  }
-
   componentDidUpdate() {
-    this.isOutOfTime() && this.submitTest();
+    this.isOutOfTime() && this.submitTest(STATUS_OF_SUBMIT.OUT_OF_TIME);
   }
 
   componentWillUnmount() {
