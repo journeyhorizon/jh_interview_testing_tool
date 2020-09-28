@@ -70,7 +70,12 @@ class ReviewPageOfTest extends React.Component {
   }
 
   giveReviewsAndScores({ target }) {
-    this.setState({ resultOfTest: { ...this.state.resultOfTest, [target.name]: target.name === "totalScore" ? parseFloat(target.value) : target.value } });
+    const newValue = () => {
+      if (target.name === "totalScore") return target.value > 10 ? 10 : parseFloat(target.value)
+      else return target.value
+    }
+
+    this.setState({ resultOfTest: { ...this.state.resultOfTest, [target.name]: newValue() } });
   }
 
   changeCurrentQA(index) {
