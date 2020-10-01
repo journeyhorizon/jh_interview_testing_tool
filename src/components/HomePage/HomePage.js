@@ -10,25 +10,23 @@ import TestList from "./TestList/TestList";
 import TestDetail from "./TestDetail/TestDetail";
 import CompleteNotification from "./CompleteNotification/CompleteNotification";
 
-class HomePage extends React.Component {
-  render() {
-    return (
-      <>
-        <Header name="Interviewee" />
-        <div className={css.container}>
-          <Switch>
-            <Route exact path="/" component={Welcome} />
-            <Route exact path="/testlist" component={TestList} />
-            <Route exact path="/test/logictest" component={TestDetail} />
-            <Route exact path="/test/englishtest" component={TestDetail} />
-            <Route exact path="/complete" component={CompleteNotification} />
-            <Redirect to="/notfound" />
-          </Switch>
-        </div>
-        <Footer />
-      </>
-    )
-  }
+const HomePage = () => {
+  return (
+    <>
+      <Header name="Interviewee" />
+      <div className={css.container}>
+        <Switch>
+          <Route exact path="/" component={Welcome} />
+          <Route exact path="/testlist" component={TestList} />
+          <Route exact path="/test/logictest" component={TestDetail} />
+          <Route exact path="/test/englishtest" component={TestDetail} />
+          <Route exact path="/complete" component={CompleteNotification} />
+          <Redirect to="/notfound" />
+        </Switch>
+      </div>
+      <Footer />
+    </>
+  )
 }
 
 export default HomePage;

@@ -6,17 +6,15 @@ import HomePage from "./HomePage/HomePage";
 import AdminPage from "./AdminPage/AdminPage";
 import NotFoundPage from "./NotFoundPage/NotFoundPage";
 
-class App extends React.Component {
-  render() {
-    return (
-      <Switch>
-        <Route path="/adminnotfound" component={NotFoundPage} />
-        <Route path="/notfound" component={NotFoundPage} />
-        <Route path="/admin" component={AdminPage} />
-        <Route path="/" component={HomePage} />
-      </Switch>
-    )
-  }
+const App = () => {
+  return (
+    <Switch>
+      <Route path="/adminnotfound" component={NotFoundPage} />
+      <Route path="/notfound" component={NotFoundPage} />
+      <Route path="/admin" component={AdminPage} />
+      <Route path="/" component={HomePage} />
+    </Switch>
+  )
 }
 
 export default App;
