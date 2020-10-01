@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import * as css from "./TestList.module.scss";
 
@@ -35,7 +35,7 @@ const TEST_RESULT = {
   ENGLISH: "englishTestResult"
 }
 
-function TestListCategory(props) {
+const TestListCategory = (props) => {
   const imageSource = (type) => {
     switch (type) {
       case TESTLIST_CATEGORY_TYPE.LOGIC_TEST:
@@ -56,98 +56,125 @@ function TestListCategory(props) {
   )
 }
 
-class TestList extends React.Component {
-  componentDidMount() {
-    !localStorage.getItem("interviewee") && this.props.history.push("/");
+const TestList = (props) => {
+  const logicCategoryRef = useRef();
+  const englishCategoryRef = useRef();
+  const completeCategoryRef = useRef();
 
-    this.updateStatusOfTestCompleted();
-    this.randomizeTestAndCreateAnswerResultForSavingData();
+  useEffect(() => {
+    !localStorage.getItem("interviewee") && props.history.push("/");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-    if (this.checkAllTestCompleted()) {
-      this.showCompleteCategoryOfTestList();
-      this.hideTestCategoryOfTestList();
-      this.mergeAllTestResult();
+  useEffect(() => {
+    const updateStatusOfTestCompleted = () => {
+      localStorage.getItem(TEST_RESULT.LOGIC) && deactiveTestCategory(logicCategoryRef);
+      localStorage.getItem(TEST_RESULT.ENGLISH) && deactiveTestCategory(englishCategoryRef);
     }
-  }
 
-  updateStatusOfTestCompleted() {
-    localStorage.getItem(TEST_RESULT.LOGIC) && this.deactiveTestCategory("logicCategory");
-    localStorage.getItem(TEST_RESULT.ENGLISH) && this.deactiveTestCategory("englishCategory");
-  }
+    const deactiveTestCategory = (categoryRef) => {
+      categoryRef.current.classList.add(css.deactivedCategory);
+    }
 
-  deactiveTestCategory(categoryId) {
-    document.getElementById(categoryId).classList.add(css.deactivedCategory);
-  }
+    updateStatusOfTestCompleted();
+  }, [])
 
-  async randomizeTestAndCreateAnswerResultForSavingData() {
-    const logicTestData = await myApi().get("/interviewee/getListOfLogicTest", { params: { tableName: "logic-test" } }).then(response => response.data);
-    const englishTestData = await myApi().get("/interviewee/getListOfEnglishTest", { params: { tableName: "english-test" } }).then(response => response.data);
+  useEffect(() => {
+    const randomizeTestAndCreateAnswerResultForSavingData = async () => {
+      const logicTestData = await myApi().get(
+        "/interviewee/getListOfLogicTest",
+        { params: { tableName: "logic-test" } }
+      ).then(response => response.data);
 
-    !localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC) && randomizeTestAndSaveResult(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC, logicTestData);
-    !localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH) && randomizeTestAndSaveResult(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH, englishTestData);
-  }
+      const englishTestData = await myApi().get(
+        "/interviewee/getListOfEnglishTest",
+        { params: { tableName: "english-test" } }
+      ).then(response => response.data);
 
-  checkAllTestCompleted() {
-    if (localStorage.getItem(TEST_RESULT.LOGIC) && localStorage.getItem(TEST_RESULT.ENGLISH)) return true;
-    else return false;
-  }
+      !localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC)
+        && randomizeTestAndSaveResult(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC, logicTestData);
+      !localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH)
+        && randomizeTestAndSaveResult(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH, englishTestData);
+    }
 
-  showCompleteCategoryOfTestList() {
-    this.changeCategoryApperance("completeCategory", css.showedCategory, css.hideCategory);
-  }
+    randomizeTestAndCreateAnswerResultForSavingData();
+  }, [])
 
-  hideTestCategoryOfTestList() {
-    this.changeCategoryApperance("logicCategory", css.hideCategory, css.showedCategory);
-    this.changeCategoryApperance("englishCategory", css.hideCategory, css.showedCategory);
-  }
+  useEffect(() => {
+    const checkAllTestCompleted = () => {
+      if (localStorage.getItem(TEST_RESULT.LOGIC) && localStorage.getItem(TEST_RESULT.ENGLISH)) return true;
+      else return false;
+    }
 
-  changeCategoryApperance(elementId, addClass, removeClass) {
-    document.getElementById(elementId).classList.add(addClass);
-    document.getElementById(elementId).classList.remove(removeClass);
-  }
+    const showCompleteCategoryOfTestList = () => {
+      changeCategoryApperance(completeCategoryRef, css.showedCategory, css.hideCategory);
+    }
 
-  async mergeAllTestResult() {
-    const resultLength = await myApi().get("/interviewee/getLength", { params: { tableName: "result" } }).then(response => response.data);
-    const logicTestResult = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC));
-    const englishtestResult = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH));
+    const hideTestCategoryOfTestList = () => {
+      changeCategoryApperance(logicCategoryRef, css.hideCategory, css.showedCategory);
+      changeCategoryApperance(englishCategoryRef, css.hideCategory, css.showedCategory);
+    }
 
-    const intervieweeId = JSON.parse(localStorage.getItem("interviewee")).id;
-    const submitTime = new Date();
+    const changeCategoryApperance = (elementRef, addClass, removeClass) => {
+      elementRef.current.classList.add(addClass);
+      elementRef.current.classList.remove(removeClass);
+    }
 
-    localStorage.setItem("result", JSON.stringify({ id: resultLength, intervieweeId, submitTime, resultOfEnglishTest: englishtestResult, resultOfLogicTest: logicTestResult }));
-  }
+    const mergeAllTestResult = async () => {
+      const resultLength = await myApi().get("/interviewee/getLength", { params: { tableName: "result" } })
+        .then(response => response.data);
+      const logicTestResult = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC));
+      const englishtestResult = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH));
 
-  render() {
-    return (
-      <div className={css.container}>
-        <div className={css.categoryList}>
-          <Link id="logicCategory" className={`${css.link} ${css.showedCategory}`} to={{
-            pathname: `/test/logictest`,
-            state: {
-              localStorageTestTypeName: LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC,
-              testStartingTime: STARTING_TIME.LOGIC,
-              testResult: TEST_RESULT.LOGIC
-            }
-          }}>
-            <TestListCategory type={TESTLIST_CATEGORY_TYPE.LOGIC_TEST} />
-          </Link>
-          <Link id="englishCategory" className={`${css.link} ${css.showedCategory}`} to={{
-            pathname: `/test/englishtest`,
-            state: {
-              localStorageTestTypeName: LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH,
-              testStartingTime: STARTING_TIME.ENGLISH,
-              testResult: TEST_RESULT.ENGLISH
-            }
-          }}>
-            <TestListCategory type={TESTLIST_CATEGORY_TYPE.ENGLISH_TEST} />
-          </Link>
-          <Link id="completeCategory" className={`${css.link} ${css.hideCategory}`} to={`/complete`}>
-            <TestListCategory type={TESTLIST_CATEGORY_TYPE.COMPLETE_NOTIFICATION} />
-          </Link>
-        </div>
+      const intervieweeId = JSON.parse(localStorage.getItem("interviewee")).id;
+      const submitTime = new Date();
+
+      localStorage.setItem("result", JSON.stringify({
+        id: resultLength,
+        intervieweeId,
+        submitTime,
+        resultOfEnglishTest:
+          englishtestResult,
+        resultOfLogicTest: logicTestResult
+      }));
+    }
+
+    if (checkAllTestCompleted()) {
+      showCompleteCategoryOfTestList();
+      hideTestCategoryOfTestList();
+      mergeAllTestResult();
+    }
+  }, [])
+
+  return (
+    <div className={css.container}>
+      <div className={css.categoryList}>
+        <Link ref={logicCategoryRef} className={`${css.link} ${css.showedCategory}`} to={{
+          pathname: `/test/logictest`,
+          state: {
+            localStorageTestTypeName: LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC,
+            testStartingTime: STARTING_TIME.LOGIC,
+            testResult: TEST_RESULT.LOGIC
+          }
+        }}>
+          <TestListCategory type={TESTLIST_CATEGORY_TYPE.LOGIC_TEST} />
+        </Link>
+        <Link ref={englishCategoryRef} className={`${css.link} ${css.showedCategory}`} to={{
+          pathname: `/test/englishtest`,
+          state: {
+            localStorageTestTypeName: LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH,
+            testStartingTime: STARTING_TIME.ENGLISH,
+            testResult: TEST_RESULT.ENGLISH
+          }
+        }}>
+          <TestListCategory type={TESTLIST_CATEGORY_TYPE.ENGLISH_TEST} />
+        </Link>
+        <Link ref={completeCategoryRef} className={`${css.link} ${css.hideCategory}`} to={`/complete`}>
+          <TestListCategory type={TESTLIST_CATEGORY_TYPE.COMPLETE_NOTIFICATION} />
+        </Link>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default TestList;

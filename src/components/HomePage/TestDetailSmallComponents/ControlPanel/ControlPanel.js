@@ -6,24 +6,22 @@ import ControlPanelHandleButton from "../../../common/ControlPanelHandleButton/C
 import CountdownTimer from "./CountdownTimer/CountdownTimer";
 import ListQuestion from "./ListQuestion/ListQuestion";
 
-class ControlPanel extends React.Component {
-  render() {
-    return (
-      <div className={css.controlPanel}>
-        <CountdownTimer
-          currentMinutes={this.props.currentMinutes}
-          currentSeconds={this.props.currentSeconds}
-        />
-        <ListQuestion
-          testStorage={this.props.testStorage}
-          currentQA={this.props.currentQA}
-          changeCurrentQA={this.props.changeCurrentQA}
-          isBigScreen={this.props.isBigScreen}
-        />
-        <ControlPanelHandleButton handleClick={this.props.handleSubmit} typeOfHandleButton="Submit test" />
-      </div>
-    )
-  }
+const ControlPanel = (props) => {
+  return (
+    <div className={css.controlPanel}>
+      <CountdownTimer
+        currentMinutes={props.currentMinutes}
+        currentSeconds={props.currentSeconds}
+      />
+      <ListQuestion
+        testStorage={props.testStorage}
+        currentQA={props.currentQA}
+        changeCurrentQA={props.changeCurrentQA}
+        isBigScreen={props.isBigScreen}
+      />
+      <ControlPanelHandleButton handleClick={props.handleSubmit} typeOfHandleButton="Submit test" />
+    </div>
+  )
 }
 
 export default ControlPanel;

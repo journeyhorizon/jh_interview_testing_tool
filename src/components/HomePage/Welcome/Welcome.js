@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as css from "./Welcome.module.scss";
 import * as inputCss from "./WelcomeFormInput/WelcomeFormInput.module.scss";
 
@@ -12,132 +12,145 @@ import myApi from "../../../api/myApi";
 import logoColor from "../../../assets/logo-color.png";
 
 // ALIAS
-const NOTIFICATION_FOR_LACK_OF_INFORMATION = "Please enter all fields";
-const NOTIFICATION_FOR_INVALID_INPUT = "Input is on invalid form";
+const NOTIFICATION = {
+  LACK_OF_INFORMATION: "Please enter all fields",
+  INVALID_INPUT: "Input is on invalid form",
+  VALID_INPUT: ""
+};
 
-class Welcome extends React.Component {
-  constructor() {
-    super();
+const useFormInput = (initialValue) => {
+  const [value, setValue] = useState(initialValue);
 
-    this.state = {
-      fullname: "",
-      email: "",
-      phone: "",
-      warningNotification: ""
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  }
+
+  return { value, handleChange };
+}
+
+const Welcome = (props) => {
+  const fullname = useFormInput("");
+  const email = useFormInput("");
+  const phone = useFormInput("");
+  const [warningNotification, setWarningNotification] = useState("");
+
+  const emailInputRef = useRef();
+  const phoneInputRef = useRef();
+  const notificationRef = useRef();
+  const goButtonRef = useRef();
+
+  useEffect(() => {
+    localStorage.getItem("interviewee") && props.history.push("/testlist");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    const checkFulfillInputFormForShowingButton = () => {
+      if (fullname.value !== "" && email.value !== "" && phone.value !== "")
+        changeDisplayOfElement(goButtonRef, "block");
+      else changeDisplayOfElement(goButtonRef, "none");
     }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+    checkFulfillInputFormForShowingButton();
+  }, [fullname.value, email.value, phone.value])
 
-  componentDidMount() {
-    localStorage.getItem("interviewee") && this.props.history.push("/testlist");
-  }
-
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-    this.checkFulfillInputFormForShowingButton();
-  }
-
-  handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (this.state.fullname === "" || this.state.email === "" || this.state.phone === "") {
-      this.changeDisplayOfElement("warningNotification", "flex");
-      this.setState({ warningNotification: NOTIFICATION_FOR_LACK_OF_INFORMATION });
+    if (fullname.value === "" || email.value === "" || phone.value === "") {
+      changeDisplayOfElement(notificationRef, "flex");
+      setWarningNotification(NOTIFICATION.LACK_OF_INFORMATION);
     } else {
-      const inputElementEmail = document.getElementById("intervieweeEmail");
-      const inputElementPhone = document.getElementById("intervieweePhone");
-      const regExpEmail = new RegExp(inputElementEmail.getAttribute("pattern"));
-      const regExpPhone = new RegExp(inputElementPhone.getAttribute("pattern"));
+      const regExpEmail = new RegExp(emailInputRef.current.pattern);
+      const regExpPhone = new RegExp(phoneInputRef.current.pattern);
 
-      if (!regExpEmail.test(inputElementEmail.value) || !regExpPhone.test(inputElementPhone.value)) {
-        this.handleInvalidInput(regExpEmail, inputElementEmail, regExpPhone, inputElementPhone);
-      } else this.handleValidInput();
+      if (!regExpEmail.test(emailInputRef.current.value) || !regExpPhone.test(phoneInputRef.current.value)) {
+        handleInvalidInput(regExpEmail, regExpPhone);
+      } else handleValidInput();
     }
   }
 
-  checkFulfillInputFormForShowingButton() {
-    if (this.state.fullname !== "" && this.state.email !== "" && this.state.phone !== "")
-      this.changeDisplayOfElement("goButton", "block");
-    else this.changeDisplayOfElement("goButton", "none");
+  const changeDisplayOfElement = (elementRef, displayStatus) => {
+    elementRef.current.style.display = displayStatus;
   }
 
-  changeDisplayOfElement(elementId, displayStatus) {
-    document.getElementById(elementId).style.display = displayStatus;
+  const handleInvalidInput = (regExpEmail, regExpPhone) => {
+    changeDisplayOfElement(notificationRef, "flex");
+    setWarningNotification(NOTIFICATION.INVALID_INPUT);
+
+    if (!regExpEmail.test(emailInputRef.current.value))
+      modifyIsErrorInput(emailInputRef, true, inputCss.inputEmailError);
+    else modifyIsErrorInput(emailInputRef, false, inputCss.inputEmailError);
+
+    if (!regExpPhone.test(phoneInputRef.current.value))
+      modifyIsErrorInput(phoneInputRef, true, inputCss.inputPhoneError);
+    else modifyIsErrorInput(phoneInputRef, false, inputCss.inputPhoneError);
   }
 
-  handleInvalidInput(regExpEmail, inputElementEmail, regExpPhone, inputElementPhone) {
-    this.changeDisplayOfElement("warningNotification", "flex");
-    this.setState({ warningNotification: NOTIFICATION_FOR_INVALID_INPUT });
+  const handleValidInput = async () => {
+    modifyIsErrorInput(emailInputRef, false, inputCss.inputEmailError);
+    modifyIsErrorInput(phoneInputRef, false, inputCss.inputPhoneError);
+    changeDisplayOfElement(notificationRef, "none");
+    setWarningNotification(NOTIFICATION.VALID_INPUT);
 
-    if (!regExpEmail.test(inputElementEmail.value))
-      this.modifyIsErrorInput("intervieweeEmail", true, inputCss.inputEmailError);
-    else this.modifyIsErrorInput("intervieweeEmail", false, inputCss.inputEmailError);
+    const intervieweeLength = await myApi().get(
+      "/interviewee/getLength",
+      { params: { tableName: "interviewee" } })
+      .then(response => response.data);
 
-    if (!regExpPhone.test(inputElementPhone.value))
-      this.modifyIsErrorInput("intervieweePhone", true, inputCss.inputPhoneError);
-    else this.modifyIsErrorInput("intervieweePhone", false, inputCss.inputPhoneError);
-  }
+    const intervieweeDetail = {
+      fullname: fullname.value,
+      email: email.value,
+      phone: phone.value
+    };
 
-  async handleValidInput() {
-    this.modifyIsErrorInput("intervieweeEmail", false, inputCss.inputEmailError);
-    this.modifyIsErrorInput("intervieweePhone", false, inputCss.inputPhoneError);
-    this.changeDisplayOfElement("warningNotification", "none");
-    this.setState({ warningNotification: "" });
-
-    const intervieweeLength = await myApi().get("/interviewee/getLength", { params: { tableName: "interviewee" } }).then(response => response.data);
-    const { warningNotification, ...intervieweeDetail } = this.state;
     localStorage.setItem("interviewee", JSON.stringify({ id: intervieweeLength, ...intervieweeDetail }));
-    this.props.history.push("/testlist");
+    props.history.push("/testlist");
   }
 
-  modifyIsErrorInput(elementId, isError, specifiedClass) {
-    isError ? document.getElementById(elementId).classList.add(inputCss.inputError, specifiedClass)
-      : document.getElementById(elementId).classList.remove(inputCss.inputError, specifiedClass);
+  const modifyIsErrorInput = (elementRef, isError, specifiedClass) => {
+    isError ? elementRef.current.classList.add(inputCss.inputError, specifiedClass)
+      : elementRef.current.classList.remove(inputCss.inputError, specifiedClass);
   }
 
-  render() {
-    return (
-      <div className={css.container}>
-        <img className={css.titleImage} src={logoColor} alt="logo-company" />
-        <p className={css.description}>Type your basic information below</p>
-        <form className={css.intervieweeInformationForm}>
-          <WelcomeFormInput
-            id="intervieweeFullname"
-            class={inputCss.inputFullname}
-            type="text"
-            name="fullname"
-            placeholder="Fullname"
-            value={this.state.fullname}
-            onChange={this.handleChange}
-          />
-          <WelcomeFormInput
-            id="intervieweeEmail"
-            class={inputCss.inputEmail}
-            type="text"
-            name="email"
-            placeholder="Email"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-          <WelcomeFormInput
-            id="intervieweePhone"
-            class={inputCss.inputPhone}
-            type="tel"
-            name="phone"
-            placeholder="Phone"
-            pattern="^[0-9]{10}$"
-            value={this.state.phone}
-            onChange={this.handleChange}
-          />
-          <div id="warningNotification" className={css.notification}>{this.state.warningNotification}</div>
-          <button id="goButton" className={css.formButton} onClick={this.handleSubmit}>Go!</button>
-        </form>
-      </div>
-    )
-  }
+  return (
+    <div className={css.container}>
+      <img className={css.titleImage} src={logoColor} alt="logo-company" />
+      <p className={css.description}>Type your basic information below</p>
+      <form className={css.intervieweeInformationForm}>
+        <WelcomeFormInput
+          id="intervieweeFullname"
+          class={inputCss.inputFullname}
+          type="text"
+          name="fullname"
+          placeholder="Fullname"
+          {...fullname}
+        />
+        <WelcomeFormInput
+          id="intervieweeEmail"
+          class={inputCss.inputEmail}
+          type="text"
+          name="email"
+          placeholder="Email"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          inputRef={emailInputRef}
+          {...email}
+        />
+        <WelcomeFormInput
+          id="intervieweePhone"
+          class={inputCss.inputPhone}
+          type="tel"
+          name="phone"
+          placeholder="Phone"
+          pattern="^[0-9]{10}$"
+          inputRef={phoneInputRef}
+          {...phone}
+        />
+        <div ref={notificationRef} className={css.notification}>{warningNotification}</div>
+        <button ref={goButtonRef} className={css.formButton} onClick={handleSubmit}>Go!</button>
+      </form>
+    </div>
+  )
 }
 
 export default Welcome;

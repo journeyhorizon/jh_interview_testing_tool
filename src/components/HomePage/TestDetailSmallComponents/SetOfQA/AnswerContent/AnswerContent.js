@@ -8,19 +8,19 @@ const QUESTION_TYPE = {
   MULTIPLE_CHOICES: "MULTIPLE_CHOICES"
 };
 
-class AnswerContent extends React.Component {
-  render() {
-    const currentQA = this.props.currentQA;
-
-    if (currentQA.type === QUESTION_TYPE.WH) return <AnswerContentOfWhQuestion currentQA={this.props.currentQA} handleChange={this.props.handleChange} />
-    else if (currentQA.type === QUESTION_TYPE.SINGLE_CHOICE) return <AnswerContentOfSingleChoiceQuestion currentQA={this.props.currentQA} handleChange={this.props.handleChange} />
-    else if (currentQA.type === QUESTION_TYPE.MULTIPLE_CHOICES) return <AnswerContentOfMultipleChoicesQuestion currentQA={this.props.currentQA} handleChange={this.props.handleChange} />
-    else return ""
-  }
+const AnswerContent = (props) => {
+  if (props.currentQA.type === QUESTION_TYPE.WH)
+    return <AnswerContentOfWhQuestion currentQA={props.currentQA} handleChange={props.handleChange} />
+  else if (props.currentQA.type === QUESTION_TYPE.SINGLE_CHOICE)
+    return <AnswerContentOfSingleChoiceQuestion currentQA={props.currentQA} handleChange={props.handleChange} />
+  else if (props.currentQA.type === QUESTION_TYPE.MULTIPLE_CHOICES)
+    return <AnswerContentOfMultipleChoicesQuestion currentQA={props.currentQA} handleChange={props.handleChange} />
+  else return "";
 }
 
-function AnswerContentOfWhQuestion(props) {
+const AnswerContentOfWhQuestion = (props) => {
   const currentQA = props.currentQA;
+
   return (
     <div className={css.currentAnswer}>
       <textarea name="answerContent" value={currentQA.answerContent} onChange={(e) => props.handleChange(e, QUESTION_TYPE.WH)} />
@@ -28,8 +28,9 @@ function AnswerContentOfWhQuestion(props) {
   )
 }
 
-function AnswerContentOfSingleChoiceQuestion(props) {
+const AnswerContentOfSingleChoiceQuestion = (props) => {
   const currentQA = props.currentQA;
+
   return (
     <div className={css.currentAnswer}>
       {currentQA.choices.map((result, index) => (
@@ -51,8 +52,9 @@ function AnswerContentOfSingleChoiceQuestion(props) {
   )
 }
 
-function AnswerContentOfMultipleChoicesQuestion(props) {
+const AnswerContentOfMultipleChoicesQuestion = (props) => {
   const currentQA = props.currentQA;
+
   return (
     <div className={css.currentAnswer}>
       {currentQA.choices.map((result, index) => {
