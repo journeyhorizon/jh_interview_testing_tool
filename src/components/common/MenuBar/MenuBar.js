@@ -7,7 +7,7 @@ import ControlPanelHandleButton from "../ControlPanelHandleButton/ControlPanelHa
 import CountdownTimer from "../../HomePage/TestDetailSmallComponents/ControlPanel/CountdownTimer/CountdownTimer";
 import ListQuestion from "../../HomePage/TestDetailSmallComponents/ControlPanel/ListQuestion/ListQuestion";
 
-function AdminMenuBar(props) {
+const AdminMenuBar = (props) => {
   const detailInterviewee = props.detailInterviewee;
 
   return detailInterviewee === undefined ? "" : (
@@ -33,7 +33,7 @@ function AdminMenuBar(props) {
   )
 }
 
-function HomeMenuBar(props) {
+const HomeMenuBar = (props) => {
   return (
     <div className={`${css.container} ${props.isBigScreen ? "" : props.isShow === null ? "" : props.isShow ? css.showMenuBar : css.hideMenuBar}`}>
       <CountdownTimer
@@ -54,34 +54,33 @@ function HomeMenuBar(props) {
   )
 }
 
-class MenuBar extends React.Component {
-  render() {
-    if (this.props.isAdmin)
-      return (
-        <AdminMenuBar
-          detailInterviewee={this.props.detailInterviewee}
-          isBigScreen={this.props.isBigScreen}
-          isShow={this.props.isShow}
-          resultOfTest={this.props.resultOfTest}
-          currentQA={this.props.currentQA}
-          showMenuBar={this.props.showMenuBar}
-          changeCurrentQA={this.props.changeCurrentQA}
-        />
-      );
-    else return (
-      <HomeMenuBar
-        isBigScreen={this.props.isBigScreen}
-        isShow={this.props.isShow}
-        currentQA={this.props.currentQA}
-        testStorage={this.props.testStorage}
-        currentMinutes={this.props.currentMinutes}
-        currentSeconds={this.props.currentSeconds}
-        changeCurrentQA={this.props.changeCurrentQA}
-        showMenuBar={this.props.showMenuBar}
-        handleSubmit={this.props.handleSubmit}
+const MenuBar = (props) => {
+  if (props.isAdmin)
+    return (
+      <AdminMenuBar
+        detailInterviewee={props.detailInterviewee}
+        isBigScreen={props.isBigScreen}
+        isShow={props.isShow}
+        resultOfTest={props.resultOfTest}
+        currentQA={props.currentQA}
+        showMenuBar={props.showMenuBar}
+        changeCurrentQA={props.changeCurrentQA}
       />
-    )
-  }
+    );
+  else return (
+    <HomeMenuBar
+      isBigScreen={props.isBigScreen}
+      isShow={props.isShow}
+      currentQA={props.currentQA}
+      testStorage={props.testStorage}
+      currentMinutes={props.currentMinutes}
+      currentSeconds={props.currentSeconds}
+      changeCurrentQA={props.changeCurrentQA}
+      showMenuBar={props.showMenuBar}
+      handleSubmit={props.handleSubmit}
+    />
+  )
 }
+
 
 export default MenuBar;
