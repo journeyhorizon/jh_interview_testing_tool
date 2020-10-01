@@ -36,16 +36,8 @@ const AdminMenuBar = (props) => {
 const HomeMenuBar = (props) => {
   return (
     <div className={`${css.container} ${props.isBigScreen ? "" : props.isShow === null ? "" : props.isShow ? css.showMenuBar : css.hideMenuBar}`}>
-      <CountdownTimer
-        currentMinutes={props.currentMinutes}
-        currentSeconds={props.currentSeconds}
-      />
-      <ListQuestion
-        testStorage={props.testStorage}
-        currentQA={props.currentQA}
-        changeCurrentQA={props.changeCurrentQA}
-        showMenuBar={props.showMenuBar}
-      />
+      <CountdownTimer />
+      <ListQuestion />
       <div className={css.buttonGroup}>
         <ControlPanelHandleButton handleClick={props.showMenuBar} typeOfHandleButton="Close" />
         <ControlPanelHandleButton handleClick={props.handleSubmit} typeOfHandleButton="Submit test" />
@@ -71,11 +63,6 @@ const MenuBar = (props) => {
     <HomeMenuBar
       isBigScreen={props.isBigScreen}
       isShow={props.isShow}
-      currentQA={props.currentQA}
-      testStorage={props.testStorage}
-      currentMinutes={props.currentMinutes}
-      currentSeconds={props.currentSeconds}
-      changeCurrentQA={props.changeCurrentQA}
       showMenuBar={props.showMenuBar}
       handleSubmit={props.handleSubmit}
     />

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as css from "./AnswerContent.module.scss";
+
+// Context
+import AdminContext from "../../../../../context/AdminContext";
 
 // ALIAS
 const QUESTION_TYPE = {
@@ -8,17 +11,17 @@ const QUESTION_TYPE = {
   MULTIPLE_CHOICES: "MULTIPLE_CHOICES"
 };
 
-const AnswerContent = (props) => {
-  const currentQA = props.currentQA;
+const AnswerContent = () => {
+  const currentQA = useContext(AdminContext);
 
-  if (currentQA.type === QUESTION_TYPE.WH) return <AnswerContentOfWhQuestion currentQA={currentQA} />
-  else if (currentQA.type === QUESTION_TYPE.SINGLE_CHOICE) return <AnswerContentOfSingleChoiceQuestion currentQA={currentQA} />
-  else if (currentQA.type === QUESTION_TYPE.MULTIPLE_CHOICES) return <AnswerContentOfMultipleChoicesQuestion currentQA={currentQA} />
+  if (currentQA.type === QUESTION_TYPE.WH) return <AnswerContentOfWhQuestion />
+  else if (currentQA.type === QUESTION_TYPE.SINGLE_CHOICE) return <AnswerContentOfSingleChoiceQuestion />
+  else if (currentQA.type === QUESTION_TYPE.MULTIPLE_CHOICES) return <AnswerContentOfMultipleChoicesQuestion />
   else return "";
 }
 
-const AnswerContentOfWhQuestion = (props) => {
-  const currentQA = props.currentQA;
+const AnswerContentOfWhQuestion = () => {
+  const currentQA = useContext(AdminContext);
 
   return (
     <div className={css.currentAnswer}>
@@ -27,8 +30,8 @@ const AnswerContentOfWhQuestion = (props) => {
   )
 }
 
-const AnswerContentOfSingleChoiceQuestion = (props) => {
-  const currentQA = props.currentQA;
+const AnswerContentOfSingleChoiceQuestion = () => {
+  const currentQA = useContext(AdminContext);
 
   return (
     <div className={css.currentAnswer}>
@@ -65,8 +68,8 @@ const AnswerContentOfSingleChoiceQuestion = (props) => {
   )
 }
 
-const AnswerContentOfMultipleChoicesQuestion = (props) => {
-  const currentQA = props.currentQA;
+const AnswerContentOfMultipleChoicesQuestion = () => {
+  const currentQA = useContext(AdminContext);
 
   return (
     <div className={css.currentAnswer}>

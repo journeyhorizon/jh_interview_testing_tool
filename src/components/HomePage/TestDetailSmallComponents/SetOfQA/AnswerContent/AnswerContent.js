@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as css from "./AnswerContent.module.scss";
+
+// Context
+import HomeContext from "../../../../../context/HomeContext";
 
 // ALIAS
 const QUESTION_TYPE = {
@@ -8,28 +11,30 @@ const QUESTION_TYPE = {
   MULTIPLE_CHOICES: "MULTIPLE_CHOICES"
 };
 
-const AnswerContent = (props) => {
-  if (props.currentQA.type === QUESTION_TYPE.WH)
-    return <AnswerContentOfWhQuestion currentQA={props.currentQA} handleChange={props.handleChange} />
-  else if (props.currentQA.type === QUESTION_TYPE.SINGLE_CHOICE)
-    return <AnswerContentOfSingleChoiceQuestion currentQA={props.currentQA} handleChange={props.handleChange} />
-  else if (props.currentQA.type === QUESTION_TYPE.MULTIPLE_CHOICES)
-    return <AnswerContentOfMultipleChoicesQuestion currentQA={props.currentQA} handleChange={props.handleChange} />
+const AnswerContent = () => {
+  const { currentQA } = useContext(HomeContext);
+
+  if (currentQA.type === QUESTION_TYPE.WH)
+    return <AnswerContentOfWhQuestion />
+  else if (currentQA.type === QUESTION_TYPE.SINGLE_CHOICE)
+    return <AnswerContentOfSingleChoiceQuestion />
+  else if (currentQA.type === QUESTION_TYPE.MULTIPLE_CHOICES)
+    return <AnswerContentOfMultipleChoicesQuestion />
   else return "";
 }
 
-const AnswerContentOfWhQuestion = (props) => {
-  const currentQA = props.currentQA;
+const AnswerContentOfWhQuestion = () => {
+  const { currentQA, handleChange } = useContext(HomeContext);
 
   return (
     <div className={css.currentAnswer}>
-      <textarea name="answerContent" value={currentQA.answerContent} onChange={(e) => props.handleChange(e, QUESTION_TYPE.WH)} />
+      <textarea name="answerContent" value={currentQA.answerContent} onChange={(e) => handleChange(e, QUESTION_TYPE.WH)} />
     </div>
   )
 }
 
 const AnswerContentOfSingleChoiceQuestion = (props) => {
-  const currentQA = props.currentQA;
+  const { currentQA, handleChange } = useContext(HomeContext);
 
   return (
     <div className={css.currentAnswer}>
@@ -40,7 +45,7 @@ const AnswerContentOfSingleChoiceQuestion = (props) => {
             name="answerContent"
             id={`answerChoice${currentQA.id}${index}`}
             value={result.answerId}
-            onChange={(e) => props.handleChange(e, QUESTION_TYPE.SINGLE_CHOICE, result.answerId)}
+            onChange={(e) => handleChange(e, QUESTION_TYPE.SINGLE_CHOICE, result.answerId)}
             checked={currentQA.answerContent[0] === result.answerId}
           />
           <label htmlFor={`answerChoice${currentQA.id}${index}`}>
@@ -53,7 +58,7 @@ const AnswerContentOfSingleChoiceQuestion = (props) => {
 }
 
 const AnswerContentOfMultipleChoicesQuestion = (props) => {
-  const currentQA = props.currentQA;
+  const { currentQA, handleChange } = useContext(HomeContext);
 
   return (
     <div className={css.currentAnswer}>
@@ -67,7 +72,7 @@ const AnswerContentOfMultipleChoicesQuestion = (props) => {
               name="answerContent"
               id={`answerChoice${currentQA.id}${index}`}
               value={result.answerId}
-              onChange={(e) => props.handleChange(e, QUESTION_TYPE.MULTIPLE_CHOICES, isExist)}
+              onChange={(e) => handleChange(e, QUESTION_TYPE.MULTIPLE_CHOICES, isExist)}
               checked={isExist}
             />
             <label htmlFor={`answerChoice${currentQA.id}${index}`}>

@@ -8,9 +8,11 @@ import SetOfQA from "../TestDetailSmallComponents/SetOfQA/SetOfQA";
 import ControlPanel from "../TestDetailSmallComponents/ControlPanel/ControlPanel";
 import WarningNotification from "../TestDetailSmallComponents/WarningNotification/WarningNotification";
 
-
 // Utils
 import { countdownTimer } from "../../../utils/countdownTimer";
+
+// Context
+import HomeContext from "../../../context/HomeContext";
 
 // ALIAS
 const TEST_RESULT = {
@@ -312,7 +314,16 @@ const TestDetail = (props) => {
   }
 
   return (
-    <>
+    <HomeContext.Provider value={{
+      currentSeconds,
+      currentMinutes,
+      currentQA,
+      testStorage,
+      isBigScreen,
+      showMenuBar,
+      handleChange,
+      changeCurrentQA
+    }}>
       <div className={css.container}>
         <div className={css.smallContainer}>
           <MobileNavbar
@@ -320,11 +331,7 @@ const TestDetail = (props) => {
             storage={testStorage}
             showMenuBar={showMenuBar}
           />
-          <SetOfQA
-            currentQA={currentQA}
-            handleChange={handleChange}
-            navigateQA={navigateQA}
-          />
+          <SetOfQA navigateQA={navigateQA} />
           <ControlPanel
             currentMinutes={currentMinutes}
             currentSeconds={currentSeconds}
@@ -352,7 +359,7 @@ const TestDetail = (props) => {
         showNotificationWhenDeferSubmit={showNotificationWhenDeferSubmit}
         submitTest={submitTest}
       />
-    </>
+    </HomeContext.Provider>
   )
 }
 export default TestDetail;

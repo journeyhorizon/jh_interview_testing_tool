@@ -15,6 +15,9 @@ import myApi from "../../../api/myApi";
 // Utils
 import { customizeStringLength } from "../../../utils/customizeStringLength";
 
+// Context
+import AdminContext from "../../../context/AdminContext";
+
 const ReviewPageOfTest = (props) => {
   const [resultOfTest, setResultOfTest] = useState({});
   const [currentQA, setCurrentQA] = useState({});
@@ -119,42 +122,43 @@ const ReviewPageOfTest = (props) => {
   const detailInterviewee = props.location.state;
 
   return (
-    <div className={css.container}>
-      <Breadcrumb detailInterviewee={detailInterviewee} />
-      <div className={css.smallContainer}>
-        <MobileNavbar
-          showMenuBar={showMenuBar}
-          currentQA={currentQA}
-          storage={resultOfTest}
-        />
-        <SetOfQA
+    <AdminContext.Provider value={currentQA}>
+      <div className={css.container}>
+        <Breadcrumb detailInterviewee={detailInterviewee} />
+        <div className={css.smallContainer}>
+          <MobileNavbar
+            showMenuBar={showMenuBar}
+            currentQA={currentQA}
+            storage={resultOfTest}
+          />
+          <SetOfQA
+            isBigScreen={isBigScreen}
+            limitedQuestionContent={limitedQuestionContent}
+            navigateQA={navigateQA}
+          />
+          <ControlPanel
+            resultOfTest={resultOfTest}
+            detailInterviewee={detailInterviewee}
+            currentQA={currentQA}
+            changeCurrentQA={changeCurrentQA}
+            giveReviewsAndScores={giveReviewsAndScores}
+            saveChanges={saveChanges}
+            disabledScoresInput={testType === "resultOfLogicTest"}
+          />
+        </div>
+        <MenuBar
+          isAdmin={true}
           isBigScreen={isBigScreen}
-          currentQA={currentQA}
-          limitedQuestionContent={limitedQuestionContent}
-          navigateQA={navigateQA}
-        />
-        <ControlPanel
-          resultOfTest={resultOfTest}
+          isShow={menuBar}
           detailInterviewee={detailInterviewee}
           currentQA={currentQA}
+          resultOfTest={resultOfTest}
           changeCurrentQA={changeCurrentQA}
-          giveReviewsAndScores={giveReviewsAndScores}
-          saveChanges={saveChanges}
-          disabledScoresInput={testType === "resultOfLogicTest"}
+          showMenuBar={showMenuBar}
         />
+        <ReviewPageWarning />
       </div>
-      <MenuBar
-        isAdmin={true}
-        isBigScreen={isBigScreen}
-        isShow={menuBar}
-        detailInterviewee={detailInterviewee}
-        currentQA={currentQA}
-        resultOfTest={resultOfTest}
-        changeCurrentQA={changeCurrentQA}
-        showMenuBar={showMenuBar}
-      />
-      <ReviewPageWarning />
-    </div>
+    </AdminContext.Provider>
   )
 }
 

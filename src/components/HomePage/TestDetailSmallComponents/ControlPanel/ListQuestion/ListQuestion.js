@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as css from "./ListQuestion.module.scss";
 
-const ListQuestion = (props) => {
+// Context
+import HomeContext from "../../../../../context/HomeContext";
+
+const ListQuestion = () => {
+  const { testStorage, currentQA, isBigScreen, changeCurrentQA, showMenuBar } = useContext(HomeContext);
+
   const changeQAAndCloseMenuBar = (index) => {
-    if (!props.isBigScreen) {
-      props.changeCurrentQA(index);
-      props.showMenuBar();
+    if (!isBigScreen) {
+      changeCurrentQA(index);
+      showMenuBar();
     } else {
-      props.changeCurrentQA(index);
+      changeCurrentQA(index);
     }
   }
 
@@ -17,11 +22,11 @@ const ListQuestion = (props) => {
         <h3 className={css.listQuestionTitle}>List of Questions</h3>
         <div className={css.list}>
           {/* eslint-disable-next-line array-callback-return */}
-          {props.testStorage.answerList && props.testStorage.answerList.map((result, index) => {
+          {testStorage.answerList && testStorage.answerList.map((result, index) => {
             if (result.answerContent === "" || result.answerContent.length === 0)
               return <div
                 key={result.id}
-                className={`${css.item} ${props.currentQA.id === result.id ? css.currentItem : ""}`}
+                className={`${css.item} ${currentQA.id === result.id ? css.currentItem : ""}`}
                 onClick={() => changeQAAndCloseMenuBar(index)}>{result.id + 1}
               </div>
           })}
@@ -31,11 +36,11 @@ const ListQuestion = (props) => {
         <h3 className={css.listQuestionTitle}>List of Questions <span>(Answered)</span></h3>
         <div className={css.list}>
           {/* eslint-disable-next-line array-callback-return */}
-          {props.testStorage.answerList && props.testStorage.answerList.map((result, index) => {
+          {testStorage.answerList && testStorage.answerList.map((result, index) => {
             if (result.answerContent !== "" && result.answerContent.length > 0)
               return <div
                 key={result.id}
-                className={`${css.item} ${props.currentQA.id === result.id ? css.currentItem : ""}`}
+                className={`${css.item} ${currentQA.id === result.id ? css.currentItem : ""}`}
                 onClick={() => changeQAAndCloseMenuBar(index)}>{result.id + 1}
               </div>
           })}
