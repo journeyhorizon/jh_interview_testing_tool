@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as css from "./AnswerContent.module.scss";
+
+// Context
+import AdminContext from "../../../../../context/AdminContext";
 
 // ALIAS
 const QUESTION_TYPE = {
@@ -8,19 +11,18 @@ const QUESTION_TYPE = {
   MULTIPLE_CHOICES: "MULTIPLE_CHOICES"
 };
 
-class AnswerContent extends React.Component {
-  render() {
-    const currentQA = this.props.currentQA;
+const AnswerContent = () => {
+  const currentQA = useContext(AdminContext);
 
-    if (currentQA.type === QUESTION_TYPE.WH) return <AnswerContentOfWhQuestion currentQA={this.props.currentQA} />
-    else if (currentQA.type === QUESTION_TYPE.SINGLE_CHOICE) return <AnswerContentOfSingleChoiceQuestion currentQA={this.props.currentQA} />
-    else if (currentQA.type === QUESTION_TYPE.MULTIPLE_CHOICES) return <AnswerContentOfMultipleChoicesQuestion currentQA={this.props.currentQA} />
-    else return "";
-  }
+  if (currentQA.type === QUESTION_TYPE.WH) return <AnswerContentOfWhQuestion />
+  else if (currentQA.type === QUESTION_TYPE.SINGLE_CHOICE) return <AnswerContentOfSingleChoiceQuestion />
+  else if (currentQA.type === QUESTION_TYPE.MULTIPLE_CHOICES) return <AnswerContentOfMultipleChoicesQuestion />
+  else return "";
 }
 
-function AnswerContentOfWhQuestion(props) {
-  const currentQA = props.currentQA;
+const AnswerContentOfWhQuestion = () => {
+  const currentQA = useContext(AdminContext);
+
   return (
     <div className={css.currentAnswer}>
       <textarea value={currentQA.answerContent} readOnly={true} />
@@ -28,12 +30,21 @@ function AnswerContentOfWhQuestion(props) {
   )
 }
 
-function AnswerContentOfSingleChoiceQuestion(props) {
-  const currentQA = props.currentQA;
+const AnswerContentOfSingleChoiceQuestion = () => {
+  const currentQA = useContext(AdminContext);
+
   return (
     <div className={css.currentAnswer}>
       {currentQA.choices.map((result, index) => (
-        <form key={result.answerId} className={`${css.choice} ${currentQA.answerContent[0] !== result.answerId ? result.isCorrect ? css.highlightLabelOfRightChoice : "" : result.isCorrect ? css.highlightLabelOfRightChoice : css.highlightLabelOfWrongChoice}`}>
+        <form
+          key={result.answerId} className={`${css.choice} ${currentQA.answerContent[0] !== result.answerId
+            ? result.isCorrect
+              ? css.highlightLabelOfRightChoice
+              : ""
+            : result.isCorrect
+              ? css.highlightLabelOfRightChoice
+              : css.highlightLabelOfWrongChoice
+            }`}>
           <input
             type="radio"
             name="answerChoice"
@@ -44,7 +55,12 @@ function AnswerContentOfSingleChoiceQuestion(props) {
           />
           <label htmlFor={`answerChoice${currentQA.id}${index}`}>
             <span>{result.answerContent}</span>
-            {currentQA.answerContent[0] !== result.answerId ? "" : result.isCorrect ? <span className={css.symbolOfCorrectAnswer}>&#10004;</span> : <span className={css.symbolOfIncorrectAnswer}>&#10008;</span>}
+            {currentQA.answerContent[0] !== result.answerId
+              ? ""
+              : result.isCorrect
+                ? <span className={css.symbolOfCorrectAnswer}>&#10004;</span>
+                : <span className={css.symbolOfIncorrectAnswer}>&#10008;</span>
+            }
           </label>
         </form>
       ))}
@@ -52,15 +68,23 @@ function AnswerContentOfSingleChoiceQuestion(props) {
   )
 }
 
-function AnswerContentOfMultipleChoicesQuestion(props) {
-  const currentQA = props.currentQA;
+const AnswerContentOfMultipleChoicesQuestion = () => {
+  const currentQA = useContext(AdminContext);
+
   return (
     <div className={css.currentAnswer}>
       {currentQA.choices.map((result, index) => {
         const isExist = currentQA.answerContent.includes(result.answerId);
 
         return (
-          <div key={result.answerId} className={`${css.choice} ${isExist ? result.isCorrect ? css.highlightLabelOfRightChoice : css.highlightLabelOfWrongChoice : result.isCorrect ? css.highlightLabelOfRightChoice : ""} `}>
+          <div key={result.answerId} className={`${css.choice} ${isExist
+            ? result.isCorrect
+              ? css.highlightLabelOfRightChoice
+              : css.highlightLabelOfWrongChoice
+            : result.isCorrect
+              ? css.highlightLabelOfRightChoice
+              : ""
+            }`}>
             <input
               type="checkbox"
               name="answerChoice"
@@ -71,7 +95,12 @@ function AnswerContentOfMultipleChoicesQuestion(props) {
             />
             <label htmlFor={`answerChoice${currentQA.id}${index}`}>
               <span>{result.answerContent}</span>
-              {isExist ? result.isCorrect ? <span className={css.symbolOfCorrectAnswer}>&#10004;</span> : <span className={css.symbolOfIncorrectAnswer}>&#10008;</span> : ""}
+              {isExist
+                ? result.isCorrect
+                  ? <span className={css.symbolOfCorrectAnswer}>&#10004;</span>
+                  : <span className={css.symbolOfIncorrectAnswer}>&#10008;</span>
+                : ""
+              }
             </label>
           </div>
         )

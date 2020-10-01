@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as css from "./Login.module.scss";
 
 // Component
@@ -10,93 +10,95 @@ import eye from "../../../assets/icons/eye.png";
 import eyeSlash from "../../../assets/icons/eye-slash.png";
 
 // ALIAS
-const NOTIFICATION_FOR_LACK_OF_INFORMATION = "Please enter both username and password";
-const NOTIFICATION_FOR_INCORRECT_INFORMATION = "Username or password is incorrect";
+const NOTIFICATION = {
+  LACK_OF_INFORMATION: "Please enter both username and password",
+  INCORRECT_INFORMATION: "Username or password is incorrect",
+  CORRECT_INFORMATION: ""
+};
 
-class Login extends React.Component {
-  constructor() {
-    super();
+const useFormInput = (initialValue) => {
+  const [value, setValue] = useState(initialValue);
 
-    this.state = {
-      username: "",
-      password: "",
-      warningNotification: ""
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleDisplayPassword = this.handleDisplayPassword.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  const handleChange = (event) => {
+    setValue(event.target.value);
   }
 
-  componentDidMount() {
-    sessionStorage.getItem("admin") && this.props.history.push("/admin/dashboard");
-  }
+  return { value, handleChange };
+}
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
+const Login = (props) => {
+  const username = useFormInput("");
+  const password = useFormInput("");
+  const [warningNotification, setWarningNotification] = useState("");
 
-  handleDisplayPassword(event) {
-    event.target.src = event.target.src === eye ? eyeSlash : eye;
-    this.changeTypeOfPasswordInput();
-  }
+  const passwordElement = useRef();
+  const warningNotificationElement = useRef();
 
-  handleSubmit(event) {
+  useEffect(() => {
+    sessionStorage.getItem("admin") && props.history.push("/admin/dashboard");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    if (this.state.username === "" || this.state.password === "") {
-      this.changeDisplayOfWarningNotification("flex");
-      this.setState({ warningNotification: NOTIFICATION_FOR_LACK_OF_INFORMATION });
+
+    if (username.value === "" || password.value === "") {
+      changeDisplayOfWarningNotification("flex");
+      setWarningNotification(NOTIFICATION.LACK_OF_INFORMATION);
     } else {
-      if (this.state.username !== "admin" || this.state.password !== "journeyh.io") {
-        this.changeDisplayOfWarningNotification("flex");
-        this.setState({ warningNotification: NOTIFICATION_FOR_INCORRECT_INFORMATION });
+      if (username.value !== "admin" || password.value !== "journeyh.io") {
+        changeDisplayOfWarningNotification("flex");
+        setWarningNotification(NOTIFICATION.INCORRECT_INFORMATION);
       } else {
-        this.changeDisplayOfWarningNotification("none");
-        this.setState({ warningNotification: "" });
+        changeDisplayOfWarningNotification("none");
+        setWarningNotification(NOTIFICATION.CORRECT_INFORMATION);
         sessionStorage.setItem("admin", true);
-        this.props.history.push("/admin/dashboard");
+        props.history.push("/admin/dashboard");
       }
     }
   }
 
-  changeDisplayOfWarningNotification(displayStatus) {
-    document.getElementById("warningNotification").style.display = displayStatus;
+  const changeDisplayOfWarningNotification = (displayStatus) => {
+    warningNotificationElement.current.style.display = displayStatus;
   }
 
-  changeTypeOfPasswordInput() {
-    const inputPassword = document.getElementById("inputPassword");
+  const handleDisplayPassword = (event) => {
+    event.target.src = event.target.src === eye ? eyeSlash : eye;
+    changeTypeOfPasswordInput();
+  }
+
+  const changeTypeOfPasswordInput = () => {
+    const inputPassword = passwordElement.current;
     inputPassword.type = inputPassword.type === "password" ? "text" : "password";
   }
 
-  render() {
-    return (
-      <div className={css.container}>
-        <img className={css.titleImage} src={logoColor} alt="logo-company" />
-        <p className={css.description}>Prove you're our admin!</p>
-        <form className={css.loginForm} onSubmit={this.handleSubmit}>
-          <LoginFormInput
-            id="inputUsername"
-            type="text"
-            name="username"
-            value={this.state.username}
-            handleChange={this.handleChange}
-            label="Username"
-          />
-          <LoginFormInput
-            id="inputPassword"
-            type="password"
-            name="password"
-            value={this.state.password}
-            handleChange={this.handleChange}
-            label="Password"
-            isPasswordType={true}
-            handleDisplayPassword={this.handleDisplayPassword}
-          />
-          <div id="warningNotification" className={css.notification}>{this.state.warningNotification}</div>
-          <button className={css.formButton}>Login</button>
-        </form>
-      </div>
-    )
-  }
+  return (
+    <div className={css.container}>
+      <img className={css.titleImage} src={logoColor} alt="logo-company" />
+      <p className={css.description}>Prove you're our admin!</p>
+      <form className={css.loginForm} onSubmit={handleSubmit}>
+        <LoginFormInput
+          id="inputUsername"
+          type="text"
+          name="username"
+          label="Username"
+          {...username}
+        />
+        <LoginFormInput
+          id="inputPassword"
+          type="password"
+          name="password"
+          label="Password"
+          isPasswordType={true}
+          handleDisplayPassword={handleDisplayPassword}
+          passwordRef={passwordElement}
+          {...password}
+        />
+        <div id="warningNotification" ref={warningNotificationElement} className={css.notification}>{warningNotification}</div>
+        <button className={css.formButton}>Login</button>
+      </form>
+    </div>
+  )
 }
 
 export default Login;

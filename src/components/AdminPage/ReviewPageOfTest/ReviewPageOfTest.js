@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as css from "./ReviewPageOfTest.module.scss"
 
 // Component
@@ -15,151 +15,151 @@ import myApi from "../../../api/myApi";
 // Utils
 import { customizeStringLength } from "../../../utils/customizeStringLength";
 
-class ReviewPageOfTest extends React.Component {
-  constructor() {
-    super();
+// Context
+import AdminContext from "../../../context/AdminContext";
 
-    this.state = {
-      resultOfTest: {},
-      currentQA: {},
-      testType: "",
-      limitedQuestionContent: "",
-      isBigScreen: false,
-      menuBar: null
-    };
+const ReviewPageOfTest = (props) => {
+  const [resultOfTest, setResultOfTest] = useState({});
+  const [currentQA, setCurrentQA] = useState({});
+  const [testType, setTestType] = useState("");
+  const [limitedQuestionContent, setLimitedQuestionContent] = useState("");
+  const [isBigScreen, setIsBigScreen] = useState(false);
+  const [menuBar, setMenuBar] = useState(null);
 
-    this.giveReviewsAndScores = this.giveReviewsAndScores.bind(this);
-    this.changeCurrentQA = this.changeCurrentQA.bind(this);
-    this.navigateQA = this.navigateQA.bind(this);
-    this.showMenuBar = this.showMenuBar.bind(this);
-    this.saveChanges = this.saveChanges.bind(this);
-  }
+  useEffect(() => {
+    !sessionStorage.getItem("admin") && props.history.push("/admin");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-  componentDidMount() {
-    this._isMounted = true;
-
-    !sessionStorage.getItem("admin") && this.props.history.push("/admin");
-    window.addEventListener("resize", this.updateDimensions);
-
-    if (!this.checkDirectAccess()) {
-      this.updateDimensions();
-
-      const detailInterviewee = this.props.location.state;
-      this.limitLengthOfQuestionContent(detailInterviewee[detailInterviewee.resultTest].answerList[0].questionContent);
-      this.setState({ testType: detailInterviewee.resultTest });
-      this.setState({ currentQA: detailInterviewee[detailInterviewee.resultTest].answerList[0] });
-      this.setState({ resultOfTest: { ...detailInterviewee[detailInterviewee.resultTest], totalScore: detailInterviewee[detailInterviewee.resultTest].totalScore === null ? 0 : detailInterviewee[detailInterviewee.resultTest].totalScore } });
-    } else this.props.history.push(`/admin/interviewee/${this.props.match.params.id}-${this.props.match.params.fullname}`);
-  }
-
-  checkDirectAccess() {
-    return this.props.location.state === undefined ? true : false;
-  }
-
-  updateDimensions() {
-    if (this._isMounted)
+  useEffect(() => {
+    const updateDimensions = () => {
       if (window.innerWidth > 1200) {
-        this.setState({ menuBar: null });
-        this.setState({ isBigScreen: true });
-      } else this.setState({ isBigScreen: false });
-  }
+        setMenuBar(null);
+        setIsBigScreen(true);
+      } else setIsBigScreen(false);
+    }
 
-  limitLengthOfQuestionContent(currentQuestion) {
+    window.addEventListener("resize", updateDimensions);
+    updateDimensions();
+
+    return () => { window.removeEventListener("resize", updateDimensions); }
+  }, [])
+
+  useEffect(() => {
+    const checkDirectAccess = () => {
+      return props.location.state === undefined ? true : false;
+    }
+
+    if (!checkDirectAccess()) {
+      const detailInterviewee = props.location.state;
+      limitLengthOfQuestionContent(detailInterviewee[detailInterviewee.resultTest].answerList[0].questionContent);
+      setTestType(detailInterviewee.resultTest);
+      setCurrentQA(detailInterviewee[detailInterviewee.resultTest].answerList[0]);
+      setResultOfTest({
+        ...detailInterviewee[detailInterviewee.resultTest],
+        totalScore: detailInterviewee[detailInterviewee.resultTest].totalScore === null
+          ? 0
+          : detailInterviewee[detailInterviewee.resultTest].totalScore
+      });
+    } else props.history.push(`/admin/interviewee/${props.match.params.id}-${props.match.params.fullname}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const limitLengthOfQuestionContent = (currentQuestion) => {
     const limitedQuestionContent = customizeStringLength(currentQuestion, 115);
-    this.setState({ limitedQuestionContent });
+    setLimitedQuestionContent(limitedQuestionContent);
   }
 
-  giveReviewsAndScores({ target }) {
+  const giveReviewsAndScores = ({ target }) => {
     const newValue = () => {
       if (target.name === "totalScore") return target.value > 10 ? 10 : parseFloat(target.value)
       else return target.value
     }
 
-    this.setState({ resultOfTest: { ...this.state.resultOfTest, [target.name]: newValue() } });
+    setResultOfTest({
+      ...resultOfTest,
+      [target.name]: newValue()
+    });
   }
 
-  changeCurrentQA(index) {
-    this.setState({ currentQA: this.state.resultOfTest.answerList[index] });
-    this.limitLengthOfQuestionContent(this.state.resultOfTest.answerList[index].questionContent);
+  const changeCurrentQA = (index) => {
+    setCurrentQA(resultOfTest.answerList[index]);
+    limitLengthOfQuestionContent(resultOfTest.answerList[index].questionContent);
   }
 
-  navigateQA(step) {
-    if (this.state.resultOfTest.answerList) {
-      const currentIndex = this.state.resultOfTest.answerList.findIndex(item => item.id === this.state.currentQA.id);
+  const navigateQA = (step) => {
+    if (resultOfTest.answerList) {
+      const currentIndex = resultOfTest.answerList.findIndex(item => item.id === currentQA.id);
       const newIndex = currentIndex + step;
 
-      if (newIndex < 0) this.changeCurrentQA(this.state.resultOfTest.answerList.length - 1);
-      else if (newIndex >= this.state.resultOfTest.answerList.length) this.changeCurrentQA(0);
-      else this.changeCurrentQA(newIndex);
+      if (newIndex < 0) changeCurrentQA(resultOfTest.answerList.length - 1);
+      else if (newIndex >= resultOfTest.answerList.length) changeCurrentQA(0);
+      else changeCurrentQA(newIndex);
     }
   }
 
-  showMenuBar() {
-    this.setState({ menuBar: !this.state.menuBar });
+  const showMenuBar = () => {
+    setMenuBar(!menuBar);
   }
 
-  async saveChanges() {
-    const testResultId = await myApi().get("/admin/getResultIdByIntervieweeId", { params: { intervieweeId: this.props.match.params.id } }).then(response => response.data);
+  const saveChanges = async () => {
+    const testResultId = await myApi().get(
+      "/admin/getResultIdByIntervieweeId",
+      { params: { intervieweeId: props.match.params.id } }
+    ).then(response => response.data);
+
     const item = {
       id: testResultId,
-      testType: this.state.testType,
-      newData: this.state.resultOfTest
+      testType: testType,
+      newData: resultOfTest
     }
 
     // eslint-disable-next-line no-unused-vars
     const newData = await myApi().post("/admin/saveIntervieweeTestRecord", item).then(response => response.data);
-    this.props.history.push(`/admin/interviewee/${this.props.match.params.id}-${this.props.match.params.fullname}`);
+    props.history.push(`/admin/interviewee/${props.match.params.id}-${props.match.params.fullname}`);
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+  const detailInterviewee = props.location.state;
 
-  render() {
-    const detailInterviewee = this.props.location.state;
-    const resultOfTest = this.state.resultOfTest;
-    const currentQA = this.state.currentQA;
-    const testType = this.state.testType;
-
-    return (
+  return (
+    <AdminContext.Provider value={currentQA}>
       <div className={css.container}>
         <Breadcrumb detailInterviewee={detailInterviewee} />
         <div className={css.smallContainer}>
           <MobileNavbar
-            showMenuBar={this.showMenuBar}
+            showMenuBar={showMenuBar}
             currentQA={currentQA}
             storage={resultOfTest}
           />
           <SetOfQA
-            isBigScreen={this.state.isBigScreen}
-            currentQA={currentQA}
-            limitedQuestionContent={this.state.limitedQuestionContent}
-            navigateQA={this.navigateQA}
+            isBigScreen={isBigScreen}
+            limitedQuestionContent={limitedQuestionContent}
+            navigateQA={navigateQA}
           />
           <ControlPanel
             resultOfTest={resultOfTest}
             detailInterviewee={detailInterviewee}
             currentQA={currentQA}
-            changeCurrentQA={this.changeCurrentQA}
-            giveReviewsAndScores={this.giveReviewsAndScores}
-            saveChanges={this.saveChanges}
+            changeCurrentQA={changeCurrentQA}
+            giveReviewsAndScores={giveReviewsAndScores}
+            saveChanges={saveChanges}
             disabledScoresInput={testType === "resultOfLogicTest"}
           />
         </div>
         <MenuBar
           isAdmin={true}
-          isBigScreen={this.state.isBigScreen}
-          isShow={this.state.menuBar}
+          isBigScreen={isBigScreen}
+          isShow={menuBar}
           detailInterviewee={detailInterviewee}
           currentQA={currentQA}
           resultOfTest={resultOfTest}
-          changeCurrentQA={this.changeCurrentQA}
-          showMenuBar={this.showMenuBar}
+          changeCurrentQA={changeCurrentQA}
+          showMenuBar={showMenuBar}
         />
         <ReviewPageWarning />
       </div>
-    )
-  }
+    </AdminContext.Provider>
+  )
 }
 
 export default ReviewPageOfTest;
