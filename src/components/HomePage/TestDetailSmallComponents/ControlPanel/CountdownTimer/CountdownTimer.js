@@ -12,13 +12,13 @@ const CountdownTimer = () => {
       <h3 className={css.countdownTimerTitle}>Countdown Timer</h3>
       <div className={css.countdownTimerDisplay}>
         <div className={css.timerCountingSet}>
-          <div className={css.timerCountingSet_countingNumber}>{currentMinutes}</div>
-          <p className={css.timerCountingSet_unit}>MINUTES</p>
+          <div className={css.timerCountingNumber}>{currentMinutes}</div>
+          <p className={css.timerCountingUnit}>MINUTES</p>
         </div>
         <div className={css.gapBetweenTwoCountingNumber}>:</div>
         <div className={css.timerCountingSet}>
-          <div className={css.timerCountingSet_countingNumber}>{currentSeconds}</div>
-          <p className={css.timerCountingSet_unit}>SECONDS</p>
+          <div className={css.timerCountingNumber}>{currentSeconds}</div>
+          <p className={css.timerCountingUnit}>SECONDS</p>
         </div>
       </div>
     </div>

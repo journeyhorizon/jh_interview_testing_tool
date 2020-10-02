@@ -37,6 +37,7 @@ const IntervieweeList = (props) => {
     const resultList = await myApi().get("/admin/getAllResult").then(response => response.data);
 
     const fullDetailIntervieweeList = customizeData(intervieweeList, resultList);
+    fullDetailIntervieweeList.sort((a, b) => { return b.id - a.id });
     setFullDetailIntervieweeList(fullDetailIntervieweeList);
   }
 

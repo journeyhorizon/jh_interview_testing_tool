@@ -332,24 +332,11 @@ const TestDetail = (props) => {
             showMenuBar={showMenuBar}
           />
           <SetOfQA navigateQA={navigateQA} />
-          <ControlPanel
-            currentMinutes={currentMinutes}
-            currentSeconds={currentSeconds}
-            isBigScreen={isBigScreen}
-            testStorage={testStorage}
-            currentQA={currentQA}
-            changeCurrentQA={changeCurrentQA}
-            handleSubmit={submitTest}
-          />
+          <ControlPanel handleSubmit={submitTest} />
         </div>
         <MenuBar
           isBigScreen={isBigScreen}
           isShow={menuBar}
-          currentQA={currentQA}
-          testStorage={testStorage}
-          currentMinutes={currentMinutes}
-          currentSeconds={currentSeconds}
-          changeCurrentQA={changeCurrentQA}
           showMenuBar={showMenuBar}
           handleSubmit={submitTest}
         />

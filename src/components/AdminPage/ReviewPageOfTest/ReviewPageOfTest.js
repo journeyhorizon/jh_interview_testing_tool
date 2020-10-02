@@ -72,7 +72,10 @@ const ReviewPageOfTest = (props) => {
 
   const giveReviewsAndScores = ({ target }) => {
     const newValue = () => {
-      if (target.name === "totalScore") return target.value > 10 ? 10 : parseFloat(target.value)
+      if (target.name === "totalScore") {
+        if (parseFloat(target.value) >= 10) return parseFloat("10").toFixed(1);
+        else return parseFloat(target.value).toFixed(1);
+      }
       else return target.value
     }
 
@@ -108,10 +111,12 @@ const ReviewPageOfTest = (props) => {
       { params: { intervieweeId: props.match.params.id } }
     ).then(response => response.data);
 
+    const newResultOfTest = { ...resultOfTest, totalScore: Number(resultOfTest.totalScore) }
+
     const item = {
       id: testResultId,
       testType: testType,
-      newData: resultOfTest
+      newData: newResultOfTest
     }
 
     // eslint-disable-next-line no-unused-vars
