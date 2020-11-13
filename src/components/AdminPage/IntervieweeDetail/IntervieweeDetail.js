@@ -38,7 +38,7 @@ const ReviewContainer = (props) => {
       <div className={`${css.reviews} ${props.isNotReviewYet && css.notReviewYet}`}>
         {props.isNotReviewYet ? props.limitedReviews : props.isBigScreen ? props.fullReviews : props.limitedReviews}
         <Link to={{
-          pathname: `/admin/interviewee/${data.id}-${data.fullname}/${props.title}test`,
+          pathname: `/admin/interviewee/${data.id}/${data.fullname}/${props.title}test`,
           state: { ...data, resultTest: props.resultTest }
         }}>View Details!</Link>
       </div>
@@ -74,6 +74,7 @@ const IntervieweeDetail = (props) => {
 
   useEffect(() => {
     const loadDetailInterviewee = async () => {
+      console.log({ props });
       const intervieweeParam = {
         id: props.match.params.id,
         fullname: props.match.params.fullname

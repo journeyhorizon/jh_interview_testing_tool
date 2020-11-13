@@ -20,9 +20,9 @@ const AdminPage = () => {
           <Route exact path="/admin" component={Login} />
           <Route exact path="/admin/dashboard" component={Dashboard} />
           <Route exact path="/admin/intervieweelist" component={IntervieweeList} />
-          <Route exact path="/admin/interviewee/:id-:fullname" component={IntervieweeDetail} />
-          <Route path="/admin/interviewee/:id-:fullname/logictest" component={ReviewPageOfTest} />
-          <Route path="/admin/interviewee/:id-:fullname/englishtest" component={ReviewPageOfTest} />
+          <Route exact path="/admin/interviewee/:id/:fullname" component={IntervieweeDetail} />
+          <Route path="/admin/interviewee/:id/:fullname/logictest" component={ReviewPageOfTest} />
+          <Route path="/admin/interviewee/:id/:fullname/englishtest" component={ReviewPageOfTest} />
           <Redirect to="/adminnotfound" />
         </Switch>
       </div>

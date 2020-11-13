@@ -67,7 +67,7 @@ const IntervieweeList = (props) => {
               <Link
                 key={result.id}
                 className={css.item}
-                to={`/admin/interviewee/${result.id}-${result.fullname}`}
+                to={`/admin/interviewee/${result.id}/${result.fullname}`}
                 style={{ borderBottom: index === fullDetailIntervieweeList.length - 1 && "none" }}>
                 <EachInterviewee index={index} result={result} />
               </Link> :

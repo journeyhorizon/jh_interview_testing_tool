@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as css from "./Welcome.module.scss";
 import * as inputCss from "./WelcomeFormInput/WelcomeFormInput.module.scss";
+import * as types from "../../../types";
+import { v4 as uuidv4 } from 'uuid';
 
 // Components
 import WelcomeFormInput from "./WelcomeFormInput/WelcomeFormInput";
@@ -95,7 +97,7 @@ const Welcome = (props) => {
 
     const intervieweeLength = await myApi().get(
       "/interviewee/getLength",
-      { params: { tableName: "interviewee" } })
+      { params: { tableName: types.INTERVIEWEE_TABLE_NAME } })
       .then(response => response.data);
 
     const intervieweeDetail = {
@@ -104,7 +106,7 @@ const Welcome = (props) => {
       phone: phone.value
     };
 
-    localStorage.setItem("interviewee", JSON.stringify({ id: intervieweeLength, ...intervieweeDetail }));
+    localStorage.setItem("interviewee", JSON.stringify({ id: uuidv4(), ...intervieweeDetail }));
     props.history.push("/testlist");
   }
 

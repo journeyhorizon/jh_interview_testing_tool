@@ -9,7 +9,6 @@ function myApi() {
     get: function (url, config) {
       return instance.get(url, config);
     },
-
     post: function (url, data) {
       return instance.post(url, data);
     },

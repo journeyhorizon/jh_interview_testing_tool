@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import * as css from "./TestList.module.scss";
+import * as types from "../../../types";
+import { v4 as uuidv4 } from 'uuid';
 
 // Utils
 import { randomizeTestAndSaveResult } from "../../../utils/randomizeTestAndSaveResult";
@@ -83,12 +85,12 @@ const TestList = (props) => {
     const randomizeTestAndCreateAnswerResultForSavingData = async () => {
       const logicTestData = await myApi().get(
         "/interviewee/getListOfLogicTest",
-        { params: { tableName: "logic-test" } }
+        { params: { tableName: types.LOGIC_TESTS_TABLE_NAME } }
       ).then(response => response.data);
 
       const englishTestData = await myApi().get(
         "/interviewee/getListOfEnglishTest",
-        { params: { tableName: "english-test" } }
+        { params: { tableName: types.ENGLISH_TESTS_TABLE_NAME } }
       ).then(response => response.data);
 
       !localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC)
@@ -121,8 +123,6 @@ const TestList = (props) => {
     }
 
     const mergeAllTestResult = async () => {
-      const resultLength = await myApi().get("/interviewee/getLength", { params: { tableName: "result" } })
-        .then(response => response.data);
       const logicTestResult = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.LOGIC));
       const englishtestResult = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TEST_TYPE_NAME.ENGLISH));
 
@@ -130,7 +130,7 @@ const TestList = (props) => {
       const submitTime = new Date();
 
       localStorage.setItem("result", JSON.stringify({
-        id: resultLength,
+        id: uuidv4(),
         intervieweeId,
         submitTime,
         resultOfEnglishTest:

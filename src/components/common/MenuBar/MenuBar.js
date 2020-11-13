@@ -13,11 +13,11 @@ const AdminMenuBar = (props) => {
   return detailInterviewee === undefined ? "" : (
     <div className={`${css.container} ${props.isBigScreen ? "" : props.isShow === null ? "" : props.isShow ? css.showMenuBar : css.hideMenuBar}`}>
       <div className={css.breadcrumb}>
-        <Route path="/admin/interviewee/:id-:fullname/logictest">
-          <Link className={css.breadcrumbLink} to={"/admin/dashboard"}>Dashboard |&nbsp;</Link> <Link className={css.breadcrumbLink} to={"/admin/intervieweelist"}>Interviewee List |&nbsp;</Link> <Link className={css.breadcrumbLink} to={`/admin/interviewee/${detailInterviewee.id}-${detailInterviewee.fullname}`}>{detailInterviewee.fullname} |&nbsp;</Link> <span> Logic Test </span>
+        <Route path="/admin/interviewee/:id/:fullname/logictest">
+          <Link className={css.breadcrumbLink} to={"/admin/dashboard"}>Dashboard |&nbsp;</Link> <Link className={css.breadcrumbLink} to={"/admin/intervieweelist"}>Interviewee List |&nbsp;</Link> <Link className={css.breadcrumbLink} to={`/admin/interviewee/${detailInterviewee.id}/${detailInterviewee.fullname}`}>{detailInterviewee.fullname} |&nbsp;</Link> <span> Logic Test </span>
         </Route>
-        <Route path="/admin/interviewee/:id-:fullname/englishtest">
-          <Link className={css.breadcrumbLink} to={"/admin/dashboard"}>Dashboard |&nbsp;</Link> <Link className={css.breadcrumbLink} to={"/admin/intervieweelist"}>Interviewee List |&nbsp;</Link> <Link className={css.breadcrumbLink} to={`/admin/interviewee/${detailInterviewee.id}-${detailInterviewee.fullname}`}>{detailInterviewee.fullname} |&nbsp;</Link> <span> English Test </span>
+        <Route path="/admin/interviewee/:id/:fullname/englishtest">
+          <Link className={css.breadcrumbLink} to={"/admin/dashboard"}>Dashboard |&nbsp;</Link> <Link className={css.breadcrumbLink} to={"/admin/intervieweelist"}>Interviewee List |&nbsp;</Link> <Link className={css.breadcrumbLink} to={`/admin/interviewee/${detailInterviewee.id}/${detailInterviewee.fullname}`}>{detailInterviewee.fullname} |&nbsp;</Link> <span> English Test </span>
         </Route>
       </div>
       <div className={css.listQuestion}>

@@ -21,7 +21,7 @@ const BreadcrumbIntervieweeDetail = (props) => {
 const BreadcrumbIntervieweeReviewTest = (props) => {
   return props.detailInterviewee === undefined ? "" : (
     <div className={css.breadcrumbReviewPage}>
-      <Link className={css.breadcrumbReviewPageLink} to={"/admin/dashboard"}>Dashboard |&nbsp;</Link> <Link className={css.breadcrumbReviewPageLink} to={"/admin/intervieweelist"}>Interviewee List |&nbsp;</Link> <Link className={css.breadcrumbReviewPageLink} to={`/admin/interviewee/${props.detailInterviewee.id}-${props.detailInterviewee.fullname}`}>{props.detailInterviewee.fullname} |&nbsp;</Link> <span> {props.testName} Test </span>
+      <Link className={css.breadcrumbReviewPageLink} to={"/admin/dashboard"}>Dashboard |&nbsp;</Link> <Link className={css.breadcrumbReviewPageLink} to={"/admin/intervieweelist"}>Interviewee List |&nbsp;</Link> <Link className={css.breadcrumbReviewPageLink} to={`/admin/interviewee/${props.detailInterviewee.id}/${props.detailInterviewee.fullname}`}>{props.detailInterviewee.fullname} |&nbsp;</Link> <span> {props.testName} Test </span>
     </div>
   )
 }
@@ -31,13 +31,13 @@ const Breadcrumb = (props) => {
     <>
       <Switch>
         <Route exact path="/admin/intervieweelist" component={BreadcrumbIntervieweeList} />
-        <Route exact path="/admin/interviewee/:id-:fullname">
+        <Route exact path="/admin/interviewee/:id/:fullname">
           <BreadcrumbIntervieweeDetail detailInterviewee={props.detailInterviewee} />
         </Route>
-        <Route path="/admin/interviewee/:id-:fullname/logictest">
+        <Route path="/admin/interviewee/:id/:fullname/logictest">
           <BreadcrumbIntervieweeReviewTest detailInterviewee={props.detailInterviewee} testName="Logic" />
         </Route>
-        <Route path="/admin/interviewee/:id-:fullname/englishtest">
+        <Route path="/admin/interviewee/:id/:fullname/englishtest">
           <BreadcrumbIntervieweeReviewTest detailInterviewee={props.detailInterviewee} testName="English" />
         </Route>
       </Switch>
