@@ -5,6 +5,7 @@ import * as css from "./Dashboard.module.scss";
 // Assets
 import intervieweeList from "../../../assets/icons/interviewee-list.png";
 import logout from "../../../assets/icons/logout.png";
+import { AuthContext } from "../../../context/AuthContext";
 
 // ALIAS
 const CATEGORY_INTERVIEWEE_LIST = "INTERVIEWEE LIST";
@@ -17,27 +18,32 @@ const MenuCategory = (props) => {
         return intervieweeList;
       case CATEGORY_LOGOUT:
         return logout;
-      default: return null;
+      default:
+        return null;
     }
-  }
+  };
 
   return (
     <div className={css.category}>
-      <img className={css.categoryIcon} src={imageSource(props.type)} alt="icon" />
+      <img
+        className={css.categoryIcon}
+        src={imageSource(props.type)}
+        alt="icon"
+      />
       <h3 className={css.categoryName}>{props.type}</h3>
     </div>
-  )
-}
+  );
+};
 
-const Dashboard = (props) => {
+const DashboardComponent = ({ currentUser, logout, history }) => {
   useEffect(() => {
-    !sessionStorage.getItem("admin") && props.history.push("/admin");
+    !currentUser && history.push("/admin");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [JSON.stringify(currentUser)]);
 
   const handleLogout = () => {
-    sessionStorage.removeItem("admin");
-  }
+    logout();
+  };
 
   return (
     <div className={css.container}>
@@ -48,7 +54,15 @@ const Dashboard = (props) => {
         <MenuCategory type={CATEGORY_LOGOUT} />
       </Link>
     </div>
-  )
-}
+  );
+};
+
+const Dashboard = (props) => (
+  <AuthContext.Consumer>
+    {(context) => {
+      return <DashboardComponent {...props} {...context} />;
+    }}
+  </AuthContext.Consumer>
+);
 
 export default Dashboard;
