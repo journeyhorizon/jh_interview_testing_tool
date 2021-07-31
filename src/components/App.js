@@ -14,7 +14,7 @@ const App = () => {
       <Route path="/admin" component={AdminPage} />
       <Route path="/" component={HomePage} />
     </Switch>
-  )
-}
+  );
+};
 
 export default App;
